@@ -1,0 +1,83 @@
+1 #include "stdio.h"     
+2 #include "stdlib.h"    
+3 #include "io.h"   
+4 #include "math.h"   
+5 #include "time.h" 
+6 
+ 
+7 #define OK 1 
+8 #define ERROR 0 
+9 #define TRUE 1 
+10 #define FALSE 0 
+11 #define MAXSIZE 100 
+12 
+ 
+13 typedef int Status;
+14 
+ 
+15 int F[100];
+16 
+ 
+17
+18 int Sequential_Search(int *a,int n,int key) 
+19 { 
+20 	int i; 
+21 	for(i=1;i<=n;i++) 
+22 	{ 
+23 		if (a[i]==key) 
+24 			return i; 
+25 	} 
+26 	return 0; 
+27 } 
+28 
+29 int Sequential_Search2(int *a,int n,int key) 
+30 { 
+31 	int i; 
+32 	a[0]=key; 
+33 	i=n; 
+34 	while(a[i]!=key) 
+35 	{ 
+36 		i--; 
+37 	} 
+38 	return i; 
+39 } 
+40 
+ 
+41 
+42 int Binary_Search(int *a,int n,int key) 
+43 { 
+44 	int low,high,mid; 
+45 	low=1;
+46 	high=n;	
+47 	while(low<=high) 
+48 	{ 
+49 		mid=(low+high)/2;	
+50 		if (key<a[mid])	
+51 			high=mid-1;	
+52 		else if (key>a[mid])
+53 			low=mid+1;		
+54 		else 
+55 		{ 
+56 			return mid;	
+57 		} 
+58 		 
+59 	} 
+60 	return 0; 
+61 } 
+62 
+ 
+63
+64 int Interpolation_Search(int *a,int n,int key) 
+65 { 
+66 	int low,high,mid; 
+67 	low=1;
+68 	high=n;	
+69 	while(low<=high) 
+70 	{ 
+71 		mid=low+ (high-low)*(key-a[low])/(a[high]-a[low]);  
+72 		if (key<a[mid])	
+73 			high=mid-1;		
+74 		else if (key>a[mid])
+75 			low=mid+1;	
+76 		else 
+77 			return mid;
