@@ -1,0 +1,34 @@
+#include "stdafx.h"
+#include "stdlib.h"
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+int i;
+int num=0;
+
+printf("<1> 자동차 넣기 <2> 자동차 빼기 <3> 끝 : ");
+scanf("%d",&i);
+
+
+
+switch(i)
+{
+case 1: 
+printf("A 자동차가 터널에 들어감\n");
+num +=1;
+break;
+case 2:
+printf("B 자동차가 터널에서 빠짐\n");
+num-=1;
+break;
+case 3:
+printf("현재 터널에 %d대가 있음\n",num);
+break;
+if(i==3)
+break;
+}
+
+
+system("pause");
+return 0;
+}
