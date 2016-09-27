@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include "stdlib.h"
+#include "string.h"
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+int i;
+char diff = 'a'-'A';
+char ch[50];
+
+puts("문자열을 입력 하세요 : ");
+gets(ch);
+
+for(i=0;i<strlen(ch);i++)
+{
+if(ch[i]>= 97 && ch[i] <=122)
+ch[i] = ch[i]-diff;
+else if(ch[i]>=65 && ch[i] <= 80)
+ch[i]= ch[i]+diff;
+}
+printf("%s\n",ch);
+system("pause");
+return 0;
+}
