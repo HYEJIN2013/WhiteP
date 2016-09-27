@@ -1,0 +1,94 @@
+#include "stdafx.h"
+#include "stdlib.h"
+#include "time.h"
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+	int num; // switch 문을 사용할 num
+	int arr[7];  // 내가 정한 7개의 숫자를 쓴다.
+	int lotto[7]; // 임의의 7개의 숫자가 정해진다.
+	int i,j;  
+	int sum=0;  // 맞은 숫자 갯수
+	srand((int)time(NULL));
+	
+
+
+	for(i=0;i<7;i++)
+	{
+		lotto[i]=(rand()%45+1);
+		if(lotto[i]==0)
+			continue;
+		for(j=0;j<6;j++)
+		{
+			if(lotto[j]==lotto[j+1])
+				lotto[j]=(rand()%45+1);
+		}
+		
+	} // 임의의 7가지 숫자가 정해지는 배열
+
+	printf("1번. 자동 2번. 수동 3번. 취소");
+	printf(": ");
+	scanf("%d",&num);
+
+	switch(num)
+	{
+	case 1:
+		for(i=0;i<7;i++)
+		{
+			arr[i]=(rand()%45+1);
+			if(arr[i]==0)
+				continue;
+			for(j=1;j<7;j++)
+			{
+				if(arr[j]==arr[j-1])
+					arr[j]=(rand()%45+1);
+			}
+		} // 임의의 7가지 숫자가 정해지는 배열
+		for(i=0;i<7;i++)
+		{
+			if(lotto[i]==arr[0]||lotto[i]==arr[1]||lotto[i]==arr[2]||lotto[i]==arr[3]||lotto[i]==arr[4]||lotto[i]==arr[5]||lotto[i]==arr[6])
+				sum++;
+		}
+		printf("사용자 숫자 : ");
+		for(i=0;i<7;i++)
+			printf("%3d ",arr[i]);
+		
+		printf("\n로또 숫자 :   ");
+		for(i=0;i<7;i++)
+		    printf("%3d ",lotto[i]);
+		printf("\n맞은 숫자 : %d \n",sum);
+		break;
+	case 2:
+
+	for(i=0;i<7;i++)
+	{
+		printf("%d 번째 번호 : ",i+1);
+		scanf("%d",&arr[i]);
+	}
+
+	for(i=0;i<7;i++)
+	{
+		if(lotto[i]==arr[0]||lotto[i]==arr[1]||lotto[i]==arr[2]||lotto[i]==arr[3]||lotto[i]==arr[4]||lotto[i]==arr[5]||lotto[i]==arr[6])
+			sum++;
+	}
+	printf("\n사용자 숫자 : ");
+	for(i=0;i<7;i++)
+		printf("%3d ",arr[i]);
+	
+	printf("\n로또 숫자 :   ");
+	for(i=0;i<7;i++)
+		printf("%3d ",lotto[i]);
+		
+	printf("\n");
+	break;
+	case 3:
+		printf("취소 됬습니다.\n종료 하겠습니다\n");
+		break;
+	}
+	
+
+	
+	system("pause");
+	return 0;
+}
