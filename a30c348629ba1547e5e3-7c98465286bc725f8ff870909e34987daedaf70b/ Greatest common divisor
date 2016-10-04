@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+
+
+
+int maxgodi(int num1, int num2) // 2. i, j값이 들어옴
+
+{
+
+    if(num2 == 0) return num1;
+
+    // 3. j값이 0이면 i가 반환되어 최대공약수는 i가 됨
+
+    else return maxgodi(num2, num2 % num1);
+
+    // 4. j값이 0이 아니면 재귀호출 - 자기 자신을 불러와서 num2가 0과 같을 때까지 2, 3, 4과정을 반복
+
+}
+
+
+
+
+int main(void)
+
+{
+
+    int i = 0, j = 0;
+
+    
+
+    printf("두 개의 정수를 입력하시오: ");
+
+    scanf("%d %d" , &i, &j);
+
+    
+
+    printf("두수의 최대공약수는 %d입니다. \n" , maxgodi(i, j));
+
+    // 1. i는 num1에 들어갈 값, j는 num2에 들어갈 값
+
+    
+
+    return 0;
+
+}
+
+
+
+
+// maxgodi(num2, num2 % num1);
+
+
+// num1에 num2를 넣고, num2와 num1을 나눈 나머지값을 num2에 넣는다. num2가 0이 될 때까지 2, 3, 4과정을 반복
