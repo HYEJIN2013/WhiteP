@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+ char A[] = "I love her";
+ char B[] = "I feel you";
+ int C[] = {1,2,3,4,5};
+ int D[] = {6,7,8,9,10,11};
+ int i;
+
+ printf("원래 문장 A : %s \n",A);
+ printf("원래 문장 B : %s \n",B);
+ printf("원래 문장 C :");
+ for(i=0;i<5;i++)
+ {
+  printf("%d ",C[i]);
+ }
+ printf("\n");
+ printf("원래 문장 D :");
+ for(i=0;i<6;i++)
+ {
+  printf("%d ", D[i]);
+ }
+ printf("\n");
+
+
+ memcpy(B+7,A+7,3);
+ memmove(D,C,sizeof(int)*5);       //D[1]과 C[3]을 하고 싶다면 &D[1],&C[3],4 를 하면 된다.
+
+ printf("바뀐 후 A : %s \n",A);
+ printf("바뀐 후 B : %s \n",B);
+  printf("바뀐 후 C :");
+ for(i=0;i<5;i++)
+ {
+  printf("%d ",C[i]);
+ }
+ printf("\n");
+ printf("바뀐 후 D :");
+ for(i=0;i<6;i++)
+ {
+  printf("%d ", D[i]);
+ }
+ printf("\n");
+}
