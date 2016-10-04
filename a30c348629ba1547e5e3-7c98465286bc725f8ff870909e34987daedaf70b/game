@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+ void game()
+{
+ int b;
+ int a;
+ srand(time(NULL));   // 순차문이라 rand()가 뒤에 있어야한다. 그렇지않으면 계속 같은 숫자가 나온다.
+ a= rand()%100; 
+ for( ; ; )
+ {
+  scanf("%d",&b);
+  if(a == b)
+  {
+   printf(" 정답! 게임종료 \n ");
+   break;
+  }
+  else if(a > b)
+  {
+   printf("High \n");
+   printf("다시입력하세요.");
+  }
+  else if(a < b)
+  {
+   printf("Low \n");
+   printf("다시입력하세요.");
+  }
+ }
+}
+int main(void)
+{
+ printf("게임 이름:\n number checker \n");
+ printf("게임 룰 :\n 컴퓨터가 랜덤으로 숫자를 0~99까지 고릅니다.\n 사용자가 컴퓨터가 고를 숫자를 예상해서 적습니다.\n 그 수보다 높으면 High, 낮으면 low를 출력 합니다. 맞으면 게임종료.\n");
+ printf("숫자를 입력하세요.");
+ game();
+} 
