@@ -1,0 +1,32 @@
+#include "stdio.h" //구조체를 동적 메모리에 할다하고 포인터 배열에 구조체를 저장후 출력해보자
+#include "stdlib.h"
+
+typedef struct st
+{
+	char name[20];
+	int age;
+}p;
+
+int main()
+{
+	int size; //메모리를 할당받을 변수명
+	int i;
+
+	printf("할당받을 메모리 수: ");
+	scanf("%d",&size);
+	p *person[100] = {NULL}; //우선 배열의 크기는 임의로 지정하고 나중에 할당받은 메모리 만큼만 사용한다
+
+	for(i=0;i<size;i++)
+		*(person+i) = (p*)malloc(sizeof(p)*size); // 구조체 포인터 동적 메모리 할당
+
+
+	for(i=0;i<size;i++)
+		scanf("%s %d",person[i]->name,&person[i]->age);
+	for(i=0;i<size;i++)
+		printf("%s %d",person[i]->name,person[i]->age);
+
+	for(i=0;i<size;i++)
+		free(person[i]);
+	return 0;
+}
+

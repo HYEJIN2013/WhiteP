@@ -1,0 +1,27 @@
+/* 재귀 함수를 이용한 하노이타워 코드 ( 하노이타워 - 막대 A B C 가 있을때 A 에 있는 원반을 C 로 옮긴다)*/
+// from = A     by = B   to = C     num = 옮겨야할 원반의 총갯수 
+
+#include "stdio.h"
+int NUM =0;
+
+void hanoitower (int num, char from, char by, char to) // num 개의 원반을 by를 거쳐 from 에서 to 로 이동한다.
+{
+	NUM++;
+	if(num == 1)
+	{
+		printf("%d 번째 : 원반 1을 %c에서  %c로 이동\n",NUM,from,to);//처음은 무조건 실행되는 문장
+	}
+	else
+	{
+		hanoitower(num-1,from,to,by); //hanoitower 의 인자가 by-> to ,to -> by 로 변경되었다 이는 num-1 개의 원반을 B 로 이동시켜야하기때문이다
+		printf("%d 번째 : 원반 %d을(를) %c에서 %c로 이동\n",NUM,num,from,to);
+		hanoitower(num-1,by,from,to);
+	}
+}
+
+int main()
+{
+	//막대 A의 원반 3개를 막대 B 를 경우하여 막대 C로 옮기자
+	hanoitower(3,'A','B','C');
+	return 0;
+}
