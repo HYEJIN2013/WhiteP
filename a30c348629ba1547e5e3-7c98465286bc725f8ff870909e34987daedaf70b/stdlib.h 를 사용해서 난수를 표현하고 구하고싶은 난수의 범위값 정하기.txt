@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main (void)
+{
+	int seed, i;
+	printf("씨드 값 입력:");
+	scanf("%d",&seed);
+	srand(seed);// 씨앗을 심는다.
+
+	for(i=0;i<5;i++)
+	{
+		printf("정수 출력: %d \n",rand()); // 열매를 수확한다.
+	}
+	return 0;
+}
+
+/*일반 난수 입력식 
+#include<stdio.h>
+#include<stdlib.h>
+
+int main (void)
+{
+	int i;
+	printf("난수의 범위 입력: 0부터 %d 까지 \n",RAND_MAX (난수의 최대값 == RAND_MAX));
+
+	for(i=0;i<5;i++)
+		printf("%d " ,rand());
+	return 0;
+}
+*/
+
+
+#include <time.h> 를 써서 시간 받기 
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int main (void)
+{
+	int i;
+	srand((int)time(NULL)); //현재시간을 이용해서 씨드 설정 // 8행
+	for(i=0;i<5;i++)
+		printf("정수 출력  : %d\n",rand());
+	return 0;
+}
+
+/* 헤더파일 time.h 를 선언하고 time.h 안에 있는 time 함수를 이용해서 seed 값을 초다위로 변환해주는 식이다.*/
+/* time.h 파일은 현재 컴퓨터의 시간과 1970년1월1일 의 시간을 초단위로 비교해주기 때문에 seed 값으로 쓰기가 적당.*/
+/* 위 예제 8 행에서는 time 함수를 호출하면서 인자로 NULL을 전달하고 있다. 
+   이렇듯 단순히 시간정보를 반환 받는것이 목적이라면 NULL을 전달 하면된다.!*/
