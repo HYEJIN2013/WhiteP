@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h> //malloc() 함수를 사용하기 위함.
+typedef struct node{
+  char data;
+  struct node *next;
+}NODE;
+
+void main()
+{
+  NODE *list, *temp;
+  list = (NODE *) malloc (sizeof(NODE));
+  list -> data = 'a';
+  temp = list;
+  temp -> next = (NODE *) malloc (sizeof(NODE));
+  temp = temp -> next;
+  temp -> data = 'b';
+  temp -> next = (NODE *) malloc (sizeof(NODE));
+  
+  temp = temp -> next;
+  temp -> data = 'c';
+  temp -> next = NULL;
+  
+  //Linked list출력.
+  temp = list;
+  while(temp != NULL)
+  {
+    printf("%5c\n", temp -> data);
+    temp = temp -> next;
+   }
