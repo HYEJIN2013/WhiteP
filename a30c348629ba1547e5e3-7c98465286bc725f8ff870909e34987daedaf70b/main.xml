@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="50dp"
+              android:gravity="center">
+
+    <ImageView
+            android:id="@+id/image"
+            android:layout_width="300px"
+            android:layout_height="300px"
+            android:src="@drawable/android"/>
+
+    <TextView
+            android:id="@+id/url"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="(caminho da imagem no aparelho)"/>
+
+    <Button
+            android:id="@+id/button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Choice Image"/>
+
+</LinearLayout>
+
