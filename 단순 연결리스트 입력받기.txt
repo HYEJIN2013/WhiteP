@@ -1,0 +1,145 @@
+//단순 연결 리스트
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef char ch;
+typedef struct listNode
+{
+	ch data[100];
+	struct listNode *link;
+}basic;
+
+typedef struct
+{
+	basic *head;
+}linklist;
+
+linklist *create()
+{
+	linklist* L;
+	L=(linklist*)malloc(sizeof(linklist));
+	L->head = NULL;
+	return L;
+}
+
+void print(linklist *L)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	p=L->head;
+	printf("( ");
+	while(p != NULL)
+	{
+		printf("%s",p->data);
+		p=p->link;
+		if(p!=NULL)
+			printf(", ");
+	}
+	printf(" )\n");
+	printf("\n");
+}
+
+void free(linklist *L)
+{
+	basic *p;
+	p = (basic*)malloc(sizeof(basic));
+	
+	while(L->head !=NULL)
+	{
+		p=L->head;
+		L->head = L->head->link;
+		free(p);
+		p=NULL;
+	}
+}
+
+void insertfirst(linklist*L , ch *x)
+{
+	basic *newNode;
+	newNode = (basic*)malloc(sizeof(basic));
+	strcpy(newNode->data,x);
+	newNode->link = L->head;
+	L ->head= newNode;
+}
+void insertmiddle(linklist *L,basic *pre,ch *x)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	if(L==NULL)
+	{
+		p->link = NULL;
+		L->head = p;
+	}
+	else if(pre == NULL)
+	{
+		L->head = p;
+	}
+	else
+	{
+		p->link = pre->link;
+		pre ->link = p;
+	}
+}
+
+void insertlast(linklist *L,char *x)
+{
+	basic *p;
+	basic *temp;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	p->link = NULL;
+	if(L==NULL)
+	{
+		L->head = p;
+		return ;
+	}
+	temp = L->head;
+	while(temp->link != NULL)
+		temp = temp->link;
+	temp->link = p;
+}
+
+void main()
+{
+	linklist *L;
+	L=create();
+	int a;
+
+	ch s[100];
+	int i=0;
+	puts("공백 리스트 생성");
+	print(L);
+	getchar();
+	printf("앞으로 3개의 문자 넣을수 있어요\n");
+	do
+	{
+		printf("1번이면 처음에 노드 넣기 2번이면 마지막에 노드 넣기\n");
+		scanf_s("%d",&a,1);
+		switch(a)
+		{
+		case 1:
+			printf("문자 입력: ");
+			scanf("%s",s);
+			insertfirst(L,s);print(L);
+			getchar();
+			break;
+		case 2:
+			printf("문자 입력: ");
+			scanf("%s",s);
+			insertlast(L,s);print(L);
+			getchar();
+			break;
+		}
+		i++;
+	}while(i<3);
+	getchar();
+	free(L);
+}
+
+	
+	
+
+
+
