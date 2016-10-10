@@ -1,0 +1,137 @@
+//왜 계속 보면서 하냐ㅄ아
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct linklist
+{
+	char data[100];
+	struct linklist *link;
+}ba;
+
+typedef struct
+{
+	ba *head;
+}link;
+
+link *create()
+{
+	link* L;
+	L = (link*)malloc(sizeof(link));
+	L->head = NULL;
+	return L;
+}
+
+void print(link *L)
+{
+	ba *p;
+	p=(ba*)malloc(sizeof(ba));
+	p=L->head;
+	printf("( ");
+	while(p!=NULL)
+	{
+		printf("%s",p->data);
+		p=p->link;
+	}
+	printf(" )\n");
+	printf("\n");
+}
+
+void free(link *L)
+{
+	ba *p;
+	p=(ba*)malloc(sizeof(ba));
+	
+	if(L->head!=NULL)
+	{
+		p=L->head;
+		p->link=L->head->link;
+		free(p);
+		p=NULL;
+	}
+}
+
+void insertfirst(link *L,char *x)
+{
+	ba *p;
+	p=(ba*)malloc(sizeof(ba));
+	strcpy(p->data,x);
+	p->link=L->head;
+	L->head = p;
+}
+void insertmiddle(link *L,ba *pre,char*x)
+{
+	ba *p;
+	p=(ba*)malloc(sizeof(ba));
+	strcpy(p->data,x);
+	if(L == NULL)
+	{
+		p->link =NULL;
+		L->head = p;
+	}
+	else if(pre == NULL)
+	{
+		L->head = p;
+	}
+	else
+	{
+		p->link = pre->link;
+		pre->link = p;
+	}
+}
+void insertlast(link *L,char *x)
+{
+	ba *p;
+	ba *temp;
+	p=(ba*)malloc(sizeof(ba));
+	strcpy(p->data,x);
+	p->link = NULL;
+	if(L == NULL)
+	{
+		
+		L->head = p;
+		return ;
+	}
+	temp = L-> head;
+	while(temp->link != NULL)
+		temp = temp->link;
+	temp->link = p;
+}
+void main()
+{
+	link *L;
+	L=create();
+	int a;
+
+	char s[100];
+	int i=0;
+	puts("공백 리스트 생성");
+	print(L);
+	getchar();
+	printf("앞으로 3개의 문자 넣을수 있어요\n");
+	do
+	{
+		printf("1번이면 처음에 노드 넣기 2번이면 마지막에 노드 넣기\n");
+		scanf_s("%d",&a,1);
+		switch(a)
+		{
+		case 1:
+			printf("문자 입력: ");
+			scanf("%s",s);
+			insertfirst(L,s);print(L);
+			getchar();
+			break;
+		case 2:
+			printf("문자 입력: ");
+			scanf("%s",s);
+			insertlast(L,s);print(L);
+			getchar();
+			break;
+		}
+		i++;
+	}while(i<3);
+	getchar();
+	free(L);
+}
+
+

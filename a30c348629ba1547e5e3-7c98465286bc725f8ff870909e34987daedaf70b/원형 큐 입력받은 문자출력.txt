@@ -1,0 +1,117 @@
+//문자를 입력 받아서 원형 큐에 넣고 입력 받은 문자 출력 하기 ver.광
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 5
+
+typedef char ch;
+
+typedef struct
+{
+	ch queue[SIZE];
+	int front,rear;
+}Q; // 큐 구조체 선언
+
+Q *create() // 큐 구조체로 동적할당 받을 함수 선언
+{
+	Q *q;
+	q = (Q*)malloc(sizeof(Q));
+	q->front =0;
+	q->rear = 0;
+	return q;
+}// 동적할당한 구조체 포인터를 꼭 반환 시키도록 하자 맨날 까먹더라
+
+int isempty(Q *q)
+{
+	if(q->front == q->rear)
+	{
+		printf("\n빈방\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int isfull(Q *q)
+{
+	if(((q->rear+1)%SIZE) == q->front)
+	{
+		printf("\n풀방\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+void enqueue(Q *q,ch a)
+{
+	if(isfull(q))
+		return ;
+	else
+	{
+		q->rear=(q->rear+1)%SIZE;
+		q->queue[q->rear]=a;
+	}
+}
+
+ch dequeue(Q* q)
+{
+	if(isempty(q))
+		return '\n';
+	else
+	{
+		q->front = (q->front+1)%SIZE;
+		return q->queue[q->front];
+	}
+}
+
+void first(Q *q)
+{
+	if(isempty(q))
+		exit(1);
+	else
+		printf("첫번째 큐 : %c\n",q->queue[(q->front+1)%SIZE]);
+}
+
+void printq(Q *q)
+{
+	int i,first,last;
+	first = (q->front+1)%SIZE;
+	last = (q->rear+1)%SIZE;
+	i=first;
+	printf("남은 큐 : [ ");
+	while(i != last)
+	{	
+		printf(" %c ",q->queue[i]);
+		i=(i+1)%SIZE;
+	}
+	printf(" ]\n");
+}
+
+void main ()
+{
+	Q *q = create();
+	ch data,a;
+	int i;
+	while(1)
+	{
+		scanf_s("%c",&a,1);
+		if(a=='\n')
+			break;
+		else
+			enqueue(q,a);printq(q);
+	}
+	first(q);
+	printq(q);
+	for(i=0;i<SIZE;i++)
+	{
+		data= dequeue(q);
+		printf("삭제된 큐 : %c\n",data);
+		printq(q);
+	}
+}
+		
+
+
+
