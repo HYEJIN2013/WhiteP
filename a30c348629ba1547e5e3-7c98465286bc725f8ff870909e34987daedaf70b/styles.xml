@@ -1,0 +1,11 @@
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="cropImageStyle">@style/Widget.CropImageView</item>
+    </style>
+    
+    <style name="Widget.CropImageView" parent="android:Widget">
+        <item name="showThirds">false</item>
+        <item name="showCircle">true</item>
+        <item name="showHandles">always</item>
+        <item name="highlightColor">?attr/colorAccent</item>
+    </style>
