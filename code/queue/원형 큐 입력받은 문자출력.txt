@@ -1,4 +1,4 @@
-//¹®ÀÚ¸¦ ÀÔ·Â ¹Þ¾Æ¼­ ¿øÇü Å¥¿¡ ³Ö°í ÀÔ·Â ¹ÞÀº ¹®ÀÚ Ãâ·Â ÇÏ±â ver.±¤
+//ë¬¸ìžë¥¼ ìž…ë ¥ ë°›ì•„ì„œ ì›í˜• íì— ë„£ê³  ìž…ë ¥ ë°›ì€ ë¬¸ìž ì¶œë ¥ í•˜ê¸° ver.ê´‘
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,22 +11,22 @@ typedef struct
 {
 	ch queue[SIZE];
 	int front,rear;
-}Q; // Å¥ ±¸Á¶Ã¼ ¼±¾ð
+}Q; // í êµ¬ì¡°ì²´ ì„ ì–¸
 
-Q *create() // Å¥ ±¸Á¶Ã¼·Î µ¿ÀûÇÒ´ç ¹ÞÀ» ÇÔ¼ö ¼±¾ð
+Q *create() // í êµ¬ì¡°ì²´ë¡œ ë™ì í• ë‹¹ ë°›ì„ í•¨ìˆ˜ ì„ ì–¸
 {
 	Q *q;
 	q = (Q*)malloc(sizeof(Q));
 	q->front =0;
 	q->rear = 0;
 	return q;
-}// µ¿ÀûÇÒ´çÇÑ ±¸Á¶Ã¼ Æ÷ÀÎÅÍ¸¦ ²À ¹ÝÈ¯ ½ÃÅ°µµ·Ï ÇÏÀÚ ¸Ç³¯ ±î¸Ô´õ¶ó
+}// ë™ì í• ë‹¹í•œ êµ¬ì¡°ì²´ í¬ì¸í„°ë¥¼ ê¼­ ë°˜í™˜ ì‹œí‚¤ë„ë¡ í•˜ìž ë§¨ë‚  ê¹Œë¨¹ë”ë¼
 
 int isempty(Q *q)
 {
 	if(q->front == q->rear)
 	{
-		printf("\nºó¹æ\n");
+		printf("\në¹ˆë°©\n");
 		return 1;
 	}
 	else
@@ -37,7 +37,7 @@ int isfull(Q *q)
 {
 	if(((q->rear+1)%SIZE) == q->front)
 	{
-		printf("\nÇ®¹æ\n");
+		printf("\ní’€ë°©\n");
 		return 1;
 	}
 	else
@@ -71,7 +71,7 @@ void first(Q *q)
 	if(isempty(q))
 		exit(1);
 	else
-		printf("Ã¹¹øÂ° Å¥ : %c\n",q->queue[(q->front+1)%SIZE]);
+		printf("ì²«ë²ˆì§¸ í : %c\n",q->queue[(q->front+1)%SIZE]);
 }
 
 void printq(Q *q)
@@ -80,7 +80,7 @@ void printq(Q *q)
 	first = (q->front+1)%SIZE;
 	last = (q->rear+1)%SIZE;
 	i=first;
-	printf("³²Àº Å¥ : [ ");
+	printf("ë‚¨ì€ í : [ ");
 	while(i != last)
 	{	
 		printf(" %c ",q->queue[i]);
@@ -107,7 +107,7 @@ void main ()
 	for(i=0;i<SIZE;i++)
 	{
 		data= dequeue(q);
-		printf("»èÁ¦µÈ Å¥ : %c\n",data);
+		printf("ì‚­ì œëœ í : %c\n",data);
 		printq(q);
 	}
 }
