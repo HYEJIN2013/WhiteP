@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 4
+typedef char ch;
+
+typedef struct
+{
+	ch Queue[SIZE];
+	int front;
+	int rear;
+}Queuetype; //구조체 선언
+
+Queuetype* create()
+{
+	Queuetype *Q;
+	Q = (Queuetype*)malloc(sizeof(Queuetype)); // 포인터 구조체 Q 동적할당 선언
+	Q->front = -1;
+	Q->rear = -1; //front 와 rear 값 -1로 초기화
+	return Q;
+}
+
+int isFull(Queuetype *Q) //가득 차있는지 검사
+{
+	if(Q->rear == SIZE-1)
+	{
+		printf("풀방\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int isEmpty(Queuetype *Q)
+{
+	if(Q->front == Q->rear)
+	{
+		printf("빈방\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+void enQueue(Queuetype *Q,ch a) //큐 삽입
+{
+	if(isFull(Q))
+		return;
+	else
+	{
+		Q->rear++;
+		Q->Queue[Q->rear]=a;
+	}
+}
+ch deQueue(Queuetype *Q) // 큐 삭제
+{
+	if(isEmpty(Q))
+		return '\n';
+	else
+	{
+		Q->front++;
+		return Q->Queue[Q->front];
+	}
+}
+
+void printQ(Queuetype *Q) // 큐 출력
+{
+	int i;
+	printf(" 남은 큐 : [  ");
+	for(i=Q->front+1;i<=Q->rear;i++)
+		printf("%c ",Q->Queue[i]);
+	printf(" ]");
+	printf("\n");
+}
+
+ch firstQ(Queuetype *Q) // 첫번째 큐 검색 
+{
+	if(isEmpty(Q))
+		exit(1);
+	else
+		return Q->Queue[Q->front+1];
+}
+
+void main()
+{
+	Queuetype *Q1 = create();// Q1 으로 동적할당 받은 구조체 포인터 생성
+	printf("A 넣기>>");enQueue(Q1,'A');printQ(Q1);
+	printf("B 넣기>>");enQueue(Q1,'B');printQ(Q1);
+	printf("C 넣기>>");enQueue(Q1,'C');printQ(Q1);
+	printf("D 넣기>>");enQueue(Q1,'D');printQ(Q1);
+	printf("E 넣기>>");enQueue(Q1,'E');printQ(Q1);
+	printf("가장 처음 넣은 큐 : %c\n",firstQ(Q1));
+	printf("\t삭제 한 큐 : %c ",deQueue(Q1));printQ(Q1);
+	printf("\t삭제 한 큐 : %c ",deQueue(Q1));printQ(Q1);
+	printf("\t삭제 한 큐 : %c ",deQueue(Q1));printQ(Q1);
+	printf("\t삭제 한 큐 : %c ",deQueue(Q1));printQ(Q1);
+	deQueue(Q1);
+
+}
+
