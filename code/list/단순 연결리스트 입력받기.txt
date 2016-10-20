@@ -1,4 +1,4 @@
-//¿Ö °è¼Ó º¸¸é¼­ ÇÏ³Ä¤´¾Æ
+//ì™œ ê³„ì† ë³´ë©´ì„œ í•˜ëƒã…„ì•„
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -105,24 +105,24 @@ void main()
 
 	char s[100];
 	int i=0;
-	puts("°ø¹é ¸®½ºÆ® »ı¼º");
+	puts("ê³µë°± ë¦¬ìŠ¤íŠ¸ ìƒì„±");
 	print(L);
 	getchar();
-	printf("¾ÕÀ¸·Î 3°³ÀÇ ¹®ÀÚ ³ÖÀ»¼ö ÀÖ¾î¿ä\n");
+	printf("ì•ìœ¼ë¡œ 3ê°œì˜ ë¬¸ì ë„£ì„ìˆ˜ ìˆì–´ìš”\n");
 	do
 	{
-		printf("1¹øÀÌ¸é Ã³À½¿¡ ³ëµå ³Ö±â 2¹øÀÌ¸é ¸¶Áö¸·¿¡ ³ëµå ³Ö±â\n");
+		printf("1ë²ˆì´ë©´ ì²˜ìŒì— ë…¸ë“œ ë„£ê¸° 2ë²ˆì´ë©´ ë§ˆì§€ë§‰ì— ë…¸ë“œ ë„£ê¸°\n");
 		scanf_s("%d",&a,1);
 		switch(a)
 		{
 		case 1:
-			printf("¹®ÀÚ ÀÔ·Â: ");
+			printf("ë¬¸ì ì…ë ¥: ");
 			scanf("%s",s);
 			insertfirst(L,s);print(L);
 			getchar();
 			break;
 		case 2:
-			printf("¹®ÀÚ ÀÔ·Â: ");
+			printf("ë¬¸ì ì…ë ¥: ");
 			scanf("%s",s);
 			insertlast(L,s);print(L);
 			getchar();
