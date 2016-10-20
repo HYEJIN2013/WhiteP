@@ -1,0 +1,84 @@
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.util.*;
+
+public class SendMail {
+
+    private void send(String sender, String recipient, String headline, String content) throws Exception{
+        List<Long> updateIds = new ArrayList<Long>();
+        String host = "smtp.host";
+
+        Properties props = System.getProperties();
+        // proxy like this is your java mail api version >=1.4.5
+        // Use this proxy on a per-session, per-protocol basis
+        props.setProperty("mail.smtp.socks.host", "proxy.host.ip");
+        props.setProperty("mail.smtp.socks.port", "proxy.host.port");
+        
+        
+        //proxy like this if your java mail api version < 1.4.5
+        // this may proxy on jvm level(so just use the way above)
+        //props.setProperty("proxySet", "true");
+        //props.setProperty("socksProxyHost", "proxy.host.ip");
+        //props.setProperty("socksProxyPort", "proxy.host.port");
+
+        // print debug message
+        props.put("mail.debug", "true");
+
+        //if you hava a password
+//        String proxyUsername = "username";
+//        String proxyPassword = "password";
+//        java.net.Authenticator authenticator = new java.net.Authenticator() {
+//
+//            protected java.net.PasswordAuthentication getPasswordAuthentication() {
+//                return new java.net.PasswordAuthentication("", password.toCharArray());
+//            }
+//        };
+//
+//        System.setProperty("java.net.socks.username", username);
+//        System.setProperty("java.net.socks.password", password);
+//        java.net.Authenticator.setDefault(authenticator);
+
+        // 设置SMTP的主机
+        props.put("mail.smtp.host", host);
+        props.put("mail.transport.procotol", "smtp");
+        // 不需要经过验证
+        props.put("mail.smtp.auth", "false");
+
+        Session session = Session.getInstance(props);
+
+        //建立邮件内容
+        MimeMessage msg = new MimeMessage(session);
+        //设置邮件内容格式为混合内容
+        MimeMultipart msgMultipart = new MimeMultipart("mixed");
+        msg.setContent(msgMultipart);
+
+        MimeBodyPart bodyPart = new MimeBodyPart();
+        msgMultipart.addBodyPart(bodyPart);
+
+        //设置html内容
+        bodyPart.setContent(content, "text/html;charset=utf-8");
+        msg.setSentDate(new Date());
+        //设置发件人地址
+        msg.setFrom(new InternetAddress(sender));
+        //设置标题
+        msg.setSubject(headline);
+        //发送邮件
+        Transport transport = session.getTransport("smtp");
+        transport.connect();
+                transport.sendMessage(msg, new InternetAddress[]{new InternetAddress(rcpt.getValue())});
+        transport.close();
+    }
+
+    public static void main(String[] args) {
+        try {
+            new SendMail().send("sender@mail.host.com", "recipient@mail.host.com", "Hello", "Have a nice day!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
