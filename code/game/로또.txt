@@ -5,11 +5,11 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	int num; // switch ¹®À» »ç¿ëÇÒ num
-	int arr[7];  // ³»°¡ Á¤ÇÑ 7°³ÀÇ ¼ıÀÚ¸¦ ¾´´Ù.
-	int lotto[7]; // ÀÓÀÇÀÇ 7°³ÀÇ ¼ıÀÚ°¡ Á¤ÇØÁø´Ù.
+	int num; // switch ë¬¸ì„ ì‚¬ìš©í•  num
+	int arr[7];  // ë‚´ê°€ ì •í•œ 7ê°œì˜ ìˆ«ìë¥¼ ì“´ë‹¤.
+	int lotto[7]; // ì„ì˜ì˜ 7ê°œì˜ ìˆ«ìê°€ ì •í•´ì§„ë‹¤.
 	int i,j;  
-	int sum=0;  // ¸ÂÀº ¼ıÀÚ °¹¼ö
+	int sum=0;  // ë§ì€ ìˆ«ì ê°¯ìˆ˜
 	srand((int)time(NULL));
 	
 
@@ -25,9 +25,9 @@ int _tmain(int argc, _TCHAR* argv[])
 				lotto[j]=(rand()%45+1);
 		}
 		
-	} // ÀÓÀÇÀÇ 7°¡Áö ¼ıÀÚ°¡ Á¤ÇØÁö´Â ¹è¿­
+	} // ì„ì˜ì˜ 7ê°€ì§€ ìˆ«ìê°€ ì •í•´ì§€ëŠ” ë°°ì—´
 
-	printf("1¹ø. ÀÚµ¿ 2¹ø. ¼öµ¿ 3¹ø. Ãë¼Ò");
+	printf("1ë²ˆ. ìë™ 2ë²ˆ. ìˆ˜ë™ 3ë²ˆ. ì·¨ì†Œ");
 	printf(": ");
 	scanf("%d",&num);
 
@@ -44,26 +44,26 @@ int _tmain(int argc, _TCHAR* argv[])
 				if(arr[j]==arr[j-1])
 					arr[j]=(rand()%45+1);
 			}
-		} // ÀÓÀÇÀÇ 7°¡Áö ¼ıÀÚ°¡ Á¤ÇØÁö´Â ¹è¿­
+		} // ì„ì˜ì˜ 7ê°€ì§€ ìˆ«ìê°€ ì •í•´ì§€ëŠ” ë°°ì—´
 		for(i=0;i<7;i++)
 		{
 			if(lotto[i]==arr[0]||lotto[i]==arr[1]||lotto[i]==arr[2]||lotto[i]==arr[3]||lotto[i]==arr[4]||lotto[i]==arr[5]||lotto[i]==arr[6])
 				sum++;
 		}
-		printf("»ç¿ëÀÚ ¼ıÀÚ : ");
+		printf("ì‚¬ìš©ì ìˆ«ì : ");
 		for(i=0;i<7;i++)
 			printf("%3d ",arr[i]);
 		
-		printf("\n·Î¶Ç ¼ıÀÚ :   ");
+		printf("\në¡œë˜ ìˆ«ì :   ");
 		for(i=0;i<7;i++)
 		    printf("%3d ",lotto[i]);
-		printf("\n¸ÂÀº ¼ıÀÚ : %d \n",sum);
+		printf("\në§ì€ ìˆ«ì : %d \n",sum);
 		break;
 	case 2:
 
 	for(i=0;i<7;i++)
 	{
-		printf("%d ¹øÂ° ¹øÈ£ : ",i+1);
+		printf("%d ë²ˆì§¸ ë²ˆí˜¸ : ",i+1);
 		scanf("%d",&arr[i]);
 	}
 
@@ -72,18 +72,18 @@ int _tmain(int argc, _TCHAR* argv[])
 		if(lotto[i]==arr[0]||lotto[i]==arr[1]||lotto[i]==arr[2]||lotto[i]==arr[3]||lotto[i]==arr[4]||lotto[i]==arr[5]||lotto[i]==arr[6])
 			sum++;
 	}
-	printf("\n»ç¿ëÀÚ ¼ıÀÚ : ");
+	printf("\nì‚¬ìš©ì ìˆ«ì : ");
 	for(i=0;i<7;i++)
 		printf("%3d ",arr[i]);
 	
-	printf("\n·Î¶Ç ¼ıÀÚ :   ");
+	printf("\në¡œë˜ ìˆ«ì :   ");
 	for(i=0;i<7;i++)
 		printf("%3d ",lotto[i]);
 		
 	printf("\n");
 	break;
 	case 3:
-		printf("Ãë¼Ò ‰ç½À´Ï´Ù.\nÁ¾·á ÇÏ°Ú½À´Ï´Ù\n");
+		printf("ì·¨ì†Œ Â‰ç‡Ÿìœ±æ±‚.\nì¢…ë£Œ í•˜ê² ìŠµë‹ˆë‹¤\n");
 		break;
 	}
 	
