@@ -7,10 +7,10 @@ int arr[10];
 int change;
 int i,j;
 
-printf("Á¤¼ö ÀÔ·Â : ");
+printf("ì •ìˆ˜ ìž…ë ¥ : ");
 for(i=0;i<10;i++)
 scanf("%d",&arr[i]);
-printf("Á¤·ÄÀü ¹è¿­ : ");
+printf("ì •ë ¬ì „ ë°°ì—´ : ");
 for(i=0;i<10;i++)
 printf("%d ",arr[i]);
 printf("\n");
@@ -26,7 +26,7 @@ arr[j+1]=change;
 }
 }
 
-printf("Á¤·ÄÈÄ ¹è¿­ : ");
+printf("ì •ë ¬í›„ ë°°ì—´ : ");
 for(i=0;i<10;i++)
 printf("%d ",arr[i]);
 printf("\n");
