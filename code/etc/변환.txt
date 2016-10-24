@@ -9,7 +9,7 @@ int i;
 char diff = 'a'-'A';
 char ch[50];
 
-puts("╧╝юз©╜ю╩ ют╥б го╪╪©Д : ");
+puts("б╧б╝ц─ц б©б╜ц─б╩ ц─ц■б╥ц┌ ц┤ц▐б╪б╪б©ц╓ : ");
 gets(ch);
 
 for(i=0;i<strlen(ch);i++)
