@@ -7,26 +7,26 @@ int main (void)
 char ch;
 double num;
 double fah,cel;
-printf("╪╥╬╬╦И 'C', х╜╬╬╦И 'F'╦╕ ют╥бго╪╪©Д: ");
+printf("Л└╜Л■╗К╘╢ 'C', М≥■Л■╗К╘╢ 'F'К╔╪ Л·┘К═╔М∙≤Л└╦Л ■: ");
 scanf("%c",&ch);
 
 
 if(ch=='c'|| ch== 'C')
 {
-printf("╪╥╬╬ ©б╣╣╦╕ ют╥бго╪╪©Д :");
+printf("Л└╜Л■╗ Л≤╗К▐└К╔╪ Л·┘К═╔М∙≤Л└╦Л ■ :");
 scanf("%lf",&num);
 
 fah = num*1.8+32;
-printf("х╜╬╬ ©б╣╣╢б %f ют╢о╢ы.\n",fah);
+printf("М≥■Л■╗ Л≤╗К▐└К┼■ %f Л·┘К▀┬К▀╓.\n",fah);
 
 }
 else if (ch=='f'|| ch=='F')
 {
-printf("х╜╬╬ ©б╣╣╦╕ ют╥бго╪╪©Д : ");
+printf("М≥■Л■╗ Л≤╗К▐└К╔╪ Л·┘К═╔М∙≤Л└╦Л ■ : ");
 scanf("%lf",&num);
 
 cel = (num-32)/1.8;
-printf("╪╥╬╬ ©б╣╣╢б %f ют╢о╢ы.\n",cel);
+printf("Л└╜Л■╗ Л≤╗К▐└К┼■ %f Л·┘К▀┬К▀╓.\n",cel);
 }
 
 
