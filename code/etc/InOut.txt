@@ -6,7 +6,7 @@ int _tmain(int argc, _TCHAR* argv[])
 int i;
 int num=0;
 
-printf("<1> ÀÚµ¿Â÷ ³Ö±â <2> ÀÚµ¿Â÷ »©±â <3> ³¡ : ");
+printf("<1> ìë™ì°¨ ë„£ê¸° <2> ìë™ì°¨ ë¹¼ê¸° <3> ë : ");
 scanf("%d",&i);
 
 
@@ -14,15 +14,15 @@ scanf("%d",&i);
 switch(i)
 {
 case 1: 
-printf("A ÀÚµ¿Â÷°¡ ÅÍ³Î¿¡ µé¾î°¨\n");
+printf("A ìë™ì°¨ê°€ í„°ë„ì— ë“¤ì–´ê°\n");
 num +=1;
 break;
 case 2:
-printf("B ÀÚµ¿Â÷°¡ ÅÍ³Î¿¡¼­ ºüÁü\n");
+printf("B ìë™ì°¨ê°€ í„°ë„ì—ì„œ ë¹ ì§\n");
 num-=1;
 break;
 case 3:
-printf("ÇöÀç ÅÍ³Î¿¡ %d´ë°¡ ÀÖÀ½\n",num);
+printf("í˜„ì¬ í„°ë„ì— %dëŒ€ê°€ ìˆìŒ\n",num);
 break;
 if(i==3)
 break;
