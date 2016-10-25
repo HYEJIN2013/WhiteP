@@ -1,0 +1,6 @@
+// Add the Google Play services version to your app's manifest
+// Edit your application's AndroidManifest.xml file, and add the following declaration within the <application> element. This embeds the version of Google Play services that the app was compiled with.
+
+<meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
