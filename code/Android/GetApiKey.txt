@@ -1,0 +1,29 @@
+Get an Android API key
+
+Note: You need an Android API key, not a browser key. You can use the same API key for your Google Places API for Android apps and your Google Maps Android API v2 apps.
+Note: Existing keys from a Google Maps Android v1 application, commonly known as MapView, will not work with the v2 API. The Google Maps Android API v2 uses a new system of managing keys.
+After following the above steps to activate the API, you end up on the Credentials page in the Google Developers Console, where you can access your project's API keys and other credentials.
+
+If your project doesn't already have a Key for Android applications, create an API key by selecting Create New Key and then selecting Android key.
+In the resulting dialog, enter your app's SHA-1 fingerprint, then a semicolon (;) then your app's package name. For example:
+
+XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX;com.example.android.mapexample
+
+The Google Developers Console displays a section titled Key for Android applications followed by a forty-character API key, for example:
+
+AAAAAAAAAA-CCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+
+=============================RESULT================================================
+
+
+Key for Android applications
+
+API key	
+AIzaSyCX_Be8qLs3Wc83C9FPeYNPl-P6HA1-b2w
+Android applications	
+XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX;com.example.playservices
+Activation date	
+May 2, 2015, 2:17:00 AM
+Activated by	
+exmaple_email@example.com (you)
