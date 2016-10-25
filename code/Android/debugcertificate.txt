@@ -1,0 +1,29 @@
+// Locate the debug.keystore file
+
+Locate your debug keystore file. The file name is debug.keystore, and is created the first time you build your project. By default, it is stored in the same directory as your Android Virtual Device (AVD) files:
+
+OS X and Linux: ~/.android/
+
+// Generate SHA-1 fingerprint
+
+( Command )
+
+keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+
+( Result )
+
+Alias name: androiddebugkey
+Creation date: Jan 18, 2014
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Android Debug, O=Android, C=US
+Issuer: CN=Android Debug, O=Android, C=US
+Serial number: 52d9cb79
+Valid from: Sat Jan 18 05:31:53 PKT 2014 until: Mon Jan 11 05:31:53 PKT 2044
+Certificate fingerprints:
+	 MD5:  ---------------------------------------------------------
+	 SHA1: ---------------------------------------------------------
+	 SHA256: ---------------------------------------------------------------
+	 Signature algorithm name: --------
+	 Version: 3
