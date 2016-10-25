@@ -1,0 +1,3 @@
+//TODO: 1. include compile sdk... ( https://developer.android.com/google/play-services/setup.html )
+
+compile 'com.google.android.gms:play-services-maps:7.3.0'
