@@ -1,0 +1,51 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+
+typedef struct st
+{
+	char name[20];
+	double ave;
+}st;
+
+int name(const void *e1,const void *e2)
+{
+	st* a =(st*)e1;
+	st* b =(st*)e2;
+	return strcmp(a->name ,b->name);
+
+}
+int av(const void *e1,const void *e2)
+{
+	st* a =(st*)e1;
+	st* b =(st*)e2;
+	if(a->ave == b->ave)
+		return 0;
+	else if(a->ave > b->ave)
+		return 1;
+	else
+		return -1;
+}
+void print(st *p)
+{
+	for(int i=0;i<3;i++)
+		printf("%s %f\n",p[i].name,p[i].ave);
+}
+int main ()
+{
+	st s[3] ={{"김",25.3},{"이",92.5},{"박",52.6}};
+
+	print(s);
+	printf("\n");
+	printf("이름 차순 정렬\n");
+	qsort(s,3,sizeof(st),name);
+	print(s);
+	printf("\n");
+	qsort(s,3,sizeof(st),av);
+	print(s);
+	printf("\n");
+	return 0;
+}
+
+
+

@@ -1,0 +1,65 @@
+/* 프로그램 상에서 mystory.txt 라는 이름의 파일을 생성해서 본인의 이름,주민번호,전화번호를 저장 하는 프로그램을 작성하자
+   단 저장의 형태는 문자열 앞에# 이 들어가야한다. 저장이완료되면 메모장으로 확인이 가능해야한다.*/
+
+#include<stdio.h>
+
+int main ()
+{
+	FILE * fp=fopen("C:\\파일입출력\\mystory.txt","wt"); // 출력스트림을 이용 
+	
+	if(fp==NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;
+	}
+	fputs("#이름:김주환\n",fp);
+	fputs("#주민:920504-1000000\n",fp);
+	fputs("#번호:010-6246-7668\n",fp);
+	fclose(fp);
+	return 0;
+}
+
+-----------------------------------------------------------------------------
+
+#include<stdio.h>
+
+int main ()
+{
+	FILE * rp=fopen("C:\\파일입출력\\mystory.txt","at"); //파일 덧붙이기
+	
+	if(rp==NULL)
+	{
+		puts("파일 오픈 실패");
+		return -1;
+	}
+	fputs("#나이:25살\n",rp);
+	fflush(rp);	
+	fclose(rp);
+	return 0;
+}
+
+/* 생성된 파일에 덧붙여 쓰기 
+   스트림을 at로 하면 덧붙여 쓰기가 가능하다 */
+
+
+--------------------------------------------------------------------------------
+
+/* 출력하여 txt로 만들 파일들을 프로그램상으로  입력하기 (mystory)*/
+
+#include<stdio.h>
+#include<string.h>
+
+int main ()
+{
+	FILE * fp=fopen("C:\\파일입출력\\mystory.txt","rt"); //파일 입력 스트림 rt
+	char str[100]; // 한문자열의 길이가 얼마가 될지 모르니깐 일단 넉넉하게 (사실은 얼마인지 알고있지만 훗)
+	
+	while(fgets(str,sizeof(str),fp)!=NULL)
+		printf(str);
+	fclose(fp);
+	return 0;
+}
+
+
+while 조건문 에서 !=NULL 을사용했는데 일단 외워두자
+	

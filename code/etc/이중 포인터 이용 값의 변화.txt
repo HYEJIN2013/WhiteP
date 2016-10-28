@@ -1,0 +1,22 @@
+#include "stdio.h"
+void swap (int** x, int** y);
+int main ()
+{
+	int a =10 , b=20;
+	int *x;
+	int *y;
+
+	x=&a; //변수 a 의 주소를 포인터 x에 저장
+	y=&b; //변수 b 의 주소를 포인터 y에 저장 
+
+	swap(&x,&y); //a,b 의 주소가 저장되있는 포인터 x,y 의 주소 값을 인자로 넣어준다
+	printf("%d %d\n",*x,*y); // 포인터로 계산을 해서 swap 해주었기 때문에 입력 인자로 포인터를 넣는다.!!
+}
+void swap (int** x, int** y)
+{
+	int *temp; // x의 주소를 받을 포인터 temp 선언
+	temp = *x; // 포인터 temp 에 *x(a의 주소값을 넣어준다)
+	*x = *y;
+	*y =temp;
+}
+

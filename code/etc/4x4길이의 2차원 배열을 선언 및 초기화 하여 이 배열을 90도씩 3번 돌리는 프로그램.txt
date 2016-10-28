@@ -1,0 +1,161 @@
+#include<stdio.h>
+
+void F1 (int(*arr)[4])
+{
+	int i,j;
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%d ",arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+void F2 (int(*arr)[4])
+{
+	int arr2[4][4];
+	int i,j,k;
+	for(i=0;i<4;i++)
+	{
+		k=3;
+		for(j=0;j<4;j++)
+		{
+			arr2[i][j]=arr[k][i];
+			k--;
+		}
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%d ",arr2[i][j]);
+		}
+		printf("\n");
+	}
+}
+void F3 (int(*arr)[4])
+{
+	int arr2[4][4];
+	int i,j,k=3,l;
+	for(i=0;i<4;i++)
+	{
+		l=3;
+		for(j=0;j<4;j++)
+		{
+			arr2[i][j]=arr[k][l];
+			l--;
+		}
+		k--;
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%d ",arr2[i][j]);
+		}
+		printf("\n");
+	}
+}
+void F4 (int (*arr)[4])
+{
+	int arr2[4][4];
+	int i,j,k=3;
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			arr2[i][j]=arr[j][k];
+		}
+		k--;
+	}
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%d ",arr2[i][j]);
+		}
+		printf("\n");
+	}
+}
+int main (void)
+{
+	int arr[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+	F1(arr);
+	printf("\n");
+	F2(arr);
+	printf("\n");
+	F3(arr);
+	printf("\n");
+	F4(arr);
+	printf("\n");
+	return 0;
+}
+
+/* main 함수에서 초기화한 배열을 새로 선언한 함수에 넣을려면 새로 선언한 함수의 매개변수에
+   int (*arr)[가로값] 이렇게 이중 포인터변수(배열자체가 포인터 이기때문에 * 하나가 더붙어서 이중 포인터 변수가 된다)
+   로 매개변수 선언을 한뒤 함수의이름(선언한 배열의이름) ex) F1(arr) 이런식으로 넣어야한다.*/
+
+  
+#include <stdio.h>
+
+void F (int (*arr)[4])
+{
+	int i,j;
+
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("%3d ",arr[i][j]);
+		}
+		printf("\n");
+		printf("\n");
+	}
+}
+
+void F1 (int (*arr)[4])
+{
+	int i,j,k;
+	int arr2[4][4];
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			arr2[i][j]=arr[i][j];
+		}
+	}
+	for(i=0;i<4;i++)
+	{
+		k=3;
+		for(j=0;j<4;j++)
+		{
+			arr[i][j]=arr2[k][i];
+			k--;
+		}
+	}
+}
+
+int main (void)
+{
+	int arr[4][4]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+
+	F(arr);
+	printf("\n");
+	
+	F1(arr);
+	F(arr);
+	printf("\n");
+	
+	F1(arr);
+	F(arr);
+	printf("\n");
+	
+	F1(arr);
+	F(arr);
+	printf("\n");
+	return 0;
+}
+
+//배열포인터를 매개변수로 넣을려면 소괄호를 치고 *을 붙을것 ! 
+// ex) int (*arr)[x] 이렇게

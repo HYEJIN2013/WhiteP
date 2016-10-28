@@ -1,0 +1,20 @@
+#include "stdio.h"
+
+int main ()
+{
+	int x;
+	int * p;
+
+	p=&x;
+	*p =10; // 결과론적으론 x의 주소에 10 을 넣는것이다.
+
+	printf("*p = %d \n " ,*p);
+	printf("x = %d \n" , x);
+
+	printf("p = %p \n", p);
+	printf("x = %p \n", &x); // 포인터 변수 p 에 x의 주소값이 저장되있어서 x 의 주소값이 출력된다 
+
+	printf("&p = %p \n",&p); // 포인터 변수의 주소 값을 나타낸다.
+
+	return 0;
+}

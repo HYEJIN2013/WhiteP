@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+struct person
+{
+	char name[20]; //name 이라는 이름의 길이가 20인 배열 선언
+	char phonenum[20]; // phonenum 이라는 이름의 길이가 20인 배열 선언
+	int age;
+};
+
+int main (void)
+{
+	struct person man1,man2; // 위에 선언한 person 이라는 구조체에 man1,man2라는 변수를 선언         //13행
+	strcpy(man1.name, "안성준"); //peron 구조체로 선언한 변수 man1 안에 person 안에있던 name 이라는 멤버에 안성준이라는 문자를 저장.  //14행
+	strcpy(man1.phonenum, "010-1122-3344"); //person 구조체로 선언한 변수 man1 안에 person 안에있던 phonenum 이라는 멤버에 010-1122-3344 를 저장  //15행
+	man1.age =23; // person 구조체로 선언한 변수 man1 안에 person 안에있던 멤버 age의 값을 23 으로 저장
+
+	printf("이름 입력:"); scanf("%s",man2.name); //18행
+	printf("번호 입력:"); scanf("%s",man2.phonenum); //19행
+	printf("나이 입력:"); scanf("%d",&(man2.age)); //20행
+
+	printf("이름 : %s\n",man1.name);
+	printf("번호 : %s\n",man1.phonenum);
+	printf("나이 : %d\n",man1.age);
+
+	printf("이름 : %s\n",man2.name);
+	printf("번호 : %s\n",man2.phonenum);
+	printf("나이 : %d\n",man2.age);
+
+	return 0;
+}
+
+
+
+
+/*13행 : person형  구조체 변수 둘을 선언하고 있다.
+14,15행 : name 과 phonenum이 배열이기 때문에 문자열 저장을 위해서는 strcpy 함수를 호출해야 한다.
+ 18~20행 : 배열의 이름 앞에는 & 연산자를 붙이지 않고, int형 변수 이름 앞에는 &연산자를 붙이고 있다. 
+           즉 우리가 이미 잘 아는 scanf 함수의 사용방법을 벗어나지 않는다.*/
+             

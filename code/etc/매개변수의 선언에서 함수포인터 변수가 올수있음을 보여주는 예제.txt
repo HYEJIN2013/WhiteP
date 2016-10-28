@@ -1,0 +1,48 @@
+//이 상황은 매개변수의 선언으로 함수 포인터 변수가 올 수 있음을 보여주는 것이다
+//더불어 전달되는 인자에 따라서 달리 동작하는 함수의 정의도 가능함을보여준다
+#include <stdio.h>
+
+int Whoisfirst (int age1, int age2, int (*cmp)(int n1,int n2))
+{
+	return cmp(age1,age2);
+}
+
+int Olderfirst (int age1,int age2)
+{
+	if(age1>age2)
+		return age1;
+	else if(age1<age2)
+		return age2;
+	else 
+		return 0;
+}
+
+int Youngerfirst(int age1,int age2)
+{
+	if(age1<age2)
+		return age1;
+	else if(age2<age1)
+		return age2;
+	else 
+		return 0;
+}
+
+int main (void)
+{
+	int age1=20;
+	int age2=30;
+	int first;
+
+	printf("입장순서 1 \n");
+	first=Whoisfirst(age1,age2,Olderfirst);
+	printf("%d세와%d세중 %d 세가 먼저 입장!\n\n",age1,age2,first);//first를 Whoisfirst 함수로 초기화 시켰고 Whoisfirst 함수의 매개변수 *cmp를 이용하여 Olderfirst를 구하였다.
+
+	printf("입장순서 2\n");
+	first=Whoisfirst(age1,age2,Youngerfirst);
+	printf("%d세와%d세중 %d 세가 먼저 입장!\n\n",age1,age2,first);//first를 Whoisfirst 함수로 초기화 시키고 Whosifirst 함수의 매개변수중 *cmp에 Youngerfirst 함수를 넣어서 Youngerfirst 를 구함
+
+	return 0;
+}
+
+/*이렇듯 매개변수의 선언으로 함수 포인터 변수가 올 수 있다.
+따라서 이 함수를 호출할 때에는 세 번째 인자로, 반환형이 int 이고 두개의 int형 변수가 매개변수로 선언된 함수의 이름이 전달되어야한다.*/

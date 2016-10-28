@@ -1,0 +1,18 @@
+/* goto 사용 ex)*/
+
+#include "stdio.h"
+
+int main ()
+{
+	int i;
+
+	for(i=1;i<=10;i++)
+	{
+		if(i % 2 ==0)
+			goto exit;
+		printf("%d ",i);
+	}
+exit: // goto 를 이용하여 이동할 문장을 받을 레이블 (레이블 정의시 c 언어 식별자 정의 규칙에 따르면 된다.)
+	printf("\n");
+	return 0;
+}

@@ -1,0 +1,46 @@
+/* 파일의 크기를 바이트 단위로 계산하기 
+   FILE 구조체의 포인터가 인자로 전달되면, 파일의 크기를 바이트 단위로 계산하여 반환하는 함수를 정의하자.
+   단! 바로 위에서 소개하 ftell함수를 이용해서 구현해야 하며, 함수가 호출된 이후에도 파일 위치 지시자의 정보가 
+   변경되어서는 안된다(파일의 크기를 계산하는 과정에서 변경시켰다면, 파일의 크기를 계산한 이후에는 되돌려 놓아야 한다.*/
+
+#include<stdio.h>
+long F (FILE * fp);
+
+int main ()
+{
+	FILE * fp =fopen("C:\\파일입출력\\ABC.txt","rt"); //입력 스트림 rt ABC.txt 안에 있는 내용을 fp 안에 넣는다.
+	char str[100];
+	fgets(str,100,fp); //  fp 로 부터 받은 문자를 str배열을 이용해서 idx에 저장한다
+	fputs(str,stdout); // str 배열에 있는 내용을 출력한다
+	printf("파일의 크기 :%ld\n",F(fp));
+	fgets(str,100,fp);
+	fputs(str,stdout);
+	printf("파일의 크기 : %ld\n",F(fp));
+	fgets(str,100,fp);
+	fputs(str,stdout);
+	fclose(fp); // fp 스트림을 종료 시켜 준다.
+	return 0;
+}
+
+long F (FILE*fp)
+{
+	long fpos;
+	long fsize;
+	fpos=ftell(fp); //파일 위치 지시자 정보를 백업한다.
+
+	fseek(fp,0,SEEK_END); // 파일의 끝에서 부터 0칸만큼 오른쪽으로 이동
+	fsize=ftell(fp);
+	fseek(fp,fpos,SEEK_SET); //파일의 처음부터 파일위치 지시자가 저장된 값만큼 이동      // 파일 위치 지시자 정보 복구
+	return fsize;
+}
+
+
+/* 
+F 함수의 2번의 fseek 으로 파일의 길이를 재고 있다 . 
+첫번째 fseek을 이용해서 파일의 끝으로 파일위치 지시자를 보낸뒤 fsize에 현지 값을 저장시킨뒤,
+두번째 fseek을 이용해서 파일의 처음으로 파일위치 지시자를 다시 보낸뒤 fsize를 반환 하고있다.
+이는 문제 자체에서 파일위치 지시자를 처음 자리로 돌리라했기에 하는 것이다
+함수는 언제 사용하든 다른 줄에서 쓰면 새로운 값으로 나타낼수 있다.
+ftell 함수는 첫번째 바이트는 0 을 세번째 바이트는 2를 반환한다고 나와있다.
+이는 파일의 길이 -1 (즉, NULL 문자를 제외한 순수 파일의 크기만을 나타낸다는 것이다)를 정수 값으로 반환한다는 것이다.
+*/

@@ -1,0 +1,55 @@
+/* 열거형을 이용해서 입력된 월의 이름을 출력하는 프로그램 작성 */
+
+#include "stdio.h"
+
+enum month {January, February, March, April, May, June, July, August, September, October, November, December};
+
+int main()
+{
+	int a;
+	enum month mon;
+	mon = May;
+	printf("월 입력: ");
+	scanf("%d",&a);
+
+	switch(a)
+	{
+	case January:
+		printf("%d 월은 January 입니다.\n",a);
+		break;
+	case February:
+		printf("%d 월은 February 입니다.\n",a);
+		break;
+	case March:
+		printf("%d 월은 March 입니다.\n",a);
+		break;
+	case April:
+		printf("%d 월은 April 입니다.\n",a);
+		break;
+	case May:
+		printf("%d 월은 May 입니다.\n",a);
+		break;
+	case June:
+		printf("%d 월은 June 입니다.\n",a);
+		break;
+	case July:
+		printf("%d 월은 July 입니다.\n",a);
+		break;
+	case August:
+		printf("%d 월은 August 입니다.\n",a);
+		break;
+	case September:
+		printf("%d 월은 September 입니다.\n",a);
+		break;
+	case October:
+		printf("%d 월은 October 입니다.\n",a);
+		break;
+	case November:
+		printf("%d 월은 November 입니다.\n",a);
+		break;
+	case December:
+		printf("%d 월은 December 입니다.\n",a);
+		break;
+	}
+	return 0;
+}

@@ -1,0 +1,70 @@
+#include<stdio.h>//두개의 정수를 입력 받아서 구구단 출력 이때 입력 값이 달라도 출력순서는 같아야 한다 (ex 3,5 와 5,3의 출력 순서는 같아야한다)
+int main (void)
+{
+	int dan,dan1;
+	int i;
+	printf("두개의 정수 입력:");
+	scanf("%d %d",&dan,&dan1);
+	if(dan1>=dan)
+	{
+		while(dan1>=dan)
+		{
+		for(i=1;i<10;i++)
+		{
+			printf("%dx%d=%d\n",dan,i,dan*i);
+		}
+		dan++;
+		i=1;
+		}
+	}
+	else
+	{
+		while(dan>=dan1)
+		{
+			for(i=1;i<10;i++)
+		{
+			printf("%dx%d=%d\n",dan1,i,dan1*i);
+		}
+		dan1++;
+		i=1;
+		}
+	}
+	return 0;
+
+
+
+#include <stdio.h>//두개의 정수를 입력 받아서 구구단 출력하자 입력순서와 상관없이 출력값은 같아야한다 2,4 4,2 는 같은 값이 출력되야한다;
+int s (void)
+{
+	int num;
+	scanf("%d",&num);
+	return num;
+}
+int main (void)
+{
+	int num,num1;
+	int i;
+	printf("두 개의 정수를 입력:");
+	num=s();
+	num1=s();
+	printf("%d와 %d 사이의 구구단 값 작은수->큰수 출력\n",num,num1);
+	if(num>num1)
+	{
+		for(;num1<=num;num1++)
+		{
+			for(i=1;i<10;i++)
+				printf("%dx%d=%d\n",num1,i,num1*i);
+			i=1;
+		}
+	}
+	else//num1>num
+	{
+		for(;num<=num1;num++)
+		{
+			for(i=1;i<10;i++)
+				printf("%dx%d=%d\n",num,i,num*i);
+			i=1;
+		}
+	}
+	return 0;
+}

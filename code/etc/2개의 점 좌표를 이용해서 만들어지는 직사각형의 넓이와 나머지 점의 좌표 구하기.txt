@@ -1,0 +1,45 @@
+/*좌상단의 x,y 좌표가 [100,100] 우하단의 x,y 좌표가 [0,0]인 좌표평면상의 직사각형 정보를 표현하기 위한 구조체 정의
+  구조체 변수를 인자로 전달 받아서 해당 직사각형의 넓이를 계산해서 출력하는 함수와 
+  직사각형을 이루는 네 점의 좌표를 출력하는 함수를 각각정의하자.
+  단, 좌표평면상 에서 직사각형을 표현하기 위해서 필요한점의 객수는 4개가 아닌 2개이니, 직사각형을 의미하는
+  변수 내에는 두 점의 정보만 존재해야한다.*/
+
+#include<stdio.h>
+
+typedef struct point
+{
+	int xpos;
+	int ypos;
+}point;
+
+/* 직사각형의 넓이를 구하는 함수 */
+int F (point pos1,point pos2)
+{
+	int pos3;
+	pos3=((pos2.xpos-pos1.xpos)*(pos2.ypos-pos1.ypos));
+	return pos3;
+}
+
+/* 직사각형을 표현하기 위해서 필요한 4 개의 점  */
+
+void F1 (point pos1,point pos2)
+{
+	printf("좌하단의 좌표 = [%d , %d]\n",pos1.xpos,pos1.ypos); // 우하단인거 같지만 책에서 좌상단으로 나왔으니깐 좌상단으로 적는다
+	printf("우상단의 좌표 = [%d , %d]\n",pos2.xpos,pos2.ypos); // 좌상단인거 같지만 책에서 우하단으로 나왔으니깐 우하단으로 적는다...?
+	printf("좌상단의 좌표 = [%d , %d]\n",pos1.xpos,pos2.ypos);
+	printf("우하단의 좌표 = [%d , %d]\n",pos2.xpos,pos1.ypos);
+}
+
+int main (void)
+{
+	point pos1={0,0};
+	point pos2={100,100};
+	printf("직사각형의 넓이 : %d \n",F(pos1,pos2));
+	F1(pos1,pos2);
+	return 0;
+}
+
+
+
+/* 답지에 나온 풀이법 답지에서는 구조체멤버로 구조체를 넣어서 실행하고 있다.*/
+/* 구해야하는 값이 많아지면 답지에 나온 풀이 법이 더 쉬워 보인다 */

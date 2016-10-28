@@ -1,0 +1,20 @@
+#include "stdio.h"
+
+int main (void)
+{
+	float num;   //실수형 변수 선언
+	int i_part;  //정수형 변수 선언
+	float f_part; //실수형 변수 선언
+
+	printf("실수를 입력하세요 : ");
+	scanf("%f",&num); //실수형 변수 입력 scanf 함수를 사용시 &연산자를 사용해야한다.
+
+	i_part = num;
+	f_part = num - i_part;
+	/* num 은 실수형이다, i_part 는 정수형이기 때문에  num 을 i_part 에 넣으면 실수 부분은 짤리고 정수 부분만 들어가게 된다.
+	   f_part 는 num - i_part 인데 여기서 i_part 는 실수 부분이 짤리고 정수 부분만 있어서 f_part는 실수 부분만 남게 된다.*/
+
+
+	printf("%f의 정수부는 %d 이고, 실수부는 %f 입니다.\n",num,i_part,f_part);
+	return 0;
+}

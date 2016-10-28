@@ -1,0 +1,31 @@
+/* 구조체 포인터를 이용해서 두점 사이의 거리를 구하는 소스*/
+
+#include "stdio.h"
+#include "math.h"
+
+struct point
+{
+	int x;
+	int y;
+};
+
+double Get(struct point* p1,struct point* p2); //구조체 포인터를 매개변수로 갖는 함수 선언
+
+int main ()
+{
+	struct point p1 ={0,0};
+	struct point p2 ={10,10};
+	double distance;
+
+	distance = Get(&p1,&p2); // 구조체 변수의 주소를 Get 함수의 인자로 전달한다.
+
+	printf("두 점 사이의 거리 : %5.2f\n",distance);
+	return 0;
+}
+
+double Get(struct point* p1,struct point* p2)
+{
+	int dx = p2->x - p1->x;
+	int dy = p2->y - p1->y;
+	return sqrt((double)(dx*dx) + (double)(dy*dy));
+}

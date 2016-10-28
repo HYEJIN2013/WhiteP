@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+void MaxAndMin(int *arr,int size, int **mxptr, int **mnptr)//int * arr 을 하는 이유는 arr 배열 안의 배열요소를 전부 넣기 위해 포인터 변수로 선언
+{
+	int *max ,*min;
+	int i;
+	max=min=&arr[0];
+	for(i=0;i<size;i++)//i=1 부터 시작해도 상관없음 위 행 에서 이미 max 값과 min 값이 arr[0]의 배열요소 값으로 초기화됬음;
+	{
+		if(*max < arr[i])
+			max=&arr[i];
+		if(*min > arr[i])
+			min=&arr[i];
+	}
+	
+	//싱글포인터 변수 max, min, arr[](배열도 포인터 변수이다)들의 값 비교를 위해서 더블 포인터 변수가 필요한것 같다 ! 
+	
+	*mxptr=max;//max 라는 싱글포인터 변수를 mxptr 이라는 더블 포인터 변수에 넣어 초기화 그래서 mxptr 은 max 값을 가지게 된다.
+	*mnptr=min;//min 이라는 싱글포인터 변수를 mnptr 이라는 더블 포인터 변수에 넣어 초기화 그래서 mnptr 은 min 값을 가지게 된다.
+}
+int main (void)
+{
+	int *maxptr;
+	int *minptr;
+	int arr[5];
+	int i;
+
+	for(i=0;i<5;i++)
+	{
+		printf("%d 번째 배열요소 ",i+1);
+		scanf("%d",&arr[i]);
+	}
+
+	MaxAndMin(arr,sizeof(arr)/sizeof(int),&maxptr,&minptr);//MaxAndMin 함수에 필요한 매개변수들 4종류
+	printf("%d %d\n",*maxptr,*minptr);
+	return 0;
+}
+

@@ -1,0 +1,39 @@
+/* 열거체와 열거 상수를 정의 하고 사용하는 EX) */
+
+#include "stdio.h"
+
+enum week {sun,mon,tue,wed,thu,fri,sat};//열거체 정의
+
+int main ()
+{
+	enum week weekday; // 열거체  변수의 선언
+
+	weekday =sun; //열거상수 사용 열거체는 열거상수중하나를 변수에 저장한후 사용한다 !
+
+	switch (weekday)
+	{
+	case sun:
+		printf("일요일 입니다\n");
+		break;
+	case mon:
+		printf("월요일 입니다\n");
+		break;
+	case tue:
+		printf("화요일 입니다\n");
+		break;
+	case wed:
+		printf("수요일 입니다\n");
+		break;
+	case thu:
+		printf("목요일 입니다\n");
+		break;
+	case fri:
+		printf("금요일 입니다\n");
+		break;
+	case sat:
+		printf("토요일 입니다\n");
+		break;
+	}
+	return 0;
+}
+

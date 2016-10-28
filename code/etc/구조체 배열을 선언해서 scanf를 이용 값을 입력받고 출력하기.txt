@@ -1,0 +1,42 @@
+#include "stdio.h"
+
+#define MAX 5 // 구조체 배열 크기 5라는 상수를 MAX 로 대체 했다 ,define 을 사용시 항상 대문자로 써준다
+
+struct student 
+{
+	char name[20];
+	int korean,english,math;
+	double average;
+};
+
+int main ()
+{
+	struct student std[MAX]; // 배열의 길이가 MAX(5)인 std라는 변수명을 간진 구조체 배열 선언
+	int i;
+	double total_average = 0;
+
+	printf("%d명의 학생 정보를 입력하세요 \n",MAX);
+	for(i=0;i<MAX;i++)
+	{
+		printf("이름: ");
+		scanf("%s",std[i].name);
+		
+		printf("국 영 수 순서데로 입력: ");
+		scanf("%d %d %d",&std[i].korean,&std[i].english,&std[i].math);
+
+		std[i].average = (double)(std[i].korean+std[i].english+std[i].math)/3;
+		total_average += std[i].average;
+	}
+
+	total_average /=MAX;
+
+	printf("\n 이름       국어 영어 수학 평균 \n");
+
+	for(i=0;i<MAX;i++)
+	{
+		printf("%-10s %3d %3d %3d %6.2f\n",std[i].name,std[i].korean,std[i].english,std[i].math,std[i].average);
+	}
+
+	printf("전체 평균 : %f \n",total_average);
+	return 0;
+}

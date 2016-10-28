@@ -1,0 +1,40 @@
+#include<stdio.h>
+
+typedef struct dbshort             //3행
+{
+	unsigned short upper;
+	unsigned short lower;
+}dbshort;
+
+typedef union rdbuf                 //9행
+{
+	int ibuf;
+	char bbuf[4];
+	dbshort sbuf;                  //13행
+}rdbuf;
+
+int main (void)
+{
+	rdbuf buf;                    //18행
+	printf("정수 입력:");
+	scanf("%d",&(buf.ibuf));       //20행
+
+	printf("상위 2바이트 : %u\n",buf.sbuf.upper);       //22행
+	printf("하위 2바이트 : %u\n",buf.sbuf.lower);
+	printf("상위 1바이트 아스키 코드 : %c\n",buf.bbuf[0]);
+	printf("하위 1바이트 아스키 코드 : %c\n",buf.bbuf[3]);    //25행
+
+	return 0;
+}
+
+
+/* 3행 : 두개의 unsigned short형 변수를 멤버로 지니는 4바이트 크기의 구조체를 정의하였다.
+         (구조체의 메모리는 구조체 멤버의 메모리를 전부 더한것이다.)
+   9행 : 여기 정의된 공용체의 모든 멤버의 크기가 4바이트이므로, 이 공용체의 변수를 선언하면
+         4바이트가 할당된다.
+   13행 : 고용체의 멤버로 구조체 변수를 선언하였다. (이 코드내에서는 구조체의 메모리도 4바이트)
+   20행 : 18행에 선언된 4바이트 크기의 공용체 변수에 정수를 입력받고 있다. 
+          ibuf라는 이름의 int 형으로 선언된 멤버를 이용해서 입력 받고 있다.
+   22행,23행 : 상위 2바이트와 하위 2바이트 값을 각각 양의 정수형태로 출력하고 있다.
+   24행,25행 : 상위 1바이트와 하위 1방트의 값을 각각 아스키 코드 문자로 출력하고 있다.
+   */

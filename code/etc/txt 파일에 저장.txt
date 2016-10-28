@@ -1,0 +1,42 @@
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+
+#define MAX 5 // define 은 대문자로 쓴다
+
+typedef struct student
+{
+	char name[20];
+	int k,e,m;
+	double ave;
+}st;
+
+int main()
+{
+	st s[MAX];// 구조체 변수 s 선언후 크기값 지정
+	int i;
+	FILE *fp = NULL; //파일을 저장할 변수면 fp 선언
+
+	for (i=0;i<MAX;i++)
+	{
+		printf("학생 정보를 입력하세요 : ");
+		scanf("%s %d %d %d",s[i].name,&s[i].k,&s[i].e,&s[i].m);
+		s[i].ave = (double)(s[i].k+s[i].e+s[i].m)/3;
+	}
+
+	fp=fopen("C:\\파일입출력\\text.txt","w");
+	if(fp==NULL)
+	{
+		printf("파일 열기 실패 \n");
+		return -1;
+	}
+
+	for(i=0;i<MAX;i++)
+	{
+		fprintf(fp,"%s %d %d %d %f\n",s[i].name,s[i].k,s[i].e,s[i].m,s[i].ave);
+	};
+
+	fclose(fp); // 파일 스트림을 닫는다.
+
+	return 0;
+}

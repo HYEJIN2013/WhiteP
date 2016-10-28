@@ -1,0 +1,23 @@
+/* 출력 인자의 사용 예 */
+
+#include "stdio.h"
+
+void F(int x,int y, int* sum,int* product);
+
+int main ()
+{
+	int a=5,b =8;
+	int res1,res2;
+
+	F(a,b,&res1,&res2); // 인자로 a의값, b의값 , res1,res2 의 주소 값을 넘겨준다.
+
+	printf("%d + %d = %d \n",a,b,res1);
+	printf("%d * %d = %d \n",a,b,res2);
+	
+	return 0;
+}
+void F(int a,int b,int* sum,int* product)
+{
+	*sum= a+b;
+	*product = a*b;
+}

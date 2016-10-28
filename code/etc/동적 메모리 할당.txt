@@ -1,0 +1,35 @@
+#include "stdio.h"
+#include "stdlib.h"
+
+int main()
+{
+	int size; //동적할당을 받을 갯수
+	int *arr =NULL;// 아직 포인터에 넣을값이 없기에 NULL 을 넣어둔다
+	int sum =0;
+	double ave =0.0;
+
+	printf("입력 받을 정수수 : ");
+	scanf("%d",&size); //여기서 할당받을 메모리의 갯수를 정한다.
+
+	arr = (int*)malloc(sizeof(int)*size); //malloc 함수의 원형이 void* malloc(size_t size) 이기 때문에 명시적으로 할당받을 포인터형으로 형변환한다.
+
+	if(arr ==NULL)
+	{
+		printf("동적 메모리 할당 실패\n");
+		return -1;
+	}
+
+	printf("%d 개의 정수를 입력하세요 : ",size);
+	for(int i=0;i<size;i++)
+		scanf("%d",&arr[i]); //malloc 함수를 이용해서 할당받은 포인터는 배열 처럼 사용이 가능 하기때문에 배열 처럼 사용하고 있다.
+
+	for(int i=0;i<size;i++)
+		sum +=arr[i]; // 역시나 포인터를 배열처럼 사용 하는 곳
+
+	ave = (double)sum/(double)size;
+
+	printf("%d %f \n",sum,ave);
+	free(arr); //동적메모리는 명시적으로 해제를 해줘야 한다.
+	arr=NULL;//해제한 동적메모리라도 NULL 을 넣어주는게 안전하다
+	return 0;
+}

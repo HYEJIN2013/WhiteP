@@ -1,0 +1,29 @@
+#include "stdio.h"
+#include "string.h"
+
+struct student
+{
+	char name[20];
+	int korean,english,math;
+	double average;
+}; // student 구조체 정의
+
+int main ()
+{
+	struct student s1; //구조체 변수의 선언
+	struct student s2 = {"박나나",90,78,86}; // 구조체 변수 및 초기화 average 값은 초기화 하지않아서 자동 0으로 초기화된다.
+
+	s1.korean = 100;
+	s1.english = 100;
+	s1.math = 100;
+	strcpy(s1.name, "김모모");
+
+	s1.average = (double)(s1.korean + s1.english + s1.math) /3;
+
+	s2.average = (double)(s2.korean + s2.english + s2.math) /3;
+
+	printf("%s :%5.2f\n", s1.name , s1.average);
+	printf("%s :%5.2f\n", s2.name , s2.average);
+
+	return 0;
+}

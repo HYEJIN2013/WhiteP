@@ -1,0 +1,22 @@
+/* typedef 사용 EX) */
+
+#include "stdio.h"
+
+struct point 
+{
+	int x;
+	int y;
+};
+
+typedef struct point point; //typedef 선언을 이용해서 struct point 를 point 로 정의한다.
+
+int main()
+{
+	point p1 = {10,20};
+	struct point p2;
+
+	p2 =p1; //같은 구조체 변수간의 대입 p1 멤버의 각 값들이 p2 멤버에 대입된다.
+
+	printf("p2의 좌표 : %d %d \n",p2.x,p2.y);
+	return 0;
+}

@@ -1,0 +1,25 @@
+/* while 문의 무한 루프를 이용한 방법 1 */
+
+#include "stdio.h"
+
+int main ()
+{
+	int num,sum;
+	int i;
+
+	while(1)
+	{
+		printf("정수를 입력하세요 (-1 입력시 종료) : ");
+		scanf("%d",&num);
+
+		if(num == -1)
+			break ; // while(1) <- 무한 루프이기 때문에 반복문을 빠져나갈 조건을 만들어준다 num 이 -1일때 while 문을 빠져나간다.
+
+		sum=0;
+		for(i=0;i<=num;i++)
+			sum +=i;
+		printf("%d 까지의 합계 : %d \n",num,sum);
+	} // { .... } 까지가 전부 while 의 반복문이다.
+
+	return 0;
+}
