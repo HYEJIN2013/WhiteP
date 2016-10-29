@@ -1,0 +1,4 @@
+Redirecinar a porta :
+1 - telnet localhost 5554
+2 - redir add tcp:5000:6000
+Rode as duas Apps
