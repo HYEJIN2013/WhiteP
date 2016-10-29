@@ -1,0 +1,13 @@
+<linearlayout android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical"
+              xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <textview android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content"
+              android:textappearance="?android:attr/textAppearanceLarge">
+
+        <button android:id="@+id/button1" android:layout_gravity="center" android:layout_height="wrap_content"
+                android:layout_width="wrap_content" android:text="Send">
+        </button>
+
+    </textview>
+    
+</linearlayout>
