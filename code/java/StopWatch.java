@@ -1,30 +1,69 @@
-// StopWatch
-// Simple multiple-stopwatch application
-// Author: Christopher Vo (cvo1@cs.gmu.edu)
 
-public class StopWatch extends javax.swing.JFrame {
-  private static final long serialVersionUID = -7040646868513878300L;
-  private static int numTimers = 5;
+public class StopWatch
+{
 
-  public StopWatch() {
-    // make main window
-    setTitle("Timers");
-    setLayout(new java.awt.GridLayout(numTimers, 1));
-    setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
+    private long lastTime;
+    private long nanoTime;
+    private String name = "";
 
-    // add stopwatch panels
-    for (int i = 0; i < numTimers; i++)
-      add(new StopWatchPanel(this));
+    public StopWatch( String name )
+    {
+        this.name = name;
+    }
 
-    // show the main window
-    pack();
-    setLocationRelativeTo(null);
-    setVisible(true);
-    repaint();
-  }
+    public StopWatch()
+    {
+    }
 
-  public static void main(String args[]) {
-    new StopWatch();
-  }
+    public StopWatch setName( String name )
+    {
+        this.name = name;
+        return this;
+    }
+
+    public StopWatch start()
+    {
+        lastTime = System.nanoTime();
+        return this;
+    }
+
+    public StopWatch stop()
+    {
+        if (lastTime < 0)
+            return this;
+
+        nanoTime += System.nanoTime() - lastTime;
+        lastTime = -1;
+        return this;
+    }
+
+    /**
+     * @return the time delta in milliseconds
+     */
+    public long getTime()
+    {
+        return nanoTime / 1000000;
+    }
+
+    public long getNanos()
+    {
+        return nanoTime;
+    }
+
+    @Override
+    public String toString()
+    {
+        String str = "";
+        if (!Helper.isEmpty(name))
+        {
+            str += name + " ";
+        }
+
+        return str + "time:" + getSeconds();
+    }
+
+    public float getSeconds()
+    {
+        return nanoTime / 1e9f;
+    }
 }
