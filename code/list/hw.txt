@@ -1,0 +1,182 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct list
+{
+	int data;
+	struct list *link;
+}basic;
+
+typedef struct
+{
+	basic *head;
+}linklist;
+
+linklist *create()
+{
+	linklist *L;
+	L = (linklist*)malloc(sizeof(linklist));
+	L->head = NULL;
+	return L;
+}
+
+void printlist (linklist *L)
+{
+	basic *p;
+	p=L->head;
+	printf("[ ");
+	while(p!=NULL)
+	{
+		printf(" %d ",p->data);
+		p=p->link;
+	}
+	printf(" ]\n");
+}
+
+void insert(linklist *L,int a)
+{
+	basic *p,*temp;
+	p=(basic*)malloc(sizeof(basic));
+	p->data = a;
+
+	if(L->head == NULL)
+	{
+		p->link = L->head;
+		L->head = p;
+		return;
+	}
+	else
+	{
+		temp = L->head;
+		if(temp->data >= p->data)
+		{
+			p->link = temp;
+			L->head = p;
+			return;
+		}
+		else
+		{
+			while((temp->link != NULL)&&(temp->link->data <= p->data))
+				temp=temp->link;
+			if(temp->link == NULL)
+			{
+				p->link = NULL;
+				temp->link = p;
+				return;
+			}
+			p->link=temp->link;
+			temp->link =p;
+			return;
+		}
+	}
+}
+
+
+basic *search(linklist *L,int a)
+{
+	basic *p;
+
+	p =L->head;
+	while(p !=NULL)
+	{
+		if(p->data == a)
+			return p;
+		else
+			p=p->link;
+	}
+	return NULL;
+}
+
+void deleteNode(linklist *L,basic *p)
+{
+	basic *temp;
+	if(L->head == NULL)
+	{
+		printf("list empty\n");
+		return;
+	}
+	if(p==L->head)
+	{
+		L->head = p->link;
+		return;
+	}
+	else if(p==NULL)
+	{
+		printf("node empty\n");
+		return;
+	}
+	else
+	{
+		temp = L->head;
+		while(temp->link != p)
+			temp=temp->link;
+		temp->link = p->link;
+		free(p);
+		p=NULL;
+	}
+}
+
+
+
+void main(void)
+{
+	linklist *L;
+	basic *p;
+	L=create();
+	int a;
+	while(1)
+	{
+		printf("(1) insert (2) delete (3) printlist (4) exit\n");
+		scanf_s("%d",&a,1);
+		switch(a)
+		{
+		case 1:
+			{
+				printf("\n-1 == exit\n");
+				while(1)
+				{
+					printf("insert: ");
+					scanf_s("%d",&a,1);
+					if(a==-1)
+					{
+						printf("\nexit\n");
+						break;
+					}
+					insert(L,a);
+					printlist(L);
+				}
+				break;
+			}
+		case 2:
+			{
+				printf("\n-1 == exit\n");
+				while(1)
+				{
+					printf("\ninsert delete num: ");
+					scanf_s("%d",&a,1);
+					if(a==-1)
+					{
+						printf("\n\nexit\n");
+						break;
+					}
+					p=search(L,a);
+					deleteNode(L,p);
+					printlist(L);
+				}
+				break;
+			}
+		case 3:
+			{
+				printf("\nprint list\n");
+				printlist(L);
+				break;
+			}
+		default :
+			{
+				printf("\n\n\nexit\n\n\n");
+				getchar();
+				exit(1);
+			}
+		}
+	}
+}
