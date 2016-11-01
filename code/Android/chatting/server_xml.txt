@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="start"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <Button android:id="@+id/btn_start_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="START"
+        android:textStyle="bold"
+        android:onClick="mOnClick"/>
+    
+    <TextView android:id="@+id/label_message_from_client" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_start_server"
+        android:gravity="center"
+        android:text="The Message from the client"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="50dp"/>
+    
+    <TextView android:id="@+id/text_massage_from_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/label_message_from_client"
+        android:text="text"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+    
+    <TextView android:id="@+id/label_message_to_client" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_massage_from_client"
+        android:gravity="center"
+        android:text="The Message to the client"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="50dp"/>
+    
+    <EditText android:id="@+id/edit_message_to_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/label_message_to_client"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:hint="Enter the message"/>
+    
+    <Button android:id="@+id/btn_send_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/edit_message_to_client"
+        android:layout_marginTop="50dp"
+        android:text="SEND"
+        android:onClick="mOnClick"/>
+
+</RelativeLayout>
