@@ -1,4 +1,4 @@
-//적분공식이
+//적분공식이용
 #include <stdio.h> 
 int main(void)
 {
