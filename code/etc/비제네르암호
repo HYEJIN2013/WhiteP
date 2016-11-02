@@ -1,0 +1,92 @@
+/* 비제네르 암호는 시저 암호를 확장한 개념의 암호화 방식입니다. 시저 암호는 평문의 모든 문자를 같은 간격의 밀기 방식으로 치환하여 사용합니다. 반면 비제네르 암호는 평문의 문자들은 위치에 따라 다른 간격의 밀기 방식으로 치환하여 사용합니다. 그리고 이 때 어떠한 간격으로 밀기를 할 것인지를 약속한 키를 이용합니다.
+ 
+예를 들어 약속한 키가 "abc"라고 하면 1, 4, 7, ... 번째 문자들은 ('a'-'a')칸 밀기합니다. 0칸 밀기이므로 아무런 변화가 없겠죠. 2, 5, 8, ... 번째 문자들은 ('b'-'a')칸 밀기합니다. 1칸 밀기하는 것입니다. 그리고 3, 6, 9, ... 번째 문자들은 ('c' - 'a')칸 밀기합니다. 2칸 밀기하는 것입니다.
+ 
+평문: Welcome! Here is ehclub.net
+키: hello
+암호문: Diwncti! Vlvp wz psqsym.blx */
+
+//비제네르 암호(Vigenere Chipher)
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+ 
+char *encrypt(char *dest, const char *src, const char *key);
+char *decrypt(char *dest, const char *encryptstr, const char *key);
+int main(void)
+{
+    char source[100] = "Welcome! Here is ehclub.net";
+    char en_str[100];
+    char de_str[100];
+ 
+    printf("source: %s\n", source);
+    encrypt(en_str, source, "hello");
+    printf("encrypted: %s\n", en_str);
+    decrypt(de_str, en_str, "hello");
+    printf("decrypted: %s\n", de_str);
+ 
+    return 0;
+}
+ 
+char *encrypt(char *dest, const char *src, const char *key)
+{
+    char *origin;
+    int len = strlen(key);
+    int cnt = 0;
+    for (origin = dest; *src; dest++, src++)//종료 문자를 만날 때까지 반복
+    {
+        if (isupper(*src))//대문자일 때
+        {
+            //(key[cnt]-'a')칸 밀기
+            *dest = (*src - 'A' + (key[cnt] - 'a')) % 26 + 'A';
+        }
+        if (islower(*src))//소문자일 때
+        {
+            //(key[cnt]-'a')칸 밀기
+            *dest = (*src - 'a' + (key[cnt] - 'a')) % 26 + 'a';
+        }
+        if (isdigit(*src))//숫자 문자일 때
+        {
+            //(key[cnt]-'a')칸 밀기
+            *dest = (*src - '0' + (key[cnt] - 'a')) % 10 + '0';//3칸 밀기(0->3)
+        }
+        if (isalnum(*src) == 0)
+        {
+            *dest = *src;
+        }
+        cnt = (cnt + 1) % len;
+    }
+    *dest = '\0';
+    return origin;
+}
+char *decrypt(char *dest, const char *encryptstr, const char *key)
+{
+    char *origin;
+    int len = strlen(key);
+    int cnt = 0;
+    for (origin = dest; *encryptstr; dest++, encryptstr++)//종료 문자를 만날 때까지 반복
+    {
+        if (isupper(*encryptstr))//대문자일 때
+        {
+            //(26 -(key[cnt] - 'a'))칸 밀기 => (key[cnt]-'a')칸 당기기
+            *dest = (*encryptstr - 'A' + (26 - (key[cnt] - 'a'))) % 26 + 'A';
+        }
+        if (islower(*encryptstr))//소문자일 때
+        {
+            //(26 -(key[cnt] - 'a'))칸 밀기 => (key[cnt]-'a')칸 당기기
+            *dest = (*encryptstr - 'a' + (26 - (key[cnt] - 'a'))) % 26 + 'a';
+        }
+        if (isdigit(*encryptstr))//숫자 문자일 때
+        {
+            //(26 -(key[cnt] - 'a'))칸 밀기 => (key[cnt]-'a')칸 당기기
+            *dest = (*encryptstr - '0' + (26 - (key[cnt] - 'a'))) % 10 + '0';
+        }
+        if (isalnum(*encryptstr) == 0)
+        {
+            *dest = *encryptstr;
+        }
+        cnt = (cnt + 1) % len;
+    }
+    *dest = '\0';
+    return origin;
+}
