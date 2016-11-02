@@ -35,5 +35,6 @@ int main(void)
         }
         putchar('\n');//개행
     }
+    
     return 0;
 }
