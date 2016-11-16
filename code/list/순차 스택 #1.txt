@@ -1,0 +1,87 @@
+// 순차 스택 부터 하자
+
+#include <stdio.h>
+
+#define N 100
+typedef char ch;
+ch s[N];
+int top = -1;
+
+int isfull()
+{
+	if(top > N-1)
+	{
+		printf("\n풀방입니다\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int isempty()
+{
+	if(top <= -1)
+	{
+		printf("\n빈방입니다\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+void push (ch a)
+{
+	if(isfull())
+		return;
+	else
+		s[++top] =a;
+}
+
+ch pop ()
+{
+	if(isempty())
+		return '\n';
+	else
+		return s[top--];
+}
+
+void printstack()
+{
+	int i;
+	if(isempty())
+		return;
+	printf(" 남은 스택 : [ ");
+		for(i=0;i<=top;i++)
+			printf(" %c ",s[i]);
+		printf(" ]\n");
+}
+
+void firststack()
+{
+	printf("첫번째 스택 : %c\n",s[0]);
+}
+
+void main()
+{
+	int i;
+	ch a;
+	while(1)
+	{
+		scanf_s("%c",&a,1);
+		if(a=='\n')
+			break;
+		push(a);
+		printstack();
+	}
+	getchar();
+
+	firststack();
+	getchar();
+	for(i=top;i>-1;i--)
+	{
+		a =pop();
+		printf("삭제된 스택 : %c\n",a);
+		printstack();
+	}
+}
+
