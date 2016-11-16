@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "NameCard.h"
+
+NameCard *MakeNameCard(char *name,char *phone)
+{
+	NameCard *card;
+
+	card = (NameCard*)malloc(sizeof(NameCard));
+	strcpy(card->name,name);
+	strcpy(card->phone,phone); // 처음에 내가 코드 짤때는 strcpy를 사용 안했는데 답지 보니깐 있네 하면 편하긴 하겠다
+	return card;
+}
+
+void ShowNameCardInfo(NameCard *pcard)
+{
+	printf("이름 : %s , 전화번호 : %s\n",pcard->name,pcard->phone); //이름과 폰번호 출력 함수
+}
+
+void ChangePhoneNum(NameCard *pcard,char *phone)
+{
+	strcpy(pcard->phone,phone); //pcard 에 저장된 phone 번호를 인자로 받은 phone 로 변경
+}
+
+int NameCompare(NameCard *pcard,char *name) // strcmp 함수 이용하면 같으면 0 다르면 0아닌값 나오자나 다시 공부하자 광모야
+{
+	return strcmp(pcard->name,name);
+}
+
