@@ -1,0 +1,58 @@
+// 순차 자료구조를 이용해서 순차stack 구현하기
+// 귀찮으니깐 정수로 하자 1~0 까지 넣어서 빼기
+
+#include "stdio.h"
+#define N 5
+int top = -1;
+int s[N];
+
+void push (int a)
+{
+	if(top >= N-1)
+	{
+		printf("stack 이 가득차있습니다\n");
+		return ;
+	}
+	else
+		s[++top] =a;
+}
+
+int pop()
+{
+	if(top<=-1)
+	{
+		printf("stack 이 하나도 없습니다\n");
+		return 1;
+	}
+	else
+		return s[top--];//stack 이 하나라도 있으면 stack 을 반환하고 후위감소시켜 인덱스값 감소
+}
+
+void printstack ()
+{
+	int i;
+	printf("저장된 스택 : ");
+	for(i=0;i<=top;i++)
+		printf("%d ",s[i]);
+}
+
+
+int main ()
+{
+	int a;
+	int i;
+
+	for(i=0;i<5;i++)
+	{
+		printf("입력 : ");
+		scanf("%d",&a);
+		push(a);printstack();
+		puts(" ");
+	}
+	for(i=0;i<5;i++)
+	{
+		printf("\npop 된 스택 %d ",pop());
+	}
+	puts(" ");
+	return 0;
+}
