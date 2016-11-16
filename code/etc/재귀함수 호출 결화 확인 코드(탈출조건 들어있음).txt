@@ -1,0 +1,21 @@
+/// 재귀함수 호출 결화 확인 코드 ( 탈출조건 들어있음)
+
+#include <stdio.h>
+
+void Recursive(int num)
+{
+	if(num <=0) //재귀함수 탈출 조건
+		return; //재귀함수 탈출!
+
+	printf("Recursive call %d \n",num);
+	Recursive(num-1); // Recursive 함수 재 호출 num 값은 -1 을시켜서 무한루프를 방지
+}
+
+int main(void)
+{
+	Recursive(3);
+	return 0;
+}
+
+// 탈출 조건에서 보이듯이 num 값이 0 이되면 재귀함수 탈출이 되도록 조건을 걸었다. 
+// 이 조건이 가능하게 만드는것이 11행의 num-1 이다.
