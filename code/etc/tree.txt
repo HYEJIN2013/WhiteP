@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct treenode
+{
+	struct treenode *left;
+	char key;
+	struct treenode *right;
+}treenode;
+
+// Search
+
+treenode *searchk(treenode *root,char x)
+{
+	treenode *p;
+	p=root;
+	while(p != NULL)
+	{
+		if(x<p->key)
+			p=p->left;
+		else if(x==p->key)
+			return p;
+		else
+			p=p->right;
+	}
+	printf("\n no found key \n");
+	return p;
+}
+
+// Insert
+
+treenode *insert(treenode *p,char key)
+{
+	treenode *temp;
+	if(p==NULL)
+	{
+		temp=(treenode*)malloc(sizeof(treenode));
+		temp->key = key;
+		temp->left = NULL;
+		temp->right = NULL;
+		return temp;
+	}
+	else if(key < p->key)
+		p->left=insert(p->left,key);
+	else if(key > p->key)
+		p->right = insert(p->right,key);
+	else
+		printf("\n same key in the tree\n");
+}
+
+// delete
+
+void deletenode(treenode *root,char x)
+{
+	treenode *parent,*child,*p,*succ,*succ_parent;
+
+	parent = NULL;
+	p = root;
+
+	while((p!=NULL)&&(p->key != x))
+	{
+		parent = p;
+		if(x < p->key)
+			p=p->left;
+		else
+			p=p->right;
+	}
+
+	if (p==NULL)
+	{
+		printf(" no key in treee\n");
+		return;
+	}
+
+	if((p->left == NULL) && (p->right == NULL))
+	{
+		if(parent !=NULL)
+		{
+			if(parent->left == p)
+				parent->left == NULL;
+			else
+				parent->right == NULL;
+		}
+	}
+
+	else if((p->left==NULL) || (p->right==NULL))
+	{
+		if(p->left != NULL)
+			child = p->left;
+		else
+			child = p-> right;
+		if(parent != NULL)
+		{
+			if(parent->left == p)
+				parent->left =child;
+			else
+				parent->right=child;
+		}
+		else
+			root = child;
+	}
+
+	else
+	{
+		succ_parent = p; // 삭제할 노드
+		succ = p->left; // 삭제할 노드 왼쪽 아래 노드
+		while(succ -> right != NULL) // 왼쪽 아래 오른쪽 노드가 공백이 아닐때 까지
+		{
+			succ_parent = succ;
+			succ = succ->right;
+		}
+		if(succ_parent->left ==succ)
+			succ_parent->left=succ->left;
+		else
+			succ_parent->right=succ->left;
+		p->key = succ -> key;
+		p=succ;
+	}
+	free(p);
+}
+		
