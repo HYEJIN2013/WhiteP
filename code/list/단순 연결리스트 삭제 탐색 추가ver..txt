@@ -1,0 +1,192 @@
+// 다시 다시 조금 이해함 ㅗ
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct list
+{
+	char data[100];
+	struct list *link;
+}basic;
+
+typedef struct
+{
+	basic *head;
+}linklist;
+
+linklist *createlist()
+{
+	linklist *L;
+	L = (linklist*)malloc(sizeof(linklist));
+	L->head = NULL; /* L->head 안에는 앞으로 받을 값을 저장하는 data 변수와 다음 노드로 넘어갈 주소를 저장하는 link 구조체 포인터가 들어있따
+	                   이 값들을 NULL 로 만들어서 일단 공백으로 만드는 것이다*/
+	return L;
+}
+
+void freenode(linklist *L)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	while(L->head != NULL) // 넘겨받은 리스트(L) 의 값 (data 와 link) 이 NULL이 되기 전까지만
+	{
+		p= L->head; //  리스트 값을 p 에 넘겨주고
+		p->link = L->head->link; // p 노드 다음에 올 노드 를 저장하는 link 에 리스트의 첫번째 노드에 저장되어있는 다음 노드의 주소값을 저장(복사)
+		free(p); // 이번에 p 로 받은 리스트의 첫번째 노드를 해제 하고
+		p= NULL; // p 값을 NULL 로 바꿔준다(할당한 메모리를 해제한후는 NULL 로 초기화하는것이 좋으니깐)
+	}
+}
+void printlist(linklist *L)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	p=L->head; //받은 리스트 정보(L) 을 새로 할당한 구조체 포인터 p 에 넣어준다(이편이 다음 주소를 불러 오기 쉽다)
+	printf("( ");
+	while(p!=NULL)//p의 다음 주소가 NULL 이 되기 전까지만 이렇게하면 link 값에 NULL 이 들어있는 노드까지만 출력되고 반복문이 종료되니깐
+	{
+		printf(" %s ",p->data);//p 안에 들어있는 data 를 뽑아주고
+		p= p->link; // p를 다음 주소값으로 변경 시켜 준다
+	}
+	printf(" )\n\n");
+}
+
+void insertfirst(linklist *L,char *x)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	p->link = L->head; // p 다음에 올 주소를 저장하는 link 에 리스트 정보를 저장한다 (이 함수가 첫번째 노드를 만드는 함수이기때문에)
+	L->head = p; // 리스트 에 p 를 저장시켜 다시 L 리스트에 모든 노드를 저장시킨다
+}
+
+void insertmiddle(linklist *L,basic *pre,char *x)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	if(L == NULL) // 만약 L 이 NULL 값이다(리스트 자체가 없다)
+	{
+		p->link = NULL; // 그말은 p 다음에 올 노드도 없다는 말이니깐 p의 link 에 NULL 을 ㄴ허고
+		L->head = p; // 리스트에 p 를 넣어준다
+	}
+	else if(pre ==NULL)// p 전에 오는 노드값에 저장된 값이없다 (data,link 모두 값이 없다는 의미)
+	{
+		L->head = p; // 그냥 리스트 마지막에 p 를 넣어주면된다.
+	}
+	else // p 노드 앞에도 노드가 있고 뒤에도 노드가 있는경우
+	{
+		p->link = pre ->link;
+		pre->link = p; 
+	}
+}
+
+void insertlast(linklist *L, char *x)
+{
+	basic *p;
+	basic *temp;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	p->link = NULL; // p값이 마지막 노드이기때문에 p 다음에 올 주소값을 가지는 link 는 NULL포인터를 저장시켜 둔다
+	while(L->head ==NULL) // 만약 리스트는 존재하지만 리스트 안에 아무값도 없다면
+	{
+		L->head = p; // 리스트안에 p 값을 넣어주고 
+		return ; //종료(이때 return은 종료의 의미)
+	}
+	temp = L->head; // temp 에 리스트를 저장시킨뒤에
+	while(temp->link != NULL) // temp 뒤에올 주소 값이 NULL 이 아닐때까지 반복
+		temp = temp->link;
+	temp->link = p; // temp 뒤에 NULL 이 오면 종료 되니깐 그 temp 의 link 에 p 값을 넣어준다
+}
+
+basic *searchnode(linklist *L, char *x) // 리스트 안에서 문자 x 찾는 함수
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic)); // 일단 구조체 포인터 p 값을 넣어준다
+	p=L->head; //p 에 리스트 정보를 넣어준다
+	while(p != NULL) // p 의 link 값이 NULL이 되면 종료하는 반복문 선언하고
+	{
+		if(strcmp(p->data,x) ==0) // p안의 data 값(리스트 안에 들어있는 값)과 인자로 받은 x 를 비교해서 
+			return p;
+		else
+			p=p->link;
+	}
+	return p;
+}
+
+void deletenode(linklist *L, basic *pre) // 리스트(L)와 삭제할 노드(pre)
+{
+	basic *temp;
+	if(L ->head == NULL) // 리스트라는 공책 안에 정보가 없는경우
+		return; //그럼 걍 종료 삭제시킬 노드가 없는게 아니고 리스트안에 노드가 하나도없다
+	if(L->head->link == NULL)//리스트 안에 노드가 하나밖에없다 L->head 로 첫번째 노드는 있는데 그안에 link를 타고 들어갈수있는 두번째 노드가 없는경우
+	{
+		free(L->head);//그럼 첫번째 노드를 할당 해제시키고
+		L->head = NULL; // 첫번째 노드의 값을 NULL로 초기화 시키고
+		return ;// 종료
+	}
+	else if(pre == NULL) // 삭제시킬 노드가 없다란 의미인데 이러면 뭐하러 함수를 실행하냐 ?
+		return;
+	else
+	{
+		temp = L->head; // temp 에 리스트 정보를 넣어준다
+		while(temp->link != pre) // 리스트를 저장한 temp 를 찾고자 하는 pre 값 직전까지 찾자
+		{
+			temp=temp->link; // 노드를 계속 뒤지면서
+		}
+		temp -> link = pre ->link; // pre(삭제 하고자 하는 노드) 뒤에 올 노드를 temp뒤에 넣어준다
+		free(pre);
+		pre=NULL;
+	}
+}
+
+void reverselist(linklist *L)
+{
+	basic *p,*q,*r;
+	q=NULL;
+	r=NULL;
+	p=L->head; // p에 리스트 정보를 넣어주고
+	while(p != NULL)
+	{
+		r=q;
+		q=p;
+		p=p->link;
+		q->link=r;
+	}
+	L->head =q;
+}
+void main()
+{
+	linklist *L;
+	basic *p;
+	L=createlist();
+	printf("(1) 리스트에 [월][수][일]노드 삽입하기\n");
+	insertlast(L,"월");insertlast(L,"수");insertlast(L,"일");
+	printlist(L);getchar();
+
+	printf("(2) 리스트에서 [수] 노드 탐색하기\n");
+	p=searchnode(L,"수");
+	if(p==NULL)
+		printf("없어\n");
+	else
+		printf("%s\n",p->data);
+	getchar();
+	
+	printf("(3) 리스트에서 [수] 노드 뒤에 [금]노드 삽입하기\n");
+	insertmiddle(L,p,"금");
+	printlist(L);getchar();
+
+	printf("(4) 리스트에서 [일] 노드 삭제하기\n");
+	p=searchnode(L,"일");
+	deletenode(L,p);
+	printlist(L);getchar();
+
+	printf("(5) 리스트 순서를 역순으로 바꾸기 \n");
+	reverselist(L);
+	printlist(L);
+	free(L);
+}
+
+
+	
+
+
