@@ -1,0 +1,187 @@
+// 다시 다시 조금 이해함 ㅗ
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct list
+{
+	char data[100];
+	struct list *link;
+}basic;
+
+typedef struct
+{
+	basic *head;
+}linklist;
+
+linklist *create()
+{
+	linklist *L;
+	L = (linklist*)malloc(sizeof(linklist));
+	L->head= NULL;
+	return L;
+}
+
+void free(linklist *L)
+{
+	basic *p;
+	
+	while(L->head != NULL)
+	{
+		p=L->head;
+		L->head = L->head ->link;
+		free(p);
+		p=NULL;
+	}
+}
+
+void print(linklist *L)
+{
+	basic *p;
+	
+	p=L->head;
+	printf("( ");
+	while(p != NULL)
+	{
+		printf(" %s ",p->data);
+		p=p->link;
+	}
+	printf(" )\n\n");
+}
+
+void insertfirst(linklist *L,char *x)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	p->link = L->head;
+	L->head =p;
+}
+
+void insertmiddle(linklist *L,basic *pre,char *x)
+{
+	basic *p;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	if(L ==NULL)
+	{
+		p->link = L->head;
+		L->head = p;
+	}
+	else if (pre == NULL)
+	{
+		L->head = p;
+	}
+	else
+	{
+		p->link = pre->link;
+		pre->link = p;
+	}
+}
+
+void insertlast(linklist *L,char *x)
+{
+	basic *p;
+	basic *temp;
+	p=(basic*)malloc(sizeof(basic));
+	strcpy(p->data,x);
+	p->link = NULL;
+	if(L->head == NULL)
+	{
+		L->head = p;
+		return ;
+	}
+	temp = L->head;
+	while(temp ->link != NULL)
+		temp=temp->link;
+	temp -> link = p;
+}
+
+basic *search(linklist *L,char *x)
+{
+	basic *p;
+	
+	p=L->head;
+	while(p ->link!= NULL)
+	{
+		if(strcmp(p->data,x)==0)
+			return p;
+		else
+			p=p->link;
+	}
+	return p;
+}
+
+void deletenode(linklist *L,basic *pre)
+{
+	basic *temp;
+	if(L->head == NULL)
+		return;
+	if(L->head->link==NULL)
+	{
+		free(L->head);
+		L->head = NULL;
+		return;
+	}
+	else if(pre == NULL)
+		return;
+	else
+	{
+		temp=L->head;
+		while(temp->link!=pre)
+		{
+			temp=temp->link;
+		}
+		temp->link=pre->link;
+		free(pre);
+		pre=NULL;
+	}
+}
+
+void reverse(linklist *L)
+{
+	basic *p,*q,*r;
+	p=L->head;
+	q=NULL;
+	r=NULL;
+	while(p != NULL)
+	{
+		r=q;
+		q=p;
+		p=p->link;
+		q->link = r;
+	}
+	L->head = q;
+}
+void main()
+{
+	linklist *L;
+	basic *p;
+	L=create();
+	printf("(1) 리스트에 [월][수][일]노드 삽입하기\n");
+	insertlast(L,"월");insertlast(L,"수");insertlast(L,"일");
+	print(L);getchar();
+
+	printf("(2) 리스트에서 [수] 노드 탐색하기\n");
+	p=search(L,"수");
+	if(p==NULL)
+		printf("없어\n");
+	else
+		printf("%s\n",p->data);
+	getchar();
+	
+	printf("(3) 리스트에서 [수] 노드 뒤에 [금]노드 삽입하기\n");
+	insertmiddle(L,p,"금");
+	print(L);getchar();
+
+	printf("(4) 리스트에서 [일] 노드 삭제하기\n");
+	p=search(L,"일");
+	deletenode(L,p);
+	print(L);getchar();
+
+	printf("(5) 리스트 순서를 역순으로 바꾸기 \n");
+	reverse(L);
+	print(L);
+	free(L);
+}
