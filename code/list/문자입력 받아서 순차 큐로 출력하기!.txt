@@ -1,0 +1,108 @@
+// 순차 큐 해보자
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 5
+typedef char ch;
+
+typedef struct
+{
+	ch queue[SIZE];
+	int front,rear;
+}Q1;
+
+Q1 *create()
+{
+	Q1 *q;
+	q = (Q1*)malloc(sizeof(Q1));
+	q -> front = -1;
+	q -> rear = -1;
+	return q;
+}
+
+int isfull(Q1 *q)
+{
+	if(q->rear == SIZE-1)
+	{
+		printf("풀방입니다\n\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int isempty(Q1 *q)
+{
+	if(q->front == q-> rear)
+	{
+		printf("빈방입니다\n\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+void enqueue(Q1 *q,ch a)
+{
+	if(isfull(q))
+		return;
+	else
+	{
+		q->rear++;
+		q->queue[q->rear] =a;
+	}
+}
+
+ch dequeue(Q1 *q)
+{
+	if(isempty(q))
+		return '\n';
+	else
+	{
+		q->front++;
+		return q->queue[q->front];
+	}
+}
+
+void printq(Q1 *q)
+{
+	int i;
+	if(isempty(q))
+		exit(1);
+	else
+		printf("남은 큐 : [ ");
+	for(i=q->front+1;i<=q->rear;i++)
+		printf(" %c ",q->queue[i]);
+	printf(" ]\n");
+}
+
+void firstq(Q1 *q)
+{
+	printf("첫번째 큐 : %c\n",q->queue[q->front+1]);
+}
+
+void main ()
+{
+	Q1 *q;
+	int i;
+	q= create();
+	ch a;
+	while(1)
+	{
+		scanf_s("%c",&a,1);
+		if(a=='\n')
+			break;
+		else
+			enqueue(q,a);printq(q);
+	}
+	getchar();
+	firstq(q);
+	getchar();
+	for(i=q->front+1;i<=q->rear;i++)
+	{
+		a= dequeue(q);
+		printf("삭제된 큐 : \t%c\n",a);
+		printq(q);
+	}
+}
+
