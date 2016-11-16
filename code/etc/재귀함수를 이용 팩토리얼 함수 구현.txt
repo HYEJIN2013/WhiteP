@@ -1,0 +1,27 @@
+// 팩토리얼 알고리즘 구현 
+// 0! 을 구현하고 싶으면 따로 조건문을 이용해서 넣어줘야한다. 18행
+#include <stdio.h>
+
+int Factorial (int num)
+{
+	if(num <= 0) // 탈출 조건
+		return 1; //탈출 
+	else
+		return (num * Factorial(num -1));
+}
+
+int main ()
+{
+	int a;
+	printf("숫자 입력:");
+	scanf("%d",&a);
+	if(a == 0)
+		printf("%d! 은 0\n",a);
+	else
+	{
+
+	int b = Factorial(a);
+	printf("%d! 은 %d\n",a,b);
+	}
+	return 0;
+}
