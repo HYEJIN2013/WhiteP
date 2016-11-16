@@ -1,27 +1,27 @@
-/* ì¬ê·€ í•¨ìˆ˜ë¥¼ ì´ìš©í•œ í•˜ë…¸ì´íƒ€ì›Œ ì½”ë“œ ( í•˜ë…¸ì´íƒ€ì›Œ - ë§‰ëŒ€ A B C ê°€ ìˆì„ë•Œ A ì— ìˆëŠ” ì›ë°˜ì„ C ë¡œ ì˜®ê¸´ë‹¤)*/
-// from = A     by = B   to = C     num = ì˜®ê²¨ì•¼í•  ì›ë°˜ì˜ ì´ê°¯ìˆ˜ 
+/* Àç±Í ÇÔ¼ö¸¦ ÀÌ¿ëÇÑ ÇÏ³ëÀÌÅ¸¿ö ÄÚµå ( ÇÏ³ëÀÌÅ¸¿ö - ¸·´ë A B C °¡ ÀÖÀ»¶§ A ¿¡ ÀÖ´Â ¿ø¹İÀ» C ·Î ¿Å±ä´Ù)*/
+// from = A     by = B   to = C     num = ¿Å°Ü¾ßÇÒ ¿ø¹İÀÇ ÃÑ°¹¼ö 
 
 #include "stdio.h"
 int NUM =0;
 
-void hanoitower (int num, char from, char by, char to) // num ê°œì˜ ì›ë°˜ì„ byë¥¼ ê±°ì³ from ì—ì„œ to ë¡œ ì´ë™í•œë‹¤.
+void hanoitower (int num, char from, char by, char to) // num °³ÀÇ ¿ø¹İÀ» by¸¦ °ÅÃÄ from ¿¡¼­ to ·Î ÀÌµ¿ÇÑ´Ù.
 {
 	NUM++;
 	if(num == 1)
 	{
-		printf("%d ë²ˆì§¸ : ì›ë°˜ 1ì„ %cì—ì„œ  %cë¡œ ì´ë™\n",NUM,from,to);//ì²˜ìŒì€ ë¬´ì¡°ê±´ ì‹¤í–‰ë˜ëŠ” ë¬¸ì¥
+		printf("%d ¹øÂ° : ¿ø¹İ 1À» %c¿¡¼­  %c·Î ÀÌµ¿\n",NUM,from,to);//Ã³À½Àº ¹«Á¶°Ç ½ÇÇàµÇ´Â ¹®Àå
 	}
 	else
 	{
-		hanoitower(num-1,from,to,by); //hanoitower ì˜ ì¸ìê°€ by-> to ,to -> by ë¡œ ë³€ê²½ë˜ì—ˆë‹¤ ì´ëŠ” num-1 ê°œì˜ ì›ë°˜ì„ B ë¡œ ì´ë™ì‹œì¼œì•¼í•˜ê¸°ë•Œë¬¸ì´ë‹¤
-		printf("%d ë²ˆì§¸ : ì›ë°˜ %dì„(ë¥¼) %cì—ì„œ %cë¡œ ì´ë™\n",NUM,num,from,to);
+		hanoitower(num-1,from,to,by); //hanoitower ÀÇ ÀÎÀÚ°¡ by-> to ,to -> by ·Î º¯°æµÇ¾ú´Ù ÀÌ´Â num-1 °³ÀÇ ¿ø¹İÀ» B ·Î ÀÌµ¿½ÃÄÑ¾ßÇÏ±â¶§¹®ÀÌ´Ù
+		printf("%d ¹øÂ° : ¿ø¹İ %dÀ»(¸¦) %c¿¡¼­ %c·Î ÀÌµ¿\n",NUM,num,from,to);
 		hanoitower(num-1,by,from,to);
 	}
 }
 
 int main()
 {
-	//ë§‰ëŒ€ Aì˜ ì›ë°˜ 3ê°œë¥¼ ë§‰ëŒ€ B ë¥¼ ê²½ìš°í•˜ì—¬ ë§‰ëŒ€ Cë¡œ ì˜®ê¸°ì
+	//¸·´ë AÀÇ ¿ø¹İ 3°³¸¦ ¸·´ë B ¸¦ °æ¿ìÇÏ¿© ¸·´ë C·Î ¿Å±âÀÚ
 	hanoitower(3,'A','B','C');
 	return 0;
 }
