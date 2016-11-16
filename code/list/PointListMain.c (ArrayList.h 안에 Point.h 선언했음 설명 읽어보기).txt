@@ -1,0 +1,94 @@
+/* 
+   1. ArrayList.h 안에 Point.h 선언했음
+   2. typedef int LData 선언을 typedef Point *LData 선언으로 변경
+   */
+
+/*
+   지금 하고 있는 리스트는 순차 리스트 & 연결 리스트 혼합 사용중 (배열과 동적할당 모두 사용중이니깐)
+   1. 두 point 변수의 멤버 xpos만 같으면 1 반환
+   2. 두 point 변수의 멤버 ypos만 같으면 2 반환
+   3. 두 point 변수의 멤버가 모두 같으면 0 반환
+   4. 두 point 변수의 멤버가 모두 다르면 -1 반환
+   */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Point.h"
+#include "ArrayList.h"
+
+int main (void)
+{
+	List list;
+	Point compPos; // point 구조체의 멤버 (자료형은 둘다 int) xpos,ypos
+	Point *ppos; //구조체 포인터 선언 했고
+
+	ListInit(&list); // 리스트 주소값 초기화 했고
+
+	//4개의 데이터 저장 //
+
+	ppos = (Point*)malloc(sizeof(Point)); // 메모리 8 할당 받아서 ppos 변수 메모리 줬고
+	SetPointpos(ppos,2,1); // void SetPointpos(Point *ppos,int xpos,int ypos) //SetPointpos 함수로 ppos 안 xpos,ypos 에 2,1 저장했고
+	LInsert(&list,ppos); //LInsert 함수 이용해서 ppos 초기화했고 (밑에도 동일하게 3번 변수 값만 변경해서 반복)
+
+	ppos = (Point*)malloc(sizeof(Point));
+	SetPointpos(ppos,2,2);
+	LInsert(&list,ppos);
+
+	ppos = (Point*)malloc(sizeof(Point));
+	SetPointpos(ppos,3,1);
+	LInsert(&list,ppos);
+
+	ppos = (Point*)malloc(sizeof(Point));
+	SetPointpos(ppos,3,2);
+	LInsert(&list,ppos);
+
+	// 저장된 데이터의 출력 //
+
+	printf("현재 데이터의 수 : %d\n",LCount(&list));
+
+	if(LFirst(&list,&ppos))
+	{
+		ShowPointpos(ppos); //ShowPointpos 는 printf("[%d,%d]\n",ppos->xpos,ppos->ypos); 이거 포인터 구조체 멤버 출력 함수
+
+		while(LNext(&list,&ppos)) // 두번째로 저장된 데이터도 출력하자
+			ShowPointpos(ppos);
+	}
+
+	printf("\n");
+
+	//xpos가 2인 모든 데이터 삭제//
+	compPos.xpos = 2; //여기서 Point 구조체 멤버 xpos를 2로 초기화
+	compPos.ypos = 0; //여기서는 Point 구조체 멤버 ypos를 0으로 초기화
+
+	if(LFirst(&list,&ppos))
+	{
+		if(PointComp(ppos,&compPos)==1) //PointComp 함수는 다른곳에 저장된 동일한 멤버 비교후 같으면....etc (나머지 설명은 맨 위에 참고)
+		{
+			ppos = LRemove(&list); // xpos 멤버만 같으면 데이터 지우고
+			free(ppos); // 할당해제
+		}
+
+		while(LNext(&list,&ppos))
+		{
+			if(PointComp(ppos,&compPos)==1) //나머지 데이터 값들(동적 할당을 4번 선언했으므로 앞으로 3번)도 동일한 반복 수행
+			{
+				ppos = LRemove(&list);
+				free(ppos);
+			}
+		}
+	}
+
+	// 삭제 후 남은 데이터 전체 출력 //
+	printf("현재 데이터의 수 : %d\n",LCount(&list)); //xpos 가 같은 데이터를 지우고 나서 남은 데이터의 수 파악 
+
+	if(LFirst(&list,&ppos))
+	{
+		ShowPointpos(ppos);
+
+		while(LNext(&list,&ppos))
+			ShowPointpos(ppos); //showPointpos안에 printf(출력함수) 가 들어있어서 출력된다.!
+	}
+	printf("\n");
+	return 0;
+}
+
