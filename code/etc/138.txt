@@ -1,0 +1,93 @@
+#include "stdio.h"
+
+int main ()
+{
+	int a,b,c,d,e;
+	
+	
+	i:
+	printf("문과면 1번 이과면 2번 :  ");
+	scanf("%d",&a);
+
+	switch(a)
+	{
+	case 1:
+		printf("경상 계열이면 1번 인문계열이면 2번 :  ");
+		scanf("%d",&b);
+		switch(b)
+		{
+		case 1:
+			printf("CEO 가 되었다면 1번 백수라면 2번 :  ");
+			scanf("%d",&c);
+			switch(c)
+			{
+			case 1:
+				printf("경영이 잘된다면 1번을 부도라면 2번 :  ");
+				scanf("%d",&d);
+				switch(d)
+				{
+				case 1:
+					printf("결과 : 부도\n");
+					printf("....\n");
+				case 2:
+					printf("결과 : 치킨집 \n");
+					goto he;
+					
+				}
+			case 2:
+				printf("결과 : 아사\n");
+				goto he;
+			}
+		case 2:
+			printf("백수라면 1번을 작가라면 2번 : ");
+			scanf("%d",&c);
+			switch(c)
+			{
+			case 1:
+				printf("결과 : 치킨집\n");
+				goto he;
+			case 2:
+				printf("결과 : 치킨집\n");
+				goto he;
+			}
+		}
+	case 2:
+
+		printf("자연계열이면 1번을 공학계열이면 2번 : ");
+		scanf("%d",&b);
+		switch(b)
+		{
+		case 1:
+			printf("결과 : 아사\n");
+			goto he;
+		case 2:
+			printf("회사를 다니면 1번 그만두었으면 2번 : ");
+			scanf("%d",&c);
+			switch(c)
+			{
+			case 1:
+				printf("과로\n\n\n\n\n\n\n\n");
+				printf("결과 : 과로사\n");
+				goto he;
+			case 2:
+				printf("과로\n\n\n\n\n\n\n\n\n\n");
+				printf("결과 : 치킨집\n");
+				goto he;
+			}
+		}
+	default:
+		printf("1과 2중에서 누르세요\n");
+	}
+he:
+	printf("계속하려면 1번 끝내려면 2번 ");
+	scanf("%d",&e);
+
+	if(e==1)
+		goto i;
+	else if(e ==2)
+		goto j;
+
+	j:
+	return 0;
+}
+
