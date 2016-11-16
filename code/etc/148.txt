@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+int main (void)
+{
+	int arr[100][100];
+	int i,j,n;
+	int x=0;
+	int y=-1;
+	int sw=-1;
+	int num=0;
+	printf("숫자를 입력하시오:\n");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+		for(j=0;j<n;j++)
+			arr[i][j]=0; 
+	for(j=0;j<n;j++)
+	{
+		y++;
+		num++;
+		arr[x][y]=num;
+	}
+	
+        for(i=n-1;i>0;i--)   
+	{
+		for(j=0;j<i;j++)
+		{
+			if(sw==-1)
+			{
+				x++;
+				num++;
+				arr[x][y]=num;
+			}
+			else
+			{
+				x--;
+				num++;
+				arr[x][y]=num;
+			}
+		}
+		for(j=0;j<i;j++)
+		{
+			if(sw==-1)
+			{
+				y--;
+				num++;
+				arr[x][y]=num;
+			}
+			else
+			{
+				y++;
+				num++;
+				arr[x][y]=num;
+			}
+		}
+		sw*=-1;
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			printf("%3d ",arr[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+	return 0;
+}
+
+
+
+
+
+
+
+
