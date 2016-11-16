@@ -1,0 +1,111 @@
+// 순차 자료 구조를 이용해 원형 큐 구현하기
+
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 4
+
+typedef char ch;
+
+typedef struct
+{
+	ch Queue[SIZE];
+	int front,rear;
+}Queuetype; // 구조체 Queuetype 선언
+
+Queuetype* create()
+{
+	Queuetype *Q;
+	Q = (Queuetype*)malloc(sizeof(Queuetype));
+	Q->front =0;
+	Q->rear=0;
+	return Q;
+}// Queuetype 를 자료형으로 하는 구조체 포인터 Q 선언
+
+int isEmpty(Queuetype *Q) // 원형큐가 공백인지 검사하는 함수
+{
+	if(Q->front == Q-> rear)
+	{
+		printf("공백요\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+int isFull(Queuetype *Q)
+{
+	if(((Q->rear +1) % SIZE) == Q->front)
+	{
+		printf("풀방\n");
+		return 1;
+	}
+	else
+		return 0;
+}
+
+void enQueue(Queuetype *Q,ch a) //in
+{
+	if(isFull(Q))
+		return ;
+	else
+	{
+		Q->rear = (Q->rear+1) % SIZE;
+		Q->Queue[Q->rear] = a;
+	}
+}
+ch deQueue(Queuetype *Q) //out
+{
+	if(isEmpty(Q))
+		return '\n';
+	else
+	{
+		Q->front = (Q->front +1) % SIZE;
+		return Q->Queue[Q->front];
+	}
+}
+
+ch firstQ(Queuetype *Q)
+{
+	if(isEmpty(Q))
+		exit(1);
+	else
+		return Q->Queue[(Q->front +1) % SIZE]; //무조건 %size 연산이 들어가네
+}
+
+void printQ (Queuetype *Q)
+{
+	int i,first,last;
+	first = (Q->front +1) % SIZE;
+	last = (Q->rear +1) % SIZE;
+	printf(" Circular Q : [");
+	i=first;
+	while(i != last)
+	{
+		printf("%3c",Q->Queue[i]);
+		i=(i+1)%SIZE;
+	}
+	printf("]");
+}
+
+void main ()
+{
+	Queuetype *Q1 =create();
+	ch data;
+	printf("\n   원형 큐 연산   \n");
+	printf("\n삽입 A>>");enQueue(Q1,'A');printQ(Q1);
+	printf("\n삽입 B>>");enQueue(Q1,'B');printQ(Q1);
+	printf("\n삽입 C>>");enQueue(Q1,'C');printQ(Q1);
+	printf("\n삽입 D>>");enQueue(Q1,'D');printQ(Q1);
+	data = firstQ(Q1); printf("처음 들어간 큐 : %c\n",data);
+	printf("\n삭제 >>");data= deQueue(Q1);printQ(Q1);
+	printf("\t삭제 데이터 : %c",data);
+	printf("\n삭제 >>");data= deQueue(Q1);printQ(Q1);
+	printf("\t삭제 데이터 : %c",data);
+	printf("\n삭제 >>");data= deQueue(Q1);printQ(Q1);
+	printf("\t삭제 데이터 : %c",data);
+	printf("\n삭제 >>");data= deQueue(Q1);
+
+	printf("\n삽입 D>>");enQueue(Q1,'D');printQ(Q1);
+	printf("\n삽입 E>>");enQueue(Q1,'E');printQ(Q1);
+	getchar();
+}
