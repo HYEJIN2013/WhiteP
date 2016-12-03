@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">chat_oss</string>
+    <string name="camera_button_text">Upload</string>
+    <string name="sing_in_prompt">Sign In to begin</string>
+    <string name="take_photo_prompt">Upload Photo</string>
+    <string name="download">Download</string>
+    <string name="sign_in_anonymously">Sign In</string>
+    <string name="rationale_storage">This sample reads images from your camera to demonstrate uploading.</string>
+    <string name="label_link">Link to Uploaded File</string>
+    <string name="label_download">Download File</string>
+</resources>
