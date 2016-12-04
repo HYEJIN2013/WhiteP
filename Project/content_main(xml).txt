@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ameerhamza.firebabseyoutubetest.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:weightSum="1">
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/mUploadName"-->
+        <!--android:layout_alignRight="@+id/m_button"-->
+        <!--android:layout_alignEnd="@+id/m_button" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textEmailAddress"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/mUploadEmailId"-->
+        <!--android:layout_below="@+id/mUploadName"-->
+        <!--android:layout_alignRight="@+id/mUploadName"-->
+        <!--android:layout_alignEnd="@+id/mUploadName" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="date"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/mUploadAge"-->
+        <!--android:layout_below="@+id/mUploadEmailId"-->
+        <!--android:layout_alignRight="@+id/mUploadEmailId"-->
+        <!--android:layout_alignEnd="@+id/mUploadEmailId"-->
+        <!--android:text="0" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Upload data"-->
+        <!--android:id="@+id/m_button"-->
+        <!--android:layout_marginLeft="82dp"-->
+        <!--android:layout_marginStart="82dp"-->
+        <!--android:layout_below="@+id/mUploadAge"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="13dp" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Read From firebase"-->
+        <!--android:id="@+id/m_read_button"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignLeft="@+id/m_button"-->
+        <!--android:layout_alignStart="@+id/m_button" />-->
+
+    <!--<TextView-->
+        <!--android:text="TextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/myDownloadEmailTextView"-->
+        <!--android:layout_alignRight="@+id/mtextView"-->
+        <!--android:layout_alignEnd="@+id/mtextView" />-->
+
+    <!--<TextView-->
+        <!--android:text="TextView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:id="@+id/myDownloadNameTextView"-->
+        <!--android:layout_below="@+id/m_read_button"-->
+        <!--android:layout_alignLeft="@+id/m_read_button"-->
+        <!--android:layout_alignStart="@+id/m_read_button"-->
+        <!--android:layout_marginLeft="28dp"-->
+        <!--android:layout_marginStart="28dp" />-->
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/my_Recylerivew_"
+        android:layout_height="100dp"
+        android:layout_weight="0.97" />
+
+    <Button
+        android:text="uploadButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/UploadButton" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait"
+        android:id="@+id/mImageView" />
+
+    <!--<Button-->
+        <!--android:text="showImageFromFirebase"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/buttonDownload" />-->
+
+</LinearLayout>
