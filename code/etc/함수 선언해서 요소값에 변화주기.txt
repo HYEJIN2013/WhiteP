@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+void F(int *param, int len)
+{
+	int i;
+	for(i=0;i<len;i++)
+		printf("%d ",param[i]);
+	printf("\n");
+}
+
+void F1(int *param,int len, int add)
+{
+	int i;
+	for (i=0;i<len;i++)
+		param[i]+=add;
+}
+
+int main (void)
+{
+	int arr[3]={1,2,3};
+	F1(arr,sizeof(arr)/sizeof(int),1);//F1 은 arr의 요소 값을 1씩 더하는거다
+	F(arr,sizeof(arr)/sizeof(int));
+
+	F1(arr,sizeof(arr)/sizeof(int),2);//F1 을 다시 써서 1씩 더해진 요소 값에 다시 2를 더하기
+	F(arr,sizeof(arr)/sizeof(int));
+
+	F1(arr,sizeof(arr)/sizeof(int),3);//F1을 또 써서 총 3이 더해진 요소 값에 3을 더 더하기
+	F(arr,sizeof(arr)/sizeof(int));
+	//요소 값이 더 해지거나 빼지면은 다음 함수 에도 영향을 준다
+	return 0;
+}
