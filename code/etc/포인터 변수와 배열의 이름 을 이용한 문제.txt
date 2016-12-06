@@ -1,0 +1,54 @@
+#include<stdio.h>//포인터 변수 ptr에 저장된 값을 증가시키는 형태의 연산을 해서 배열요소의 값을전부 +2 하기;
+int main (void)
+{
+	int arr[5]={1,2,3,4,5};
+	int i;
+	int *ptr=arr;
+	for(i=0;i<5;i++)
+		*(ptr++)+=2;
+	for(i=0;i<5;i++)
+		printf("%d ",arr[i]);
+	return 0;
+}
+
+
+
+
+#include<stdio.h>//포인터 변수 ptr에 저장된 값을 변경시키지 않고 ptr을 대상으로 덧셈연산을 하여 배열요소 +2 하기
+int main (void)
+{
+	int arr[5]={1,2,3,4,5};
+	int i;
+	int *ptr=arr;//int *ptr=&arr[0];
+	for(i=0;i<5;i++)
+		*(ptr+i)+=2;
+	for(i=0;i<5;i++)
+	printf("%d ",arr[i]);
+	return 0;
+}
+
+
+
+
+
+
+#include<stdio.h>//*ptr 에 배열의 마지막 요소를 선언하고 ptr 에 저장된 값을 감소시키는 형태의 연산을 기반으로 모든 배열요소의 합을 구해라
+int main (void)
+{
+	int arr[5]={1,2,3,4,5};
+	int * ptr=&arr[4];
+	int i;
+	int sum;
+	sum=0;
+	for(i=0;i<5;i++)
+		sum+=*(ptr--);
+	printf("%d \n",sum);
+	return 0;
+}
+
+		
+
+
+
+
+
