@@ -1,0 +1,81 @@
+/* 프로그램 사용자로부터 이름과 나이를 다음의 형식에 맞춰서 하나의 문자열로 입력 받는다.
+  "이정선 29"
+  "한수정 7"
+  "오선주 17"
+
+  이러한 형식으로 두사람의 정보를 입력 받아서 이름과 나이가 각각 같은지 다른지를 판단하여 출력하는 프로그램을 작성해보자.
+  배열에는 공백이 있어야한다.*/
+
+#include<stdio.h>
+#include<string.h> //문자열의 길이를 구하기 위해 필요한 선언
+#include<stdlib.h> //문자열로된 나이값을 int 형으로 바꿀 선언
+
+int F (char a[]) //인자로 받은 배열의 길이를 구한후 그 길이 범위 내에서 공백이 있는지를 확인하는 함수 F
+{
+	int len = strlen(a);
+	int i;
+	for(i=0;i<len;i++)
+	{
+		if(a[i]==' ')
+			return i;
+	}
+	return -1;
+}
+
+int F1 (char a[],char b[])
+{
+	int idx1=F(a);//idx1 == 문자열 a 의 공백 문자의 위치 
+	int idx2=F(b); // idx2 == 문자열 b 의 공백문자의 위치
+
+	if(idx1 != idx2)
+		return 0;
+	else
+		strncmp(a,b,idx1);
+}
+
+int F2 (char a[],char b[])
+{
+	int idx1=F(a);//idx1 == 문자열 a 의 공백 문자의 위치
+	int idx2=F(b);// idx2 == 문자열 b 의 공백문자의 위치
+	int ag1,ag2;
+
+	ag1=atoi(&a[idx1+1]);//문자열 a에 나이가 저장된 위치 인덱스 값
+	ag2=atoi(&b[idx2+1]);//문자열 b에 나이가 저장된 위치 인덱스 값
+
+	if(ag1==ag2)
+		return 1;
+	else 
+		return 0;
+}
+
+int main (void)
+{
+	char str1[20];
+	char str2[20];
+
+	printf("첫번째 사람 정보 입력:");
+	fgets(str1,sizeof(str1),stdin);
+	str1[strlen(str1)-1]=0; //str1 문자열 마지막에 들어가는 널문자 삭제
+
+	printf("두번째 사람 정보 입력:");
+	fgets(str2,sizeof(str2),stdin);
+	str2[strlen(str2)-1]=0;//str2 문자열 마지막에 들어가는 널문자 삭제
+
+	if(F1(str1,str2))
+		puts("이름이 동일합니다.");
+	else 
+		puts("이름이 동일하지 않습니다,");
+
+	if(F2(str1,str2))
+		puts("나이가 동일합니다");
+	else
+		puts("나이가 동일하지 않습니다.");
+	return 0;
+}
+
+/* 전부다 답지를 보고 풀긴했지만(푼것도 아니다 그냥 답지보고 썻지) 그나저나 F1(이름 비교) 함수 에서 
+   strncmp 분명 비교 함수인데 이름이 달라도 같다는 결과가 계속해서 나온다 솔직히 뭔지 잘 모르겠다
+   길이만 같으면 같은 이름이 동일하다고 나온다
+   그리고 atoi 를쓴 F2 함수에서는 나이 뒤에 문자열이 추가 되더라도 나이만 비교를 하고있다
+   지금만 그런건지 atoi 자체가 int 형으로 받을수 있는 정수만 받는건지 아직 모르겠다 일단 이거 저장하고
+   나중에 한번더 풀어보고 이해하도록 해보자
