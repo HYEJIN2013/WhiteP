@@ -1,0 +1,27 @@
+#include<stdio.h>//switch 문을 이용하여 문자 출력
+int main (void)
+{
+	char i;
+	printf(" M 오전, A 오후, E 저녁 \n");
+	printf("입력");
+	scanf("%c",&i);
+
+	switch(i)
+	{
+		case 'M':
+		case 'm':
+			printf("Morning\n");
+			break;
+
+		case 'A':
+		case 'a':
+			printf("Afternoon\n");
+			break;
+
+		case 'E':
+		case 'e':
+			printf("evening\n");
+			break;
+	}
+	return 0;
+}
