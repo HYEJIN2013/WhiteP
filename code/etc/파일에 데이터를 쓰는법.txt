@@ -1,0 +1,18 @@
+#include<stdio.h>
+
+int main (void)
+{
+	FILE*fp=fopen("C:\\파일입출력\\c.txt","wt"); // 텍스트 데이터 출력 스트림
+	if(fp==NULL){
+		puts("파일 오픈 실패!");
+		return -1; // 비정상적 종료를 의미하기 위해서 -1을 반환 
+	}
+
+	fputc('A',fp);
+	fputc('B',fp);
+	fputc('C',fp);
+	fflush(fp); // 출력버퍼를 비우라는 요청
+	fputc('dd',fp);
+	fclose(fp); //스트림의 종료
+	return 0;
+}
