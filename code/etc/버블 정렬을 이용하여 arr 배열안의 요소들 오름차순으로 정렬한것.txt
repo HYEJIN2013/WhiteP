@@ -1,0 +1,38 @@
+#include<stdio.h>
+
+void B (int ary[] , int len);
+
+int main (void)
+{
+	int arr[4]={3,2,4,1};
+	int i;
+
+	B(arr,sizeof(arr)/sizeof(int));
+	printf("%d",sizeof(arr)/sizeof(int));
+	for (i=0;i<4;i++)
+		printf("%d ",arr[i]);
+
+	printf("\n");
+	return 0;
+}
+
+void B (int ary[], int len)
+{
+	int i,j;
+	int temp;
+
+	for(i=0;i<len-1;i++)//오름 차순 정렬//23
+	{
+		for(j=0;j<(len-i)-1;j++)//len - i -1 을 하는 이유 => ary[i] 와 ary[i+1] 을 비교 하기때문에 i=0 일때,
+		{                       // j가 2까지 되기 때문에 arr[2]와 arr[3]의 비교까지 되는것이다.
+			if(ary[j]>ary[j+1])
+			{
+				temp=ary[j];
+				ary[j]=ary[j+1];
+				ary[j+1]=temp;
+			}
+		}
+	}//34
+}
+
+//23~34행 약 10 줄 정도가 버블 정렬 알고리즘의 실제 구현 부분이다.
