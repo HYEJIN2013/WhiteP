@@ -1,0 +1,28 @@
+#include<stdio.h>
+
+void S (int n1,int n2)
+{
+	printf("%d+%d=%d\n",n1,n2,n1+n2);
+}
+
+void S1 (char * str)
+{
+	printf("%s\n",str);
+}
+
+int main (void)
+{
+	char * str="Function pointer";
+	int num1=10,num2=20;
+
+	void (*fptr1)(int,int) = S;
+	void (*fptr2)(char*) = S1;
+
+	/* 함수 포인터 변수에 의한 호출 */
+	fptr1(num1,num2);
+	fptr2(str);
+	return 0;
+}
+
+/* 함수를 선언하고 그 선언한 함수를 함수 포인터 변수에 넣어서 함수의 이름을 쓰지 않고
+   포인터 변수를 이용하여 선언한 함수의 내용 출력하기 */
