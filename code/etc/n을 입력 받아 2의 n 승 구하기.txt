@@ -1,0 +1,43 @@
+#include<stdio.h>//2의 n승을 구하는 함수를 재귀적으로 구현;
+int F (int b)
+{
+	int result=1;
+	int i;
+	for(i=0;i<b;i++)
+	{
+		result*=2;
+	}
+	return result;
+}
+int main (void)
+{
+	int a;
+	printf("정수 입력");
+	scanf("%d",&a);
+	printf("2의 %d 승은 %d \n",a,F(a));
+	return 0;
+}
+
+
+
+#include<stdio.h>//2의 n승을 구하는 함수를 재귀적으로 구현;
+int F (int b)
+{
+	if(b==0)
+		return 1;
+	if(b>0)
+		return 2*F(b-1);
+}
+int main (void)
+{
+	int num;
+	int result;
+
+	printf("정수 입력:");
+	scanf("%d",&num);
+	printf("\n");
+	result=F(num);
+	printf("결과 %d\n",result);
+	printf("\n");
+	return 0;
+}
