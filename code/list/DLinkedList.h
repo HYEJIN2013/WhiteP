@@ -1,10 +1,12 @@
 #ifndef __D_LINKED_LIST_H__
 #define __D_LINKED_LIST_H__
 
+#include "Point.h"
+
 #define TRUE	1
 #define FALSE	0
 
-typedef int LData;
+typedef Point * LData;
 
 typedef struct _node
 {
@@ -20,7 +22,6 @@ typedef struct _linkedList
 	int numOfData;
 	int (*comp)(LData d1, LData d2);
 } LinkedList;
-
 
 typedef LinkedList List;
 
