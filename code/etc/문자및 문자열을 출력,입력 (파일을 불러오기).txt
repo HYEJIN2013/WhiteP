@@ -1,0 +1,53 @@
+#include<stdio.h>
+
+int main (void)
+{
+	FILE * fp=fopen("C:\\파일입출력\\simple.txt","wt"); // 파일출력 스트림
+	if(fp==NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
+	fputc('a',fp);
+	fputc('n',fp);
+	fputs("hello\n",fp);
+        fputs("hi\n",fp);
+	fclose(fp);
+	return 0;
+}
+
+
+파일을 텍스트로 출력(문자,문자열)
+------------------------------------------------------------------
+
+
+#include<stdio.h>
+
+int main (void)
+{
+	char str[30]; //문자열을 받기위한 배열
+	int ch;      // 문자를 받기위한 변수
+	FILE * fp=fopen("C:\\파일입출력\\simple.txt","rt"); // 파일출력 스트림
+	if(fp==NULL)
+	{
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
+	ch=fgetc(fp);
+	printf("%c\n",ch);
+	ch=fgetc(fp);//출력한 문자를 입력받기위한 fgetc 
+	printf("%c\n",ch);
+
+	fgets(str,sizeof(str),fp);
+	printf("%s",str);
+	fgets(str,sizeof(str),fp);
+	printf("%s",str);
+
+	fclose(fp);
+	return 0;
+}
+
+문자 및 문자열을 입력받기위함 스트림 
+-------------------------------------------------------------------
