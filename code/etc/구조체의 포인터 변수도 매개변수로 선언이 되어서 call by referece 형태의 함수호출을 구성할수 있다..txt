@@ -1,0 +1,28 @@
+#include<stdio.h>
+
+typedef struct point
+{
+	int xpos;
+	int ypos;
+}point;
+
+void F (point * ptr) // 함수 F 의 인자를 ptr 이라는 이름의 포인터로 받았다.
+{
+	ptr->xpos =(ptr->xpos)*-1;/* ptr->xpos== (*ptr).xpos 소괄호를 쳐줘야한다.!*/
+	(*ptr).ypos=(ptr->ypos)*-1;
+}
+
+void F1 (point pos) 
+{
+	printf("[%d %d]\n",pos.xpos,pos.ypos);
+}
+
+int main (void)
+{
+	point pos={7,-5}; // pos 는 변수이름이고 바로 7,-5 로 초기화시킨다
+	F(&pos);
+	F1(pos);
+	F(&pos);
+	F1(pos);
+	return 0;
+}
