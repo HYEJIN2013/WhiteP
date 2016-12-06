@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main (void)
+{
+	int i;
+	printf("난수의 범위 : 0부터 %d 까지 \n",RAND_MAX); //7행
+	for(i=0;i<5;i++)
+		printf("난수출력: %d\n",rand());
+	return 0;
+}
+
+
+
+/* ANSI 표준에서는 이렇게 난수를 생성할 때 사용할 수 있는 함수 rand를 제공하고 있다.
+   이 함수의 사용방법은 위와 같다.*/
+/* 7행: stdlib.h에 선언되어 있는 상수 RAND_MAX를 출력하고 있다. 이 값은 생성될 수 있는 난수의 최댓값을 의미한다.
+   즉, rand 함수는 0 이상 RAND_MAX 이하의 값을 반환한다.*/
