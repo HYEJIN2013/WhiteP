@@ -1,0 +1,37 @@
+#include <stdio.h>//길이가 10인 배열을 선언하고 총 10개의 정수를 입력 받아서 홀수와 짝수를 구분지어 출력하자.
+void F (int *a);
+void F1 (int *a);
+int main (void)
+{
+	int i;
+	int a [10];
+	int * b =a;
+	printf("10개의 정수를 입력");
+	printf("\n");
+	for(i=0;i<10;i++)
+	{
+		printf("입력:");
+		scanf("%d",&a[i]);
+	}
+	printf("10개의 정수중 홀수 :\n");
+	F( b);
+	printf("\n");
+	F1(b);
+	return 0;
+}
+
+
+	void F (int *a)
+	{
+		int i;
+		for(i=0;i<10;i++)
+			if(a[i]%2==0)
+				printf("%d ",a[i]);
+	}
+	void F1 (int *a)
+	{
+		int i;
+		for(i=0;i<10;i++)
+			if(a[i]%2!=0)
+				printf("%d ",a[i]);
+	}
