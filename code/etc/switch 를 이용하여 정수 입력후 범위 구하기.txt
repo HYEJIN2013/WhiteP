@@ -1,0 +1,23 @@
+#include<stdio.h>//switch 를 이용하여 정수 입력후 범위 구하기
+int main (void)
+{
+	int n;
+	printf("정수 입력 : ");
+	scanf("%d",&n);
+
+	switch(n/10)
+	{
+	case 0:
+		printf("0이상 10 미만");
+		break;
+	case 1:
+		printf("10이상 20 미만");
+	break;
+	case 2:
+		printf("20이상 30 미만");
+	break;
+	case 3:
+		printf("30이상");
+	}
+	return 0;
+}
