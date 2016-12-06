@@ -1,0 +1,34 @@
+#include <stdio.h>//영단어를 입력 받아서 그 단어가 회문인지 아닌지 판단후 출력
+
+void F (char*b,int len);
+int main (void)
+{
+	char voca[100];
+	int len=0;
+	printf("영단어 입력:");
+	scanf("%s",voca);
+	printf("입력 받은 영단어 : %s \n",voca);
+	while (voca[len] != '\0') //입력한 voca 의 길이를 구하는 식이다 꼭 알고 있자 !! 
+		len++;
+	printf("입력 받은 단어의 길이:%d",len);
+	printf("\n");
+	F(voca,len);
+	return 0;
+}
+
+
+void F (char *b ,int len) // 위 함수에서 voca (배열) 에대한 포인터 변수를 따로 지정안해도 된다 (배열도 포인터 변수다)
+{
+	
+	int i;
+	for(i=0;i<(len/2);i++)
+	{
+		if(b[i] != b[len-1-i])
+		{
+				printf("회문이 아닙니다.\n");
+				return;
+		}
+	}
+	printf("회문 입니다.\n");
+}
+
