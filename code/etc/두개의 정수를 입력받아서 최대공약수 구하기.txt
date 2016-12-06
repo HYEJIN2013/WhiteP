@@ -1,0 +1,34 @@
+#include<stdio.h>//두개의 정수를 입력받아서 최대공약수를 구하자
+int GCD (int a,int b)
+{
+	int i;
+	if(a>=b)
+	{
+		for(i=b;i>0;i--)
+		{
+			if(a%i == 0 && b%i == 0)
+			{
+				return i;
+			}
+		}
+
+	}
+	else//(b>a)
+	{
+		for(i=a;i>0;i--)
+		{
+			if(b%i == 0 && a % i == 0)
+			{
+				return i;
+			}
+		}
+	}
+}
+int main (void)
+{
+	int a,b;
+	printf("두개의 정수 입력:");
+	scanf("%d %d",&a,&b);
+	printf("%d 와 %d 의 최대 공약수는 %d 이다 \n",a,b,GCD(a,b));
+	return 0;
+}
