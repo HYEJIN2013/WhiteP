@@ -1,0 +1,36 @@
+/* 문자열 형태의 '종업원 이름'과 문자열 형태의 '주민등록번호' 그리고 정수 형태의 '급여정보'를 저장 할수 있는 employee 라는 이름의 구조체를 정의하자.*/
+
+#include<stdio.h>
+#include<string.h>  
+
+struct employee
+{
+	char name[20]; // 이름
+	char num[20]; //주민등록 번호
+	int pay;  //급여 정보
+};
+
+int main (void)
+{
+	struct employee em1,em2;
+
+	strcpy(em1.name, "김주환");
+	strcpy(em1.num, "121212-1441414");
+	em1.pay = 100;
+
+	printf("이름 입력:");scanf("%s",em2.name);
+	printf("주민번호 입력:");scanf("%s",em2.num);
+	printf("급여 정보:");scanf("%d",&em2.pay);
+
+	printf("이름 : %s\n",em2.name);
+	printf("주민번호 : %s\n",em2.num);
+	printf("급여 : %d\n",em2.pay);
+
+	printf("이름 : %s\n",em1.name);
+	printf("주민번호 : %s\n",em1.num);
+	printf("급여 : %d\n",em1.pay);
+
+	return 0;
+}
+
+/* 아직 헤더파일 <string.h> 를 모른다 하지만 구조체 변수 (배열일때) 를 저장한떄 strcpy 를 써서 저장을 해야한다는걸 알았다.*/
