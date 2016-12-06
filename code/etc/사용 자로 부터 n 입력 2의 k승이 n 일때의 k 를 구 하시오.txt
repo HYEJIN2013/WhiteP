@@ -1,0 +1,25 @@
+#include<stdio.h>//사용자로 부터 n을 입력받음, 2의 k승<=n 의 k의 최대값 구하기
+int F (int n)
+{
+	int sum =1;
+	int i;
+	for(i=0;sum<=n;i++)
+	{
+		if(n==1)
+			return 0;
+		if(n>1)
+		{
+			sum*=2;
+		}
+	}
+	return i-1;
+}
+int main (void)
+{
+	int n;
+	printf("정수 입력");
+	scanf("%d",&n);
+	printf("%d\n",F(n));
+
+	return 0;
+}
