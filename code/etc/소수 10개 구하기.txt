@@ -1,0 +1,57 @@
+#include<stdio.h>//소수 10 개 구하기
+int main(void)
+{
+	int x,y;
+	int count = 0;
+	for(x=2;count<10;x++)
+	{
+		y=2;
+		for(y=2;y<=x;y++)
+		{
+			if(x==y)
+			{
+				printf("%3d",x);
+				count++;
+			}
+			if(x%y==0)
+				break;
+		}
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//소수 구할지 까지 정한것
+int main(void)
+{
+	int count;
+	int a,b;
+	int i=0;
+	printf("소수의 갯수:");
+	scanf("%d",&count);
+	printf("소수는 %d 개",count);
+	for(a=2;i<count;a++)
+	{
+		for(b=2;a>=b;b++)
+		{
+			if(a==b)
+			{
+				printf("%d ",a);
+				i++;
+			}
+			if(a%b==0)
+				break;
+		}
+	}
+	return 0;
+}
