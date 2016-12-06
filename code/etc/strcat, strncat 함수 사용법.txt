@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<string.h>
+
+int main (void)
+{
+	char str1[20]="First~";
+	char str2[20]="Second";
+
+	char str3[20] = "Simple num";
+	char str4[20] = "1234567890";
+
+	/***** case 1 *****/
+	strcat (str1,str2); // str1문자열 뒤에 str2 문자열을 붙여라
+	puts(str1);
+
+	/***** case 2 *****/
+	strncat (str3,str4,7); //str3 문자열 뒤에 str4 문자열을 붙이되 str4의 문자열중 7개의 문자만 붙여라 이때 널문자는 포함되지 않는다; 따라서 널문자까지 8개의 문자가 붙여진다
+	puts(str3); // puts 는 자동 개행이된다. 따라서 \n을 안써도 된다 개편해
+
+	return 0;
+}
