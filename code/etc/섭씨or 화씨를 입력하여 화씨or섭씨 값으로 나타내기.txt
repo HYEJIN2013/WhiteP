@@ -1,0 +1,32 @@
+#include<stdio.h>
+double CelToFah (double c)//È­¾¾ ±¸ÇÏ´Â °ø½Ä
+{
+	return 1.8*c+32;
+}
+double FahToCel (double f)
+{
+	return (f-32)/1.8;
+}
+int main (void)
+{
+	int num;
+	double x;
+	printf("1. È­¾¾±¸ÇÏ±â 2.¼·¾¾ ±¸ÇÏ±â");
+	scanf("%d",&num);
+	if(num==1)
+	{
+		printf("È­¾¾ ±¸ÇÏ±â\n");
+		scanf("%lf",&x);
+		printf("¼·¾¾°¡ %f ÀÏ¶§ È­¾¾´Â %f\n",x,CelToFah(x));
+	}
+	else if(num==2)
+	{
+		printf("¼·¾¾ ±¸ÇÏ±â");
+		scanf("%lf",&x);
+		printf("È­¾¾°¡ %f ÀÏ¶§ ¼·¾¾´Â %f\n",x,FahToCel(x));
+	}
+	else
+		printf("¼±ÅÃÀ» Àß¸øÇÔ\n");
+
+return 0;
+}
