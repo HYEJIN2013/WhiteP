@@ -1,0 +1,11 @@
+#include<stdio.h>//초 를 입력 받은후 이를 [일,시,분,초]로 나타내기
+int main (void)
+{
+	int s;
+	printf("초 구하기 :");
+	scanf("%d",&s);
+	printf("%d day %d hour %d minute %d second\n",(s/86400),((s%86400)/3600),(((s%86400)%3600)/60),(s%60));
+	return 0;
+}
+	
+
