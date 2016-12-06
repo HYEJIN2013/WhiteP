@@ -1,0 +1,31 @@
+#include<stdio.h>// 층별로 2가구가 사는 4층짜리 빌라가 있을때 각 세대마다 사람수를 입력해서 층별 인구수를 구하자
+
+int main (void)
+{
+	int villa[4][2];//층별로 2가구가 사는 4층짜리 빌라라고 가정
+	int popu=0,i,j;
+
+	/*가구별 거주인원 입력 받기*/
+
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<2;j++)
+		{
+			printf("%d층 %d 호 인구수 : ",i+1,j+1);
+			scanf("%d",&villa[i][j]);
+		}
+	}
+
+	/* 빌라의 층별 인구수 출력하기*/
+	
+	for(i=0;i<4;i++)
+	{
+		for(j=0;j<2;j++)
+		{
+			popu+=villa[i][j];
+		}
+		printf("%d 층의 인구수 : %d \n",i+1,popu);
+		popu=0;
+	}
+	return 0;
+}
