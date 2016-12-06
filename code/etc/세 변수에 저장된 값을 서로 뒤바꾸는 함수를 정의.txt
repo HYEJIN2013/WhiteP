@@ -1,0 +1,38 @@
+#include<stdio.h>//세 변수에 저장된 값을 서로 뒤바꾸는 함수를 정의해보자.
+
+void CH1 (int *ch1,int *ch2)
+{
+	int temp;
+	temp=*ch1;
+	*ch1 = *ch2;
+	*ch2 = temp;
+}
+int main (void)
+{
+	int num1=10, num2=20, num3=30;
+	CH1(&num1,&num2);//num1=20 num2=10
+	CH1(&num2,&num3);//num2=30 num3=10
+	printf("%d %d %d\n",num1,num2,num3);// 20 30 10 출력됨
+	return 0;
+}
+
+
+
+-------------------------------------------------------------------------- CH1 함수의 인자를 3개로 정의
+#include<stdio.h>//세 변수에 저장된 값을 서로 뒤바꾸는 함수를 정의해보자.
+
+void CH1 (int *ch1,int *ch2,int *ch3)
+{
+	int temp;
+	temp=*ch1;
+	*ch1 = *ch2;
+	*ch2 = *ch3;
+	*ch3 = temp;
+}
+int main (void)
+{
+	int num1=10, num2=20, num3=30;
+	CH1(&num1,&num2,&num3);
+	printf("%d %d %d\n",num1,num2,num3);// 20 30 10 출력됨
+	return 0;
+}
