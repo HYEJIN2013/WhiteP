@@ -1,0 +1,22 @@
+#include<stdio.h>//변수 num 에 저장된 값의 제곱을 계산하는 함수를 정의하고
+int F (int a)//Call-by-value 기반의 함수 F
+{
+	int result;
+	result = a*a;
+	return result;
+}
+int F1(int * b)//Call-by-reference 기반의 함수 F1
+{
+	int result;
+	result = *b*(*b);
+	return result;
+}
+
+int main (void)
+{
+	int a=10;
+	int * b=&a;
+	printf("%d ",F(a));
+	printf("%d ",F1(&a));
+	return 0;
+}
