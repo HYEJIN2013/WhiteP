@@ -1,0 +1,54 @@
+#include<stdio.h>//세 개의 정수를 인자로 받아서 가장 큰수 와 가장 작은수 반환 
+int i (void);
+int i1(int,int,int);
+int i2(int,int,int);
+void i3(int,int);
+void i4(void);
+int main (void)
+{
+	int x,y,z;
+	int n1,n2;
+	i4();
+	x=i();
+	y=i();
+	z=i();
+	n1=i1(x,y,z);
+	n2=i2(x,y,z);
+	
+	i3(n1,n2);
+	return 0;
+}
+
+int i (void)
+{
+	int num;
+	scanf("%d",&num);
+	return num;
+}
+int i1 (int n1,int n2,int n3)
+{
+	if(n1>n2 && n1>n3)
+		return n1;
+	else if(n2>n1 && n2>n3)
+		return n2;
+	else
+		return n3;
+}
+int i2 (int x,int y, int z)
+{
+	if(x<y&&x<z)
+		return x;
+	else if(y<x&&y<z)
+		return y;
+	else
+		return z;
+}
+void i3 (int nu,int nu2)
+{
+	printf("가장 큰수는 %d 이다\n",nu);
+	printf("가장 작은 수는 %d 이다\n",nu2);
+}
+void i4 (void)
+{
+	printf("세 개의 정수를 입력하자:");
+}
