@@ -1,0 +1,74 @@
+#include <stdio.h>//사용자로 부터 정수를 입력받아 입력받은 정수의 갯수 만큼 피보나치 수열을 나열 하시오
+void i1 (int num)
+{
+	int f1=0,f2=1,f3,i;
+
+	if(num==1)
+		printf("%3d",f1);
+	else
+		printf("%d %d",f1,f2);
+
+	for(i=0;i<num-2;i++)
+	{
+		f3=f2+f1;
+		printf("%3d",f3);
+		f1=f2;
+		f2=f3;
+	}
+}
+int main (void)
+{
+	int n;
+	printf("출력 하고싶은 피보나치 수열 갯수 :");
+	scanf("%d",&n);
+	if(n<1)
+	{
+		printf("1이상의 값을 입력하세요.\n");
+		return 0;
+	}
+	i1(n);
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>//입력한 정수의 수만큼 피보나치 수열 나열하기
+
+int main (void)
+{
+	int n;
+	int f1=0,f2=1,f3,i;
+	printf("정수를 입력 하세요");
+	scanf("%d",&n);
+	if(n<1)
+		{
+			printf("1이상의 수를 입력하시오\n");
+			return 0;
+	}
+	if(n==1)
+	printf("%d ",f1);
+	else
+		printf("%d %d ",f1,f2);
+
+	for(i=0;i<n-2;i++)
+	{
+		f3=f1+f2;
+		printf("%d ",f3);
+		f1=f2;
+		f2=f3;
+	}
+	return 0;
+}
+
+
