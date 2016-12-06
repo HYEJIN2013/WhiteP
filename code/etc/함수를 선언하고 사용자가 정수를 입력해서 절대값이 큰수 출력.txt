@@ -1,0 +1,51 @@
+#include<stdio.h>//프로그램 사용자가 입력한 두 개의 정수중 절대값이 큰 수를 반환 하자
+
+int i (int,int);
+int i1(void);
+int i2(int);
+void i3(int,int);
+void i4(int);
+
+int main (void)
+{
+	int n1,n2,result,result1,result2;
+	result=i2(n1=i1());//n1 값 입력
+	result1=i2(n2=i1());//n2 값 입력
+	//result=i2(n1); //n1의 절대 값 = result
+	//result1=i2(n2);//n2의 절대 값 = result1
+	result2=i(result,result1);//입력 받은 수의 절대값은 크기 비교
+	i3(n1,n2);
+	i4(result2);
+
+	return 0;
+}
+int i(int n1,int n2)
+{
+	if(n1>n2)
+		return n1;
+	else
+		return n2;
+}
+
+int i1(void)
+{
+	int num;
+	scanf("%d",&num);
+	return num;
+}
+
+int i2 (int n)
+{
+	if(n<0)
+		return n*(-1);
+	else
+		return n;
+}
+void i3(int num,int num1)
+{
+	printf("%d와(과) %d중 절대 값이 큰수는\n",num,num1);
+}
+void i4(int num)
+{
+	printf("%d 이다\n",num);
+}
