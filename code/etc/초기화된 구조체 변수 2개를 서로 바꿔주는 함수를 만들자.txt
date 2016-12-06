@@ -1,0 +1,29 @@
+/* 다음 구조체의 두 변수를 대상을 저장된 값을 서로 바꿔주는 함수를 정의하고 이를 호출하자*/
+#include<stdio.h>
+
+typedef struct point
+{
+	int xpos;
+	int ypos;
+}point;
+
+void F (point *a, point *b)
+{
+	point c;
+	c=*a;
+	*a=*b;
+	*b=c;
+}
+
+int main (void)
+{
+	point pos1 = {2,4};
+	point pos2 = {5,7};
+	
+	F(&pos1,&pos2);
+
+	printf("pos1의 xpos,ypos : %d %d\n",pos1.xpos,pos1.ypos);
+	printf("pos2의 xpos,ypos : %d %d\n",pos2.xpos,pos2.ypos);
+
+	return 0;
+}
