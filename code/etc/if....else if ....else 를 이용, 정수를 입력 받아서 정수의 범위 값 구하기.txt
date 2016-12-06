@@ -1,0 +1,16 @@
+#include<stdio.h>//정수를 입력받아서 범위값 구하기
+int main (void)
+{
+	int n;
+	printf("정수 입력 : ");
+	scanf("%d",&n);
+	if(n>=0 && n<10)
+		printf("o이상 10 미만\n");
+	else if(n>=10 && n<20)
+		printf("10 이상 20 미만\n");
+	else if(n>=20 && n<30)
+		printf("20 이상 30 미만\n");
+	else
+		printf("30 이상\n");
+		return 0;
+}
