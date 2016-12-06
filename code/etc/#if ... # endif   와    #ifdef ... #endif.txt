@@ -1,0 +1,20 @@
+#include<stdio.h>
+#define add 2
+#define min 1// add == 1 min ==0 이런 의미
+
+int main (void)
+{
+	int num1,num2;
+	printf("두 개의 정수 입력:");
+	scanf("%d %d",&num1,&num2);
+
+#if add // add가 '참'이라면
+	printf("%d+%d=%d\n",num1,num2,num1+num2);
+#endif
+
+#if min//min 이 참이라면
+	printf("%d-%d=%d\n",num1,num2,num1-num2);
+#endif
+
+	return 0;
+}
