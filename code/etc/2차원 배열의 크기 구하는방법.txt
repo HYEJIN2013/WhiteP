@@ -1,0 +1,16 @@
+#include<stdio.h>//sizeof 연산자를 이용해서 2차원 배열의 크기를 계산해보자
+
+int main (void)
+{
+	int arr1[3][4];
+	int arr2[7][9];
+
+	printf("세로3, 가로4: %d\n",sizeof(arr1));
+	printf("세로7, 가로9: %d\n",sizeof(arr2));
+	
+	return 0;
+}
+
+
+// 2차원 배열의 크기는 세로x가로x자료형(int,char,etc...)
+// 이렇게 나타낸다
