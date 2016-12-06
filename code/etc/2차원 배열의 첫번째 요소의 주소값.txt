@@ -1,0 +1,34 @@
+#include<stdio.h>
+
+int main (void)
+{
+	int arr2d[3][3];
+	printf("%p\n",arr2d);
+	printf("%p\n",arr2d[0]);
+	printf("%p\n",&arr2d[0][0]);
+	
+        //위 3줄은 메모리 주소값이 같다
+	
+        printf("%p\n",arr2d[1]);
+	printf("%p\n",&arr2d[1][0]);
+
+	//위 2줄은 메모리 주소값이 같다.
+
+	printf("%p\n",arr2d[2]);
+	printf("%p\n",&arr2d[2][0]);
+
+	//위 2줄은 메모리 주소값이 같다.
+
+	printf("sizeof(arr2d):%d\n",sizeof(arr2d));
+	printf("sizeof(arr2d[0]):%d\n",sizeof(arr2d[0]));
+	printf("sizeof(arr2d[1]):%d\n",sizeof(arr2d[1]));
+	printf("sizeof(arr2d[2]):%d\n",sizeof(arr2d[2]));
+
+	return 0;
+}
+/* 배열이름 arr2d를 대상으로 sizeof 연산을 하는 경우 배열 전체 크기를 반환한다.
+   arr2d[0],arr2d[1],arr2d[2]를 대상으로 sizeof 연산을 하는 경우 각 행의 크기를 반환한다 */
+
+/* arr2d는 첫 번째 요소를 가리키면서 배열 전체를 의미한다 . 하지만, arr2d[0]는 첫번째 요소를 가리키되 1행만을 의미한다.
+   그래서 sizeof 연산의 결과가 다른 것이다. 즉, arr2d와 arr2d[0]는 서로 다르다.!*/
+
