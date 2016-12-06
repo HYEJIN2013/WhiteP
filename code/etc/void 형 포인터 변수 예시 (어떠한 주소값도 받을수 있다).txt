@@ -1,0 +1,21 @@
+/* void 포인터 변수에는 어떠한 변수의 주소 값이든 담을수 있다. 
+   함수의 주소 값도 담을 수 있다.*/
+#include <stdio.h>
+
+void SoSimpleFunc(void)
+{
+	printf("I'm so simple");
+}
+
+int main (void)
+{
+	int num=20;
+	void *ptr;
+
+	ptr=&num; // 변수 num의 주소값을 포인터변수 ptr에 저장
+	printf("%p\n",ptr);
+
+	ptr=SoSimpleFunc; // 함수 SoSimpleFunc의 주소값을 포인터변수 ptr에 저장
+	printf("%p\n",ptr);
+	return 0;
+}
