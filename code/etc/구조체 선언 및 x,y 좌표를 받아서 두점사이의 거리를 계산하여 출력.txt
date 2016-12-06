@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+
+struct point // 구조체 point  정의
+{
+	int xpos;
+	int ypos;
+};
+
+int main (void)
+{ 
+	struct point pos1, pos2;  //12행 //point 라는 이름의 구조체를 선언! 그후 pos1,pos2라는 이름의 변수를 선언 
+	double distance;
+
+	fputs("point1 pos: ", stdout);   // fputs 가 뭔지 아직 모르겠다 , stdout 도 뭔지 모르겠다 
+	scanf("%d %d", &pos1.xpos, &pos1.ypos);   //16행
+
+	fputs("point2 pos: ", stdout);
+	scanf("%d %d", &pos2.xpos, &pos2.ypos);  //19행
+
+	/* 두 점간의 거리 계산 공식 */
+	distance=sqrt((double)((pos1.xpos-pos2.xpos)*(pos1.xpos-pos2.xpos)+(pos1.ypos-pos2.ypos)*(pos1.ypos-pos2.ypos))); //22행
+
+	printf("두 점의 거리는 %g 입니다. \n",distance);
+	return 0;
+}
+
+//12행 : 두 개의 구조체 변수를 선언하고 있다.
+//16,19행 : 이 두 문장에서 보이듯이 구조체의 멤버를 대상으로도 & 연산을 할 수가 있다.
+// 22행 : 여기서 호출한 sqrt 함수는 전달된 인자의 제곱근(square root)을 계산해서 반환한다.
