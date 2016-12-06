@@ -1,0 +1,242 @@
+[
+  {
+    "class" : "View",
+    "attributes" : {
+      "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
+      "enabled" : true,
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "flex" : ""
+    },
+    "frame" : "{{0, 0}, {1024, 768}}",
+    "selected" : false,
+    "nodes" : [
+      {
+        "class" : "Label",
+        "attributes" : {
+          "font_size" : 26,
+          "text" : "You",
+          "font_name" : "AmericanTypewriter",
+          "name" : "user_label",
+          "class" : "Label",
+          "alignment" : "center",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "622139D8-0D35-458C-94D9-D8148D4E0837"
+        },
+        "frame" : "{{441, 593}, {134, 41}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "user_card_1_imageview",
+          "uuid" : "A21A9590-B45D-401B-A5ED-428C0B1F5C17",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{304, 400}, {106, 163}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "user_card_2_imageview",
+          "uuid" : "3018A873-C95B-4ED0-AE1A-1BB0BFDC22FC",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{458, 400}, {108, 165}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "user_card_3_imageview",
+          "uuid" : "09819F4A-4933-4DD7-A4A2-9594771C4480",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{607, 400}, {108, 171}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Label",
+        "attributes" : {
+          "font_size" : 24,
+          "text" : "Dealer",
+          "font_name" : "AmericanTypewriter",
+          "name" : "dealer_label",
+          "class" : "Label",
+          "alignment" : "center",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "C799586D-3740-4B09-A881-7EAD50C7EF7A"
+        },
+        "frame" : "{{441, 71}, {134, 46}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Button",
+        "attributes" : {
+          "font_size" : 26,
+          "uuid" : "D7967B6D-E9E3-4771-9B81-CD52B0EFDBCD",
+          "name" : "play_button",
+          "action" : "play_button_touch_up_inside",
+          "class" : "Button",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "title" : "Play"
+        },
+        "frame" : "{{441, 14}, {134, 44}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "dealer_card_1_imageview",
+          "uuid" : "B2E77706-22EB-46ED-84C6-97E55BBCECCA",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{304, 149}, {106, 163}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "dealer_card_2_imageview",
+          "uuid" : "9CBCDFAD-BE86-452D-9A36-C4BFC0F68368",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{458, 149}, {106, 163}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "ImageView",
+        "attributes" : {
+          "class" : "ImageView",
+          "name" : "dealer_card_3_imageview",
+          "uuid" : "40DA0385-A5A5-4EBF-9405-0D8BC4DD346F",
+          "frame" : "{{462, 334}, {100, 100}}"
+        },
+        "frame" : "{{609, 149}, {106, 163}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Button",
+        "attributes" : {
+          "font_size" : 26,
+          "title" : "Add",
+          "name" : "add_button",
+          "action" : "add_button_touch_up_inside",
+          "class" : "Button",
+          "frame" : "{{472, 368}, {80, 32}}",
+          "uuid" : "8E1E1020-7260-4E9B-8948-CF80C323127E"
+        },
+        "frame" : "{{745, 465}, {80, 32}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Label",
+        "attributes" : {
+          "font_size" : 20,
+          "text" : "",
+          "font_name" : "<System>",
+          "name" : "answer_label",
+          "class" : "Label",
+          "alignment" : "center",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "56275E51-E7EF-411A-B671-4639236E480D"
+        },
+        "frame" : "{{374, 328}, {256, 56}}",
+        "selected" : true,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Button",
+        "attributes" : {
+          "font_size" : 26,
+          "title" : "Reveal",
+          "name" : "reveal_button",
+          "action" : "reveal_button_touch_up_inside",
+          "class" : "Button",
+          "alpha" : 1,
+          "frame" : "{{472, 368}, {80, 32}}",
+          "uuid" : "11618770-D6CA-4FD6-8A8C-27C0CD15B434"
+        },
+        "frame" : "{{465, 650}, {99, 32}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Label",
+        "attributes" : {
+          "font_size" : 18,
+          "text" : "",
+          "font_name" : "<System>",
+          "name" : "user_total_label",
+          "class" : "Label",
+          "alignment" : "left",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "91F8B02C-54A5-4D0A-8924-785B82D495E1"
+        },
+        "frame" : "{{136, 437}, {150, 94}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      },
+      {
+        "class" : "Label",
+        "attributes" : {
+          "font_size" : 18,
+          "text" : "",
+          "font_name" : "<System>",
+          "name" : "opponent_total_label",
+          "class" : "Label",
+          "alignment" : "left",
+          "frame" : "{{437, 368}, {150, 32}}",
+          "uuid" : "D1FD1C9C-240C-4B47-A55F-4B71E8665343"
+        },
+        "frame" : "{{126, 181}, {160, 94}}",
+        "selected" : false,
+        "nodes" : [
+
+        ]
+      }
+    ]
+  }
+]
