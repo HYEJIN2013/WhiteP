@@ -1,0 +1,41 @@
+#include<stdio.h>// 10개의 정수를 입력 받아서 홀수는 작은수부터 짝수는 큰수부터 출력 
+void F (int *a);
+void F1 (int *a);
+int main (void)
+{
+	int arr[10];
+	int i;
+	int *b = arr;
+	printf("10개의 정수를 입력:");
+	printf("\n");
+	for(i=0;i<10;i++)
+	{
+		printf("입력:");
+		scanf("%d",&arr[i]);
+	}
+	printf("\n");
+	F(b);
+	F1(b);
+	
+	printf("\n");
+	return 0;
+}
+void F (int *a)//입력받은 정수의 홀수들 순서데로 출력
+{
+	int i;
+	
+	for(i=0;i<10;i++)
+	{
+		if(a[i]%2 !=0)
+		
+				printf("%d ",a[i]);
+		
+	}
+}
+void F1(int *a)
+{
+	int i;
+	for(i=9;i>=0;i--)
+		if(a[i]%2==0)
+			printf("%d ",a[i]);
+}
