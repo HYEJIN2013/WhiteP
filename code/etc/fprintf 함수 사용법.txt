@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+int main ()
+{
+	char name[10];
+	char sex;
+	int age;
+
+	FILE*fp=fopen("C:\\파일입출력\\friend.txt","wt"); //출력스트림 friend 라는 파일명으로 txt 파일이 생성된다   // 9행
+	int i;
+
+	for(i=0;i<3;i++)
+	{
+		printf("이름 성별 나이 순 입력: ");
+		scanf("%s %c %d",name,&sex,&age);                  //15행
+		getchar(); // 버퍼에 남아있는 \n 의 소멸을 위해서  //16행
+		fprintf(fp,"%s %c %d",name,sex,age);               // 17행
+	}
+	fclose(fp);
+	return 0;
+}
+
+
+
+/* 
+6행 : fprintf 함수는 printf 함수와 마찬가지로 문자열을 구성하여 출력하는 함수이다.
+      따라서 텍스트 모드로 파일을 개방해야 한다.
+
+16행 : scanf 함수는 엔터 키의 입력을 읽어 들이지 앟고 입력버퍼에 남겨둔다.
+       따라서 입력버퍼에 남아있는 엔터 키의 소멸을 위해서 getchar 함수를 호출하였다.
+
+17행 : 15행을 통해서 입력 받은 데이터로 문자열을 구성해서 fp가 지칭하는 파일에 출력하고 있다.
+*/
