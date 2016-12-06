@@ -1,0 +1,29 @@
+de<stdio.h>
+
+struct point 
+{
+	int xpos;
+	int ypos;
+};
+
+struct person
+{
+	char name[20];
+	char phonenum[20];
+	int age;
+};
+
+int main (void)
+{
+	struct point pos={10,20};
+	struct person man = {"김주환","010-6246-7668",25};
+	printf("%d %d\n",pos.xpos,pos.ypos);
+	printf("%s %s %d\n",man.name,man.phonenum,man.age);
+	return 0;
+}
+
+/* 구조체 선언과 동시에 초기화하기
+   기본적으로 초기화 하는방식은 배열을 초기화 하는 방식과 동일 하다
+   멤버의 순서대로 초기화할 대상을 나열하면 된다.*/ 
+
+	
