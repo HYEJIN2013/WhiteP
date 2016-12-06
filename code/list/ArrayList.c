@@ -9,7 +9,7 @@ void ListInit(List * plist)
 
 void LInsert(List * plist, LData data)
 {
-	if(plist->numOfData >= LIST_LEN) 
+	if(plist->numOfData > LIST_LEN) 
 	{
 		puts("저장이 불가능합니다.");
 		return;
