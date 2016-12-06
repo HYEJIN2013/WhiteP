@@ -1,0 +1,19 @@
+/* 두개의 주사위를 던졌을때 결과를 예측하는 프로그램 만들기, 결과는 예측불가여야한다.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int main (void)
+{
+	int i;
+	srand((int)time(NULL));
+	
+	for(i=0;i<2;i++)
+		printf("주사위 %d의 값  : %d \n",i+1,(rand()%6+1));
+	return 0;
+}
+
+
+rand()%6+1 을하는 이유는 최솟값이 1로 나오기 때문이다
+rand()%7 로 하면 최솟값이 0이 나올수도 있다.
