@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+
+int main (void)
+{
+	char str1[20] = "1234567890";
+	char str2[20];
+	char str3[5];
+
+	/******case1********/
+	strcpy(str2,str1); // str1에 저장된 문자열을 str2에 복사해라
+	puts(str2);
+
+	/******case2********/
+	strncpy(str3,str1,sizeof(str3)); 
+	puts(str3);
+	/* str3에 복사를 할수는 있지만 순수하게 앞에서 5개의 문자를 복사해서 널문자가 포함이 되지않는다 그래서 오류 발생*/
+
+	/******case3********/
+	strncpy(str3,str1,sizeof(str3)-1); 
+	str3[sizeof(str3)-1]=0;
+	puts(str3);
+	/* strncpy 함수의 세번째 인자로 배열의 실제 길이보다 하나 작은 값을 전달해서 널 문자가 삽입될 공간을 마련해야한다
+	   그리고 배열의 끝에 널 문자를 삽입해야한다 (널문자가 없는것은 문자열이 아니다)*/
+	return 0;
+}
+ㅅ
