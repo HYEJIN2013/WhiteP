@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+int main ()
+{
+
+	/*파일 생성*/
+	FILE * fp = fopen("C:\\파일입출력\\test.txt","wt"); //파일생성 스트림
+	fputs("12345678",fp); //fp파일에 12345678을 넣는다
+	fclose(fp); //스트림 종료
+
+	/*파일 개방*/
+
+	fp=fopen("C:\\파일입출력\\test.txt","rt"); //파일 입력 스트림
+
+	/*SEEK_END test*/
+	fseek(fp,-2,SEEK_END); //offset 자리에 -2라는 음의정수가 나왔음으로 SEEK_END 에 의해 파일의 끝에서 부터 파일의 시작점으로 2칸이동
+	putchar(fgetc(fp));
+
+	/*SEEK_SET test*/
+	fseek(fp,2,SEEK_SET); //offset 자리에 2라는 양의정수가 나왔음으로 시작점인 1 에서 EOF 방향으로 2칸이동
+	putchar(fgetc(fp));    // 윗줄에서 실행한 fseek 함수의 결과를 출력한다.
+
+	/*SEEK_CUR tese*/
+	fseek(fp,2,SEEK_CUR); //offset 자리에 2라는 양의정수가 나왔으며, SEEK_CUR에 의해서 현재위치에서 EOF방향으로 2칸이동
+	putchar(fgetc(fp));
+
+	fclose(fp); //스트림 종료
+	return 0;
+}
+
