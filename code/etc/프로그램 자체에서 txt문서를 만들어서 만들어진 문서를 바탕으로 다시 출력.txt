@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+int main(void)
+{
+	FILE * src = fopen("C:\\파일입출력\\src.txt","rt"); //파일 입력스트림
+	FILE * des = fopen("C:\\파일입출력\\dst.txt","wt"); //파일 출력스트림
+	int ch;
+
+	if(src==NULL || des ==NULL)
+	{
+		puts("파일 오픈 실패");
+		return -1;
+	}
+
+	while((ch=fgetc(src))!=EOF)
+		fputc(ch,des);  //여기서 des 는 위에서와 마찬가지로 출력스트림 (쉽게말해서 src에 있는 문자를 옮길 텍스트 의 이름)
+
+	if(feof(src)!=0)
+		puts("파일복사 완ㄹ!");
+	else
+		puts("파일복사 실패!");
+
+	fclose(src);
+	fclose(des);
+	return 0;
+}
