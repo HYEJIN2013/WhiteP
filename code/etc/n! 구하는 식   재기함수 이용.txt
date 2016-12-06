@@ -1,0 +1,17 @@
+#include <stdio.h>//n! 구하기 재기함수 이용;;
+
+int fac (int num)
+{
+	if (num==0)
+		return 1;
+	else 
+		return num*fac(num-1);
+}
+int main (void)
+{
+	int num;
+	printf("정수 입력:");
+	scanf("%d",&num);
+	printf("%d ! 은 %d 이다\n",num,fac(num));
+	return 0;
+}
