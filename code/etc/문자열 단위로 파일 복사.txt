@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main ()
+{
+	FILE * src=fopen("C:\\파일입출력\\src.txt","rt"); //입력 스트림
+	FILE * des=fopen("C:\\파일입출력\\des.txt","wt"); //출력 스트림
+	char str[100]; //문자열을 받을 배열
+
+	if(src==NULL||des==NULL)
+	{
+		puts("파일 오픈 실 패!");
+		return -1; //비정상적 종료를 나타내기 위해 -1을 반환한다고하는데 아직 자세하게 모르겠음
+	}
+
+	while(fgets(str,sizeof(str),src)!=NULL) // 문자열을 입력받기위한 조건식 널문자가 나오기 전까지의 문자열을 입력받는다
+		fputs(str,des); //입력받은 문자열을 des.txt 파일에 출력
+
+	if(feof(src)!=0)//feof 함수는 파일 끝에 도달할경우 0이아닌 값을 반환하기 때문에 ! 연산을 통해 역을 취해준다
+		puts("파일복사 완료!");
+	else
+		puts("파일 복사실패!");
+
+	fclose(src);
+	fclose(des);//열었던 입력스트림 과 출력 스트림을 모두 닫아준다 
+
+	return 0;
+}
