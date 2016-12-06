@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+typedef struct point
+{
+	int xpos;
+	int ypos;
+}point; //typedef 선언을해서 struct point 를 point 로 묶었다.
+
+void F (point pos) //위 typedef 선언에서 나온 point 가 저 point 이다 pos 는 struct 변수이름
+{
+	printf("[%d %d]\n",pos.xpos,pos.ypos);
+}
+
+point F1 (void)
+{
+	point cen;//위 함수에서는 인자로 변수이름을 pos 로 여기서는 cen 으로 받고있다
+	printf("Input curren pos: ");
+	scanf("%d %d",&cen.xpos,&cen.ypos);//scanf 함수를 사용해서 cen 안에있는 멤버 xpos 와 ypos 값을 입력한다
+	return cen; // 구조체도 반환시킬수가 있다 .
+}
+
+int main (void)
+{
+	point curpos = F1();
+	F(curpos);
+	return 0;
+}
+
+/* F1 함수는 구조체 멤버 xpos,ypos 의 값을 입력 시켜주는 것이고 F 함수는 입력한 값을 출력 시키는 구조이다*/
