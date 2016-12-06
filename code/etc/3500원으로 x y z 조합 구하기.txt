@@ -1,0 +1,61 @@
+#include <stdio.h>//크림빵 500원(x) 새우깡 700원(y) 콜라 400원 (z) 3500원으로 x,y,z 의 조합 구하기
+int main (void)
+{
+	int num=3500;
+	int x,y,z;
+	printf("내가 소유하고 있는 금액 %d\n",num);
+
+		for(x=1;x*500<num;x++)
+		{
+			y=1;
+			for(y=1;y*700<num;y++)
+			{
+				z=1;
+				for(z=1;z*400<num;z++)
+				{
+					if(num==(x*500)+(y*700)+(z*400))
+						printf("%d,%d,%d\n",x,y,z);
+				}
+			}
+		}
+		
+
+  
+	return 0;
+}
+
+
+
+
+
+
+
+------------------------------------------------------수중에 얼마있는지 변수 잡고 
+
+#include<stdio.h>
+int main (void)
+{
+	int m;
+	int a,b,c;
+	printf("가지고 있는돈:");
+	scanf("%d",&m);
+	printf("크림빵이 500원 새우깡이 700원 콜라가 400원 일때 몇개씩 살수있나?\n");
+	
+	for(a=1;a*500<m;a++)
+	{
+		for(b=1;b*700<m;b++)
+		{
+			for(c=1;c*400<m;c++)
+			{
+				if((a*500)+(b*700)+(c*400) == m)
+				{
+					printf("크림빵 : %d 새우깡 : %d 콜라 : %d \n",a,b,c);
+				}
+			}
+			c=1;
+		}
+		b=1;
+	}
+	return 0;
+}
+
