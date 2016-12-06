@@ -1,0 +1,26 @@
+#include<stdio.h>//char 형 배열을 선언, Goodtime 으로 초기화 해서 출력하기
+/*int main (void)
+{
+	int i;
+	char Goodtime [8] = {'G','o','o','d','t','i','m','e'};
+	for(i=0;i<8;i++)
+	{
+		printf("%c",Goodtime[i]);
+	}
+	printf("\n");
+	return 0;
+}*/
+
+int main (void)
+{
+	char G[] = {'G','o','o','d','t','i','m','e'};
+	int F = sizeof(G)/sizeof(char);
+	int i;
+	
+	for(i=0;i<F;i++)
+	{
+		printf("%c",G[i]);
+	}
+	printf("\n");
+	return 0;
+}
