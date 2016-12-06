@@ -1,0 +1,33 @@
+/*적당한 길이의 문자열을 입력 받아서 그 안에 존재하는 숫자의 총합을 계산해서 출력하는 프로그램을 작성해보자.*/
+/* 문자열을 정수로 바꾸는 변환 함수 atoi*/
+
+#include<stdio.h>
+#include<string.h>
+
+int F (char c)
+{
+	int diff=1-'1'; //모든숫자 x 와 문자x 의 차는 동일하다.
+	return c+diff;
+}
+//
+int main (void)
+{
+	char str[50];
+	int len,i;
+	int sum=0;
+
+	printf("문자열 입력:");
+	fgets(str,sizeof(str),stdin);
+	len=strlen(str);
+
+	for(i=0;i<len;i++)
+	{
+		if('1'<=str[i] && str[i]<='9')
+			sum+=F(str[i]);
+
+	}
+	printf("총합 : %d\n",sum);
+	return 0;
+}
+
+/* 대충은 이해가는데 F 함수가 이해가 안된다.... 내머리는 빠가 ㅅㅂ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ*/
