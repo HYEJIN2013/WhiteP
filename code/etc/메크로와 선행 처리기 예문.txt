@@ -1,0 +1,13 @@
+#include<stdio.h>
+
+#define name "홍길동" // define 이란 매크로(name)을 매크로 몸체 (홍길동) 로 치환하라는 지시자이다.
+#define AGE 24 
+#define PRINT_ADDR puts("주소: 서울시 송파구\n");
+
+int main ()
+{
+	printf("이름 : %s \n",name);
+	printf("나이 : %d \n",AGE);
+	PRINT_ADDR;
+	return 0;
+}
