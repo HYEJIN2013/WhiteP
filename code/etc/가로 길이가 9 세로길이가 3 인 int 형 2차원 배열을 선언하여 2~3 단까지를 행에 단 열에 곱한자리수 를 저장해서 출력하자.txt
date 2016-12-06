@@ -1,0 +1,21 @@
+#include<stdio.h>//가로가 9 세로가 3 인 int형 2차원 배열을 선언하여 구구단 2,3,4 단을 저장하자 (1행에 2단 3행에 4단)
+
+int main (void)
+{
+	int G [3][9];
+	int i,j;
+
+	/* 구구단  저장 */
+	for (i=0;i<3;i++)
+		for(j=0;j<9;j++)
+		G[i][j] = (i+2)*(j+1);
+
+	/* 구구단 출력 */
+	for(i=0;i<3;i++)
+	{
+		for(j=0;j<9;j++)
+			printf("%d " ,G[i][j]);
+		printf("\n");
+	}
+	return 0;
+}
