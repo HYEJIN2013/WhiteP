@@ -1,0 +1,25 @@
+/* 여러가지 리터럴 상수 */
+
+
+#include "stdio.h"
+
+int main (void)
+{
+	char grade = '\x41'; //ASCII 코드가 ox41인 'A'문 자로초기화 된다.
+	int data = 0x7b; //16진수로 표기한 정수형 상수
+	unsigned int age =75U; //unsigned형 정수형 상수 접미사로 u(U) 를 붙였다.
+	long filesize =1234567L; //long형 정수형 상수 접미사로 l(L) 을 붙였다.
+	double area = 123.25; //double형 실수형 상수로 접미사로 아무것도 붙지 않았다.
+	double taxRate =25e-2; //지수형 표기 방식으로 나타내고있다.
+	float temperature = 17.5F; //float형 실수형 상수로 접미사로 f(F)가 붙었다.
+
+	printf("grade = %c\n",grade);
+	printf("data = %d, %o,%x\n",data,data,data); //변수 선언시 data를 16진수로 나타냈지만 형식 문자열에따라서 10,8,16진수로 나타내진다.
+	printf("age = %u\n",age); // 변수 선언시 unsigned int 형으로 선언해서 형식 문자열을 %u 로 나타냈다.
+	printf("filsize = %d\n",filesize); // 변수 선언시 long형으로 초기화 했기에 %d를 이용해서 출력
+	printf("area = %f,%e,%g\n",area,area,area); // %e 는 실수를 지수 표기 방식으로 출력하라는 의미, %g는 실수르 부동소수점 표기 방식과 지수 표기 방식중 간단한 방식으로 출력하라는 의미
+	printf("taxRate =%f\n",taxRate); //%f는 부동소수점 표기 방식으로 나타나게 된다.
+	printf("temperature = %f\n",temperature);
+
+	return 0;
+}
