@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+
+int main (void)
+{
+	char str1[20];
+	char str2[20];
+	printf("문자열 입력 1: ");
+	scanf("%s",str1);
+	printf("문자열 입력 2: ");
+	scanf("%s",str2);
+
+	if(!strcmp(str1,str2))           //13행
+	{
+		puts("동일");
+	}
+	else
+	{
+		puts("안동일");
+
+		if(!strncmp(str1,str2,3))         //21행
+			puts("앞에 3글자는 동일");
+	}
+	return 0;
+}
+
+
+/* 13행 : str1과 str2가 동일하면 거짓을 의미하는 0이 반환 된다. 그런데 이 반환 값을 대상으로 ! 연산을 하였으니
+          거짓은 참으로 바뀐다. 즉 이 if 문은 str1과 str2의문자열이 완벽히 동일할때 참이 된다.
+   
+   21행 : 이 문장은 두 문자열이 일치하지 않는 경우에 한해서 실행 된다. 그리고 strncmp 함수의 세번째 인자로 3이 
+          전달되었으니, 앞의 세 문자가 동일한 경우에 한해서 if문이 참이 되어 22행을 실행하게 된다.*/
