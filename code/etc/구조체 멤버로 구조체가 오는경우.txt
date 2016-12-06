@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+typedef struct point
+{
+	int xpos;
+	int ypos;
+}point;
+
+typedef struct circle
+{
+	point cen; // 위에선언된 point 구조체가 circle 구조체의 멤버로 왔다.
+	double rad;
+}circle;
+
+void F (circle * cptr)//인자를 포인터로 받고 있다. 주어진값을 바꿀생각으로 보인다
+{
+	printf("[%d %d]\n",(cptr->cen).xpos,cptr->cen.ypos);//cptr 구조체 변수 안에 있는 멤버 cen 의 멤버 xpos 값을 받는 코드
+	printf("radius :%g\n\n",cptr->rad);
+}
+
+int main (void)
+{
+	circle c1={{1,2},3.5};
+	circle c2={2,4}; // 소괄호를 치지 않더라도 순서데로 입력하면 circle 멤버 cen 과 rad 의 값을 입력할수 있다.
+	F(&c1);
+	F(&c2);
+	return 0;
+}
+
+/* 구조체 멤버로 구조체가 오는 경우 ex) */
