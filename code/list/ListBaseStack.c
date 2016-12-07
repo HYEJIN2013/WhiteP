@@ -30,7 +30,8 @@ Data SPop(Stack * pstack)
 	Data rdata;
 	Node * rnode;
 
-	if(SIsEmpty(pstack)) {
+	if(SIsEmpty(pstack))
+	{
 		printf("Stack Memory Error!");
 		exit(-1);
 	}
@@ -46,7 +47,8 @@ Data SPop(Stack * pstack)
 
 Data SPeek(Stack * pstack)
 {
-	if(SIsEmpty(pstack)) {
+	if(SIsEmpty(pstack))
+	{
 		printf("Stack Memory Error!");
 		exit(-1);
 	}
