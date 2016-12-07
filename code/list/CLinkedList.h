@@ -1,12 +1,10 @@
 #ifndef __C_LINKED_LIST_H__
 #define __C_LINKED_LIST_H__
 
-#include "Employee.h"
-
 #define TRUE	1
 #define FALSE	0
 
-typedef Employee * Data;
+typedef int Data;
 
 typedef struct _node
 {
