@@ -68,7 +68,7 @@ void ShowGraphEdgeInfo(ALGraph * pg)
 
 int WhoIsPrecede(int data1, int data2)
 {
-	if(data1 < data2)
+	if(data1 > data2)
 		return 0;
 	else
 		return 1;
