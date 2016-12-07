@@ -1,0 +1,205 @@
+//이진 탐색 트리 삽입 삭제 탐색 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct treenode {
+	char key;
+	struct treenode* left;
+	struct treenode* right;
+}tree;
+
+//이진 탐색 트리에서 키값이 x 인 노드의 위치를 탐색하는 연산
+
+tree *search(tree *root, char x)
+{
+	tree *p;
+	p = root;
+	while (p != NULL)
+	{
+		if (x < p->key)
+			p = p->left;
+		else if (x == p->key)
+			return p;
+		else
+			p = p->right;
+	}
+	printf("찾는 키가 없음 \n");
+	return p;
+}
+
+//포인터 p가 가리키는 노드와 비교하여 노드 x 를 삽입하는 연산
+
+tree *insert(tree *p, char x)
+{
+	tree *a;
+	if (p == NULL)
+	{
+		a = (tree*)malloc(sizeof(tree));
+		a->key = x;
+		a->left = NULL;
+		a->right = NULL;
+		return a;
+	}
+	else if (x < p->key)
+		p->left = insert(p->left, x);
+	else if (x > p->key)
+		p->right = insert(p->right, x);
+	else
+		printf("이미 있음\n");
+	return p;
+}
+
+//루트 노드부터 탐색하여 키값과 같은 노드를 찾아 삭제하는 연산
+
+void deletenode(tree *root, char x)
+{
+	tree *parent, *p, *succ, *succ_parent;
+	tree *child;
+
+	parent = NULL;
+	p = root;
+	while ((p != NULL) && (p->key != x))//삭제할 노드의 위치 탐색
+	{
+		parent = p;
+		if (x < p->key)
+			p = p->left;
+		else
+			p = p->right;
+	}
+
+	//삭제할 노드가 없는경우
+	if (p == NULL)
+	{
+		printf("삭제할 키값이 없음\n");
+		return;
+	}
+	//삭제할 노드가 단말 노드인경우
+	if ((p->left == NULL) && (p->right == NULL))
+	{
+		if (parent != NULL)
+		{
+			if (parent->left == p)
+				parent->left == NULL;
+			else
+				parent->right == NULL;
+		}
+		else
+			root = NULL; // 삭제할 노드 p 가 루트 인경우
+	}
+	//삭제할 노드가 자식노드를 하나 가진 경우
+	else if ((p->left == NULL) || (p->right == NULL))
+	{
+		if (p->left != NULL)
+			child = p->left;
+		else
+			child = p->right;
+		if (parent != NULL)
+		{
+			if (parent->left == p)
+				parent->left = child;
+			else
+				parent->right = child;
+
+		}
+		else
+			root = child; // 만약 삭제할 노드 p가 루튼인경우
+	}
+	//삭제할 노드가 자식노드를 두개 가진 경우
+	else
+	{
+		succ_parent = p; // 삭제 시킬 노드
+		succ = p->left; // 삭제 시킬노드의 왼쪽 서브 트리
+		while (succ->right != NULL) //왼쪽 서브트리에서 후계자 찾기
+		{
+			succ_parent = succ;
+			succ = succ->right;
+		}// 마지막 succ 값 왼쪽 서브트리에서 가장 큰값 찾기
+		if (succ_parent->left == succ) // 왼쪽서브트리가 왼쪽 편향 트리인경우
+			succ_parent->left = succ->left;
+		else
+			succ_parent->right = succ->left;
+		p->key = succ->key;
+		p = succ;
+	}
+	free(p);
+}
+
+//이진 탐색 트릴르 중위 순회하면서 출력하는 연산
+void displayInorder(tree *root)
+{
+	if (root)
+	{
+		displayInorder(root->left);
+		printf("%c_", root->key);
+		displayInorder(root->right);
+	}
+}
+
+void menu()
+{
+	printf("-------------------------------\n");
+	printf("트리 출력\n");
+	printf("문자 삽입\n");
+	printf("문자 삭제\n");
+	printf("문자 검색\n");
+	printf("종료\n");
+	printf("-------------------------------\n");
+	printf("메뉴입력>>\n");
+}
+
+int main()
+{
+	tree *root = NULL;
+	tree *x = NULL;
+	char c, key;
+
+	root = insert(root, 'g');
+	insert(root, 'i');
+	insert(root, 'h');
+	insert(root, 'd');
+	insert(root, 'b');
+	insert(root, 'm');
+	insert(root, 'n');
+	insert(root, 'a');
+	insert(root, 'j');
+	insert(root, 'e');
+	
+	while (1)
+	{
+		menu();
+		scanf("%c", &c);
+
+		switch (c - '0')
+		{
+		case 1:
+			printf("이진 트리 출력\n");
+			displayInorder(root);
+			printf("\n");
+			break;
+		case 2:
+			printf("문자 입력:");
+			scanf("%c", &key);
+			insert(root, key);
+			break;
+		case 3:
+			printf("삭제할 문자 입력 :");
+			scanf("%c", &key);
+			deletenode(root, key);
+			break;
+		case 4:
+			printf("찾을 문자 입력 :");
+			scanf("%c", &key);
+			x = search(root, key);
+			if (x != NULL)
+				printf("%c 찾음\n", x->key);
+			else
+				printf("못찾음\n");
+			break;
+		case 5:
+			return 0;
+
+		}
+	}
+	system("pause");
+}
