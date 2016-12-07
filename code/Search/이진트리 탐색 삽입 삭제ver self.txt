@@ -1,0 +1,116 @@
+//이진 탐색 트리 탐색 삽입 삭제
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct no
+{
+	char key;
+	struct no *left;
+	struct no *right;
+}t;
+
+t *search(t* root, char x)
+{
+	t *p;
+	p = root;
+	while (p != NULL)
+	{
+		if (x < p->key)
+			p = p->left;
+		else if (x == p->key)
+			return p;
+		else if (x > p->key)
+			p = p->right;
+		else
+			printf("찾는 키 값 없음\n");
+	}
+}
+
+t *insertnode(t *root, char x)
+{
+	t* p;
+	if (root == NULL)
+	{
+		p = (t*)malloc(sizeof(t));
+		p->key = x;
+		p->left = NULL;
+		p->right = NULL;
+		return p;
+	}
+	else if (x < p->key)
+		p->left = insertnode(p->left, x);
+	else if (x > p->key)
+		p->right = insertnode(p->right, x);
+	else
+		printf("같인 키가 있음 \n");
+	return p;
+}
+
+void deletenode(t *root, char x)
+{
+	t *parent, *p, *succ_parent, *succ, *child;
+	parent = NULL;
+	p = root;
+	while ((p != NULL) && (p->key != x))
+	{
+		parent = p;
+		if (x < p->key)
+			p = p->left;
+		else
+			p = p->right;
+	}
+
+	if (p == NULL)
+	{
+		printf("삭제시킬 노드없음 \n");
+			return;
+	}
+	if ((p->left == NULL) && (p->right == NULL))
+	{
+		if (parent != NULL)
+		{
+			if (parent->left == p)
+				parent->left = NULL;
+			else
+				parent->right = NULL;
+		}
+		else
+			root = NULL;
+	}
+	else if ((p->left == NULL) || (p->right == NULL))
+	{
+		if (p->left != NULL)
+			child = p->left;
+		else
+			child = p->right;
+		if (parent != NULL)
+		{
+			if (parent->left == p)
+				parent->left = child;
+			else
+				parent->right = child;
+		}
+		else
+			root = child;
+	}
+	else
+	{
+		succ_parent = p;
+		succ = p->left;
+		while (succ->right != NULL)
+		{
+			succ_parent = succ;
+			succ = succ->right;
+		}
+		if (succ_parent->left == succ)
+			succ_parent->left = succ->left;
+		else
+			succ_parent->right = succ->left;
+		p->key = succ->key;
+
+		p = succ;
+	}
+	free(p);
+
+}
