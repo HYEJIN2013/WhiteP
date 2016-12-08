@@ -1,21 +1,24 @@
 package main;
 
-import main.Server;
+import main.Client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class MsgSender extends Thread{
-	Server se = new Server();
+	Client c = new Client();
 	ServerSocket ss = null;
 	Socket s = null;
 	OutputStream os = null;
 	DataOutputStream dos = null;
+	
+	PrintStream output;
 	
 	InputStream is = null;
 	DataInputStream dis = null;
@@ -28,13 +31,11 @@ public class MsgSender extends Thread{
 	public void run()
 	{
 		try {
-			s = se.s;
-			os = s.getOutputStream();	//What we send
-			dos = new DataOutputStream(os);    //What we use to send the output data(os)
-			dos.writeUTF("You have connected to the main server");
+			s=c.s;
+			output = new PrintStream(s.getOutputStream());
+			output.println(c.msg.getText());
+			c.log.setText(c.log.getText()+" Me: "+c.msg.getText());
+			c.msg.setText("");
 		} catch (IOException e) {e.printStackTrace();}
-		
-		
 	}
-	
 }
