@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block search %}
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?libraries=places">
+</script>
+
+<div style='height: 100%; overflow: scroll;'>
+<div class='col-md-7' style='margin-top:30px;'>
+	<form action="" method="get" class='form-horizontal' id="search_form">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Location</label>
+			<div class='col-sm-6'>
+				{{ form.location }}
+			</div>
+			<div class='col-sm-4'>
+				{{ form.radius }}
+				</div>
+		</div>	
+		<div class="form-group">
+		<label class="col-sm-2 control-label">Venue Style</label>
+			<div class='col-sm-4'>
+				{{ form.style }}
+			</div>
+
+		<label class="col-sm-2 control-label">Space Size</label>
+			<div class='col-sm-4'>
+				{{ form.size }}
+			</div>
+		</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+        	<button type="Filter Results" class="btn btn-primary" style="width:100%;">Submit</button>
+      	</div>
+			</div>
+	</form><!-- form -->
+
+	<div id="show_results">
+	{% if spaces %}	
+			{% for space in spaces %}
+							<div class="col-md-6 col-md-6">
+								<div class="thumbnail">
+									{% if space.image1 %}
+									<img src="{{ space.image1.url }}" alt="Space Image">
+									{% endif %}
+									<div class="caption">
+										<h3>{{ space.name }}</h3>
+										<p>{{ space.description }}</p>
+										<p><a href="{% url 'space_detail' space.pk %}" class="btn btn-primary" role="button">View Space</a></p>
+									</div>
+								</div>
+							</div>
+			{% endfor %}
+	{% else %}
+			<p>No spaces are available.</p>
+	{% endif %}
+	</div>
+</div>
+<div class="col-md-5 nopadding" style="height: 100%; position: fixed !important; right: 0;">
+ <div id="map-canvas" style="width: 100%; height: 100%; display: block;" class="map-canvas"></div>
+</div>
+</div>
+<script>
+{% block footer %}{% endblock %}
+ var map;
+ var markers = [];
+ var bounds = new google.maps.LatLngBounds();
+ var center = new google.maps.LatLng(51.508515,-0.125487);
+	var markerImage = "{{ STATIC_URL }}images/marker.png";
+	var media_url = "{{ MEDIA_URL }}"
+ function initialize() {
+		var mapOptions = {
+		zoom:13,
+		center: center,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		panControl: false,
+		mapTypeControl: false,
+		zoomControl: true,
+		zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.SMALL
+		}
+		};
+		var map = new google.maps.Map(document.getElementById('map-canvas'),
+						mapOptions);
+		var image = "{{ STATIC_URL }}images/marker.png";
+		//autocomplete
+		var input = document.getElementById('id_location');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		var options = {
+		types: [],
+		componentRestrictions: {country: 'uk'}
+	};
+	
+		
+		// new marker function
+		 function addMarker(latitude, longitude) {
+			center = new google.maps.LatLng(latitude, longitude);
+			var marker = new google.maps.Marker({
+									position: center,
+									map: map,
+									//title: name,
+									icon: markerImage,
+								});
+			 // add marker to markers array
+			 markers.push(marker)
+			 // fit map to bounds
+				bounds = new google.maps.LatLngBounds(null);
+				for (i = 0; i < markers.length; i++)
+					{
+						bounds.extend(markers[i].getPosition());
+					}
+					map.fitBounds(bounds);
+		 };  
+		 var search_location = $('#id_location').val();
+				if ( search_location != '') {
+					fetchResults();
+				}
+			function fetchResults() {
+				var params = $('#search_form').serialize()
+				//remove old markers
+				function removeMarker(marker) {
+					marker.setMap(null);
+					markers = [];
+				}
+				$.each(markers, function(key, val) {
+					removeMarker(val);
+				});
+				 $.ajax({
+						url: {% url 'search_response' %},
+						data: params,
+						type: 'GET',
+						dataType: 'json',
+						success: function(data) {
+							/* var result = $('<div />').append(data).find('#show_results').html();
+						$('#show_results').html(result); */
+						$('#show_results').empty();
+							for (var i = 0; i < data.length; i++) {
+								
+								var coords = data[i]['fields']['location'];
+								var regex = /[+-]?\d+(\.\d+)?/g;
+								var coords = coords.split(";").pop();
+								var coords = coords.match(regex).map(function(v) { return parseFloat(v); });
+								var latitude = coords[1];
+								var longitude = coords[0];
+								console.log(latitude, longitude);
+								//ad markesr
+								addMarker(latitude, longitude);
+								
+								var image = media_url + data[i]['fields']['image1'];
+								var name = data[i]['fields']['name'];
+								var desc = data[i]['fields']['description'];
+								var url = window.location.origin + '/spaces/' + data[i]['pk'];
+								 result ='<div class="col-md-6 col-md-6"><div class="thumbnail"><img src="' + image + '" alt="Space Image"><div class="caption"><h3>' + name + '</h3><p>'+ desc + '</p><p><a href="' + url + '" class="btn btn-primary" role="button">View Space</a></p></div></div></div>'
+								$('#show_results').append(result);
+							
+							}
+					 
+						}
+				}); 
+			} // fetchresults
+			$('#search_form').submit(function() {
+				event.preventDefault();
+				fetchResults();
+			});
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+	
+</script>
+{% endblock %}
