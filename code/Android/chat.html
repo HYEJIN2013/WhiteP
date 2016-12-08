@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chat room</title>
+<style>
+body {
+  font-family: arial, sans-serif;
+	padding: 10px;
+}
+
+#chatlog,#entry {
+	width: 100%;
+	border: solid 4px #000000;
+	font-weight: bold;
+	font-family: monospace;
+	font-size: 30px;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		var ws = new WebSocket('ws://' + document.location.host + '/chat');
+
+		ws.onmessage = function(e) {
+			var chatlog = document.getElementById('chatlog');
+			chatlog.value += e.data + '\n';
+		};
+
+		function send(text) {
+			ws.send(text);
+		}
+
+		var entry = document.getElementById('entry');
+		entry.onkeypress = function(e) {
+			if (entry.value && e.keyCode == 13) {
+				send(entry.value);
+				entry.value = '';
+			}
+		};
+	};
+</script>
+</head>
+<body>
+	<textarea id="chatlog" rows="5"></textarea>
+	<input type="text" id="entry">
+</body>
+</html>
