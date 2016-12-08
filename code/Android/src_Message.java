@@ -12,7 +12,7 @@ public class Message implements Serializable {
 
 	private Date date = new Date();
 	private String from;
-	private String to="all";
+	private String to;
 	private String text;
 	
 	public String toJSON() {
@@ -32,10 +32,10 @@ public class Message implements Serializable {
 				.append("] ").append(text).toString();
 	}
 
-	public int send(String url,String id) throws IOException {
+	public int send(String url) throws IOException {
 		URL obj = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-		conn.setRequestProperty("id",id);
+		
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
 	
