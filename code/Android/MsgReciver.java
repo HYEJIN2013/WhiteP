@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class MsgReciver extends Thread{
 	
-	Server se = new Server();
+	Client c = new Client();
 	InputStream is = null;
 	DataInputStream dis = null;
 	
@@ -20,15 +20,15 @@ public class MsgReciver extends Thread{
 
 	public void run()
 	{
-		//Receive messages from the client
+		//Receive messages from the server
 		try {
-			s = se.s;
+			s=c.s;
 			is = s.getInputStream();
-			dis = new DataInputStream(is);	 //Message from the client
-			String received_data = dis.readUTF(); //data that we receive from the client
-			System.out.println(" Client: "+received_data);
-			se.log.setText(se.log.getText()+" Client: "+received_data);
-			//////	
+			dis = new DataInputStream(is);	 //Message from the server 
+			String received_data = dis.readUTF();  //data that we receive from the server
+			System.out.println(" Server: "+received_data);
+			c.log.setText(c.log.getText()+" Server: "+received_data);
+		
 		} catch (IOException e) {e.printStackTrace();}	 
 	}
 	
