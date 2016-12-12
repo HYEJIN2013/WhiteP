@@ -1,0 +1,18 @@
+{
+  "children": [
+    {
+      "children": [], 
+      "label": "left: 20"
+    }, 
+    {
+      "children": [
+        {
+          "children": [], 
+          "label": "rright: 40"
+        }
+      ], 
+      "label": "right: 30"
+    }
+  ], 
+  "label": "root: 10"
+}
