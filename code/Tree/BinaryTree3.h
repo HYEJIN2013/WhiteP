@@ -26,16 +26,16 @@ void PreorderTraverse(BTreeNode * bt, VisitFuncPtr action);
 void InorderTraverse(BTreeNode * bt, VisitFuncPtr action);
 void PostorderTraverse(BTreeNode * bt, VisitFuncPtr action);
 
-// ¿ŞÂÊ ÀÚ½Ä ³ëµå Á¦°Å, Á¦°ÅµÈ ³ëµåÀÇ ÁÖ¼Ò °ªÀÌ ¹İÈ¯µÈ´Ù.
+// ì™¼ìª½ ìì‹ ë…¸ë“œ ì œê±°, ì œê±°ëœ ë…¸ë“œì˜ ì£¼ì†Œ ê°’ì´ ë°˜í™˜ëœë‹¤.
 BTreeNode * RemoveLeftSubTree(BTreeNode * bt);
 
-// ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå Á¦°Å, Á¦°ÅµÈ ³ëµåÀÇ ÁÖ¼Ò °ªÀÌ ¹İÈ¯µÈ´Ù.
+// ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œ ì œê±°, ì œê±°ëœ ë…¸ë“œì˜ ì£¼ì†Œ ê°’ì´ ë°˜í™˜ëœë‹¤.
 BTreeNode * RemoveRightSubTree(BTreeNode * bt);
 
-// ¸Ş¸ğ¸® ¼Ò¸êÀ» ¼ö¹İÇÏÁö ¾Ê°í mainÀÇ ¿ŞÂÊ ÀÚ½Ä ³ëµå¸¦ º¯°æÇÑ´Ù. 
+// ë©”ëª¨ë¦¬ ì†Œë©¸ì„ ìˆ˜ë°˜í•˜ì§€ ì•Šê³  mainì˜ ì™¼ìª½ ìì‹ ë…¸ë“œë¥¼ ë³€ê²½í•œë‹¤. 
 void ChangeLeftSubTree(BTreeNode * main, BTreeNode * sub);
 
-// ¸Ş¸ğ¸® ¼Ò¸êÀ» ¼ö¹İÇÏÁö ¾Ê°í mainÀÇ ¿À¸¥ÂÊ ÀÚ½Ä ³ëµå¸¦ º¯°æÇÑ´Ù. 
+// ë©”ëª¨ë¦¬ ì†Œë©¸ì„ ìˆ˜ë°˜í•˜ì§€ ì•Šê³  mainì˜ ì˜¤ë¥¸ìª½ ìì‹ ë…¸ë“œë¥¼ ë³€ê²½í•œë‹¤. 
 void ChangeRightSubTree(BTreeNode * main, BTreeNode * sub);
 
 #endif
