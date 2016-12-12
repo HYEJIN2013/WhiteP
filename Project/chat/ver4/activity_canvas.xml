@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/llMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btnRED"
+            android:text="RED"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            />
+
+        <Button
+            android:id="@+id/btnBLUE"
+            android:text="BLUE"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            />
+
+        <Button
+            android:id="@+id/btnGREEN"
+            android:text="GREEN"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            />
+
+        <Button
+            android:id="@+id/btnBLACK"
+            android:text="BLACK"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            />
+
+        <Button
+            android:id="@+id/btnWHITE"
+            android:text="CLEAN"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:onClick="btnClick"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+</LinearLayout>
