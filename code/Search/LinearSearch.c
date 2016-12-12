@@ -6,9 +6,9 @@ int LSearch(int ar[], int len, int target)
 	for(i=0; i<len; i++)
 	{
 		if(ar[i]==target)
-			return i;    // Ã£Àº ´ë»óÀÇ ÀÎµ¦½º °ª ¹İÈ¯
+			return i;    // ì°¾ì€ ëŒ€ìƒì˜ ì¸ë±ìŠ¤ ê°’ ë°˜í™˜
 	}
-	return -1;    // Ã£Áö ¸øÇßÀ½À» ÀÇ¹ÌÇÏ´Â °ª ¹İÈ¯
+	return -1;    // ì°¾ì§€ ëª»í–ˆìŒì„ ì˜ë¯¸í•˜ëŠ” ê°’ ë°˜í™˜
 }
 
 int main(void)
@@ -18,15 +18,15 @@ int main(void)
 
 	idx=LSearch(arr, sizeof(arr)/sizeof(int), 4);
 	if(idx==-1)
-		printf("Å½»ö ½ÇÆĞ \n");
+		printf("íƒìƒ‰ ì‹¤íŒ¨ \n");
 	else
-		printf("Å¸°Ù ÀúÀå ÀÎµ¦½º: %d \n", idx);
+		printf("íƒ€ê²Ÿ ì €ì¥ ì¸ë±ìŠ¤: %d \n", idx);
 
 	idx=LSearch(arr, sizeof(arr)/sizeof(int), 7);
 	if(idx==-1)
-		printf("Å½»ö ½ÇÆĞ \n");
+		printf("íƒìƒ‰ ì‹¤íŒ¨ \n");
 	else
-		printf("Å¸°Ù ÀúÀå ÀÎµ¦½º: %d \n", idx);
+		printf("íƒ€ê²Ÿ ì €ì¥ ì¸ë±ìŠ¤: %d \n", idx);
 
 	return 0;
 }
