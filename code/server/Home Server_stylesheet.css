@@ -1,0 +1,22 @@
+body
+	{
+		margin: 10px;
+		padding: 0px;
+		background: #1B1B1B url(/OtherStuff/images/wall15.jpg) repeat fixed;
+		
+	}
+	
+	
+.equalmargin
+	{
+		padding: 10px 10px 10px 10px;
+		margin: 0 auto;
+	}
+
+.box
+	{
+	padding:0px 30px;
+	margin:auto auto;
+	width:150px;
+	}
+	
