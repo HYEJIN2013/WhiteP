@@ -1,0 +1,97 @@
+def get2pot(n):
+	""" ... """
+	p = 1
+	while (p < n):
+		p *= 2
+	return p
+def sum_of_n(n):
+	return (n * (n+1) / 2)
+
+def check_combine(type, left, right):
+	if type:
+		#non decreasing
+		return left <= right
+	else:
+		#non increasing
+		return left >= right
+
+class Node:
+	"""..."""
+	def __init__(self, value = None, index = None):
+		self.sum = 0 #the thing we will query
+		self.hi = index #index interval start
+		self.lo = index #index interval end
+		self.first = value  #maybe redundant, because I already have indicies?
+		self.last = value # same as up?
+		self.firstLen = 1 
+		self.lastLen = 1
+
+	def __repr__(self):
+		return "sum: %s | lo: %s, hi: %s, first: %s, last: %s, firstLen: %s, lastLen: %s" % (self.sum,
+																							 self.lo,
+																							 self.hi,
+																							 self.first,
+																							 self.last,
+																							 self.firstLen,
+																							 self.lastLen)
+
+class TournamentTree:
+	""" ... """	
+
+	def __initParents(self, left, right):
+		if left == 1:
+			return #its a root, already set
+		#to do: handle null children (padd)
+		for i in range(left, right, 2):
+			#set parents
+			leftChild = self.array[i]
+			rightChild = self.array[i+1]
+			#what about None children (because of the padd?)
+			parent = self.array[i // 2]
+			parent.lo = leftChild.lo
+			parent.hi = rightChild.hi
+			parent.first = leftChild.first
+			parent.last = rightChild.last
+
+			if check_combine(self.type, leftChild.last, rightChild.first):
+				#combine
+				len_combined = leftChild.lastLen + rightChild.firstLen
+				sum_tmp = sum_of_n (len_combined - 1)
+				parent.sum = sum_tmp - sum_of_n(leftChild.lastLen - 1) - sum_of_n(rightChild.firstLen - 1)
+				parent.sum += leftChild.sum + rightChild.sum
+				parent.sum = sum_tmp
+				parent.firstLen = len_combined
+				parent.lastLen = len_combined
+			else:
+				parent.sum = leftChild.sum + rightChild.sum
+				parent.firstLen = leftChild.firstLen
+				parent.lastLen = rightChild.lastLen
+
+		self.__initParents(left - (right-left) / 2, left)
+	
+
+	def __init__(self, input, t = None):
+		self.offset = get2pot(len(input))
+		self.array = []
+		self.dataLen = len(input)
+		for i in range(len(input)):
+			self.array.append(Node(input[i], i))
+		arr_tmp = []
+		for i in range(0, self.offset):
+			arr_tmp.append(Node())
+		self.array = arr_tmp + self.array
+		self.array = self.array + [Node(index = len(input))] * (self.offset - len(input))
+		self.type = t #true if non decreasing type, false if non increasing type
+		self.__initParents(len(self.array) - self.offset, len(self.array))
+	
+	def query(self):
+		pass
+	def __queryPrivate(self):
+		pass
+
+if __name__== "__main__":
+	input = [1,2,3,4,5]
+	tree = TournamentTree(input, True)
+	print "after init:"
+	for node in tree.array:
+		print node
