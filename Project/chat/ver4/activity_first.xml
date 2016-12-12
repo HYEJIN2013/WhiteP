@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/btn_first"
+        android:paddingTop="180dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:onClick="onClick"
+        android:background="#FCFCFC"
+        android:drawableTop="@drawable/people"
+        android:text="PRESS"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>
