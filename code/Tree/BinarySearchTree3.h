@@ -5,22 +5,22 @@
 
 typedef BTData	BSTData;
 
-// ÀÌÁø Å½»ö Æ®¸®ÀÇ »ý¼º ¹× ÃÊ±âÈ­
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì˜ ìƒì„± ë° ì´ˆê¸°í™”
 void BSTMakeAndInit(BTreeNode ** pRoot);
 
-// ³ëµå¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ ¹ÝÈ¯
+// ë…¸ë“œì— ì €ìž¥ëœ ë°ì´í„° ë°˜í™˜
 BSTData BSTGetNodeData(BTreeNode * bst);
 
-// ÀÌÁø Å½»ö Æ®¸®¸¦ ´ë»óÀ¸·Î µ¥ÀÌÅÍ ÀúÀå(³ëµåÀÇ »ý¼º°úÁ¤ Æ÷ÇÔ)
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ë¥¼ ëŒ€ìƒìœ¼ë¡œ ë°ì´í„° ì €ìž¥(ë…¸ë“œì˜ ìƒì„±ê³¼ì • í¬í•¨)
 void BSTInsert(BTreeNode ** pRoot, BSTData data);
 
-// ÀÌÁø Å½»ö Æ®¸®¸¦ ´ë»óÀ¸·Î µ¥ÀÌÅÍ Å½»ö
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ë¥¼ ëŒ€ìƒìœ¼ë¡œ ë°ì´í„° íƒìƒ‰
 BTreeNode * BSTSearch(BTreeNode * bst, BSTData target);
 
-// Æ®¸®¿¡¼­ ³ëµå¸¦ Á¦°ÅÇÏ°í Á¦°ÅµÈ ³ëµåÀÇ ÁÖ¼Ò °ªÀ» ¹ÝÈ¯ÇÑ´Ù. 
+// íŠ¸ë¦¬ì—ì„œ ë…¸ë“œë¥¼ ì œê±°í•˜ê³  ì œê±°ëœ ë…¸ë“œì˜ ì£¼ì†Œ ê°’ì„ ë°˜í™˜í•œë‹¤. 
 BTreeNode * BSTRemove(BTreeNode ** pRoot, BSTData target);
 
-// ÀÌÁø Å½»ö Æ®¸®¿¡ ÀúÀåµÈ ¸ðµç ³ëµåÀÇ µ¥ÀÌÅÍ¸¦ Ãâ·ÂÇÑ´Ù.
+// ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì— ì €ìž¥ëœ ëª¨ë“  ë…¸ë“œì˜ ë°ì´í„°ë¥¼ ì¶œë ¥í•œë‹¤.
 void BSTShowAll(BTreeNode * bst);
 
 #endif
