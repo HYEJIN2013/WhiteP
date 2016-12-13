@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>example</title>
+    <meta name="Viewport" content="width=device-width; user-scaleable=no; initial-scale=1.0" />
+    
+    <style type="text/css">
+      #everything {
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      canvas {
+        padding: 0;
+        margin: 10px auto;
+        display: block;
+      }
+    </style>
+
+    <script type="text/javascript" src="lib/phaser.min.js"></script>
+    <script type="text/javascript" src="lib/jquery-1.11.0.min.js"></script>
+    
+    <script type="text/javascript">
+      var Main = (function() {
+        var shorterSide = Math.min(window.innerHeight, window.innerWidth, 500) * 0.95;
+        var game = new Phaser.Game(shorterSide, shorterSide, Phaser.CANVAS, 'game', {
+          create: create
+        });
+        function create() {
+          game.input.onDown.add(function(pointer) {
+            console.log(pointer.worldX, pointer.worldY);
+            $('#game').hide();
+            setTimeout(function() {
+              $('#game').show();
+            }, 1000);
+          }, this);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="everything">
+      <div id="game"></div>
+    </div>
+  </body>
+</html>
