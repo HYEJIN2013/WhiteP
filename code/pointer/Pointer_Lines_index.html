@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style type="text/css">
+  .graphic {
+    font-family: Helvetica;
+    padding: 10px 0;
+    margin: 0 auto;
+  }
+  svg {
+    display: block;
+    margin: 10px auto;
+    background: #f0f0f0;
+  }
+  circle {
+    fill: none;
+    stroke: magenta;
+  }
+  path {
+    fill: none;
+    stroke: magenta;
+  }
+</style>
+
+<div class="graphic">
+  <div>Radius</div>
+  <input type="range" min="0" max="100" step="1" value="30"></input>
+</div>
+
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script>
+var width = 700,
+    height = 400;
+var html = d3.select(".graphic")
+    .style("width", width + "px");
+var svg = html.append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var slider = html.select("input")
+    .on("input", updateRadius);
+var radius = slider.property("value");
+var group = svg.append("g")
+    .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")")
+var circle = group.append("circle")
+    .attr("r", radius);
+var path = group.append("path");
+svg
+    .on("mousemove", move)
+    .on("mouseout", function(d) { path.attr("d", "") });
+function updateRadius() {
+  radius = this.value;
+  console.log(radius);
+  circle.attr("r", radius);
+}
+function move() {
+  var x = d3.event.offsetX - width / 2,
+      y = d3.event.offsetY - height / 2,
+      xSign = (x > 0) - (x < 0),
+      ySign = (y > 0) - (y < 0),
+      r = radius,
+      d = "",
+      a = Math.sqrt(r * r / 2),
+      b = Math.sqrt(r * r - Math.min(y * y, x * x)),
+      c = Math.sqrt(2 * Math.min(x * x, y * y));
+  if (x * x + y * y < r * r) {
+    d = "";
+  } else if (c < r) {
+    if (Math.abs(x) > Math.abs(y)) {
+      d = "M" + xSign * b + "," + y + ",L" + x + "," + y
+    } else {
+      d = "M" + x + "," + ySign * b + ",L" + x + "," + y
+    }
+  } else if (Math.abs(x) > Math.abs(y)){
+    d = "M" + xSign * a + "," + ySign * a + ",L" + xSign * Math.abs(y) + "," + y + "L" + x + "," + y;
+  } else {
+    d = "M" + xSign * a + "," + ySign * a + ",L" + x + "," + ySign * Math.abs(x) + "L" + x + "," + y;
+  }
+  path.attr("d", d);
+}
+</script>
