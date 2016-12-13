@@ -1,0 +1,35 @@
+.............F...F........................................
+
+Failures:
+
+  1) QueueItem#category_name returns the category's name of the video
+     Failure/Error: expect(queue_item.category_name).to eq("comedies")
+       
+       expected: "comedies"
+            got: "Category"
+       
+       (compared using ==)
+     # ./spec/models/queue_item_spec.rb:38:in `block (3 levels) in <top (required)>'
+
+  2) QueueItem#category returns the category of the video
+     Failure/Error: expect(queue_item.category).to eq(category)
+       
+       expected: #<Category id: 1, name: "comedies", created_at: "2014-03-18 13:03:24", updated_at: "2014-03-18 13:03:24">
+            got: #<ActiveRecord::Associations::CollectionProxy [#<Category id: 1, name: "comedies", created_at: "2014-03-18 13:03:24", updated_at: "2014-03-18 13:03:24">]>
+       
+       (compared using ==)
+       
+       Diff:
+       @@ -1,2 +1,2 @@
+       -#<Category id: 1, name: "comedies", created_at: "2014-03-18 13:03:24", updated_at: "2014-03-18 13:03:24">
+       +[#<Category id: 1, name: "comedies", created_at: "2014-03-18 13:03:24", updated_at: "2014-03-18 13:03:24">]
+       
+     # ./spec/models/queue_item_spec.rb:48:in `block (3 levels) in <top (required)>'
+
+Finished in 3.06 seconds
+58 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/models/queue_item_spec.rb:33 # QueueItem#category_name returns the category's name of the video
+rspec ./spec/models/queue_item_spec.rb:43 # QueueItem#category returns the category of the video
