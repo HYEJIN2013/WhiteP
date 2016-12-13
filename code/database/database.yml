@@ -1,0 +1,25 @@
+development:
+    adapter: postgresql
+    encoding: utf8
+    database: egenda
+    pool: 5
+    username: USUARIO DO POSTGRES
+    password: SENHA
+    host: localhost
+    
+test: &test
+    adapter: postgresql
+    encoding: utf8
+    database: egenda_test
+    pool: 5
+    username: USUARIO DO POSTGRES
+    password: SENHA
+    host: localhost 
+    
+production:
+    adapter: postgresql
+    encoding: utf8
+    database: egenda_prod
+    pool: 5
+    username: USUARIO DO POSTGRES
+    password: SENHA
