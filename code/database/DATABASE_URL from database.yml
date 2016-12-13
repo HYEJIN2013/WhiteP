@@ -1,0 +1,6 @@
+ENV["DATABASE_URL"] = begin
+  path = Rails.root.join("config/database.yml")
+  yaml = ERB.new(IO.read(path)).result
+  hash = YAML.load(yaml)[Rails.env]
+  "#{hash['adapter']}://#{hash['username']}:#{hash['password']}@#{hash['host']}:#{hash['port']}/#{hash['database']}"
+end
