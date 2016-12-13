@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+.tooltip {
+	position: pointer;
+	left: 10px;
+	top: 10px;
+	width: auto;
+	height: auto;
+	padding: 5px;
+	background-color: rgba(0,0,0,.8);
+	color: white;
+	border-radius: 5px;
+	box-shadow: 0 0 3px black;
+}
+.tooltipping:not(:hover) + .tooltip {
+	display: none;
+}
+	</style>
+</head>
+<body>
+	<button class="tooltipping">Hover over me for more info!</button>
+	<div class="tooltip">
+		Here's some more info!
+	</div>
+</body>
+</html>
