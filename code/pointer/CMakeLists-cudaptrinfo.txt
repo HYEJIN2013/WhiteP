@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(cudaptrinfo)
+
+include(FindCUDA)
+include_directories(${CUDA_INCLUDE_DIRS})
+
+set( SRCS cudaptrinfo.cpp )
+
+add_executable( cudaptrinfo ${SRCS} )
+
+target_link_libraries( cudaptrinfo ${CUDA_LIBRARIES} )
