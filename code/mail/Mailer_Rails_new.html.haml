@@ -1,0 +1,30 @@
+#app/views/contact/new.html.haml
+
+=render('layouts/header')
+- if flash[:notice]
+  .row
+    .alert-message.warning.large-8.columns.large-centered
+      %p
+        = flash[:notice]
+.content
+  .row
+    .large-6.columns#mision
+      %h3 Contacto
+  .row
+    = form_for @message, :url => contact_path do |form|
+      %fieldset.fields
+        .field
+          = form.label :nombre
+          = form.text_field :name
+        .field
+          = form.label :email
+          = form.text_field :email
+        .field
+          = form.label :asunto
+          = form.text_field :subject
+        .field
+          = form.label :cuerpo
+          = form.text_area :body
+      %fieldset.actions
+        = form.submit "Enviar"
+=render('layouts/footer')
