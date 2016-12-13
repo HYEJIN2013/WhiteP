@@ -1,0 +1,37 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+        <!-- insert the page content here -->
+        <h1>Search</h1>
+        <p>For example, you can type 'movies', 'coffee', 'Mexican', or the name of a store like 'Starbucks</p>
+        <form method="post" action="/">
+    <label for="username">Search:</label>
+    <input type="text" id="search" name="search" size="40" />
+    <input type="submit" value="go" name="submit" />
+  </form>
+  {% if queryType=='stores' %}
+         <table>
+         <tr><th>Name</th><th>Type</th><th>Address</th><th>City</th></tr>
+        {% for result in results %}
+        <tr><td>{{result['name']}}</td><td>{{result['type']}}</td><td>{{result['address']}}</td><td>{{result['city']}}</td></tr>
+        {% endfor %}
+         </table>
+        
+        
+  {% endif %}
+
+   {% if queryType=='movies' %}
+         <table>
+         <tr><th>Movie</th><th>Theater</th><th>Zip</th></tr>
+        {% for result in results %}
+        <tr><td>{{result['movie']}}</td><td>{{result['theater']}}</td><td>{{result['zip']}}</td></tr>
+        {% endfor %}
+         </table>
+        
+        
+  {% endif %}
+        
+{% endblock %}
