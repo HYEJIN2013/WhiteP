@@ -1,0 +1,89 @@
+void Cubic_Function()    // 1차 함수
+{ 
+  int a, b;  //변수 선언
+  double x, y; 
+  double max, max_y; 
+  char buf[151], Explain[20][151], select; 
+  int j = 0; 
+  FILE *op;
+  system("\n\n\t\t\tmode con:cols=150 lines=40"); //가로 150 세로 40의 콘솔창 
+  printf("\n\n\t\t\ty=ax+b라는 형식의 그래프 입니다.\n"); 
+  printf("\n\n\t\t\ta의 값과 b의 값을 입력해주세요.\n"); 
+  printf("\n\n\t\t\ta : "); scanf("%d", &a); // a의 값 입력 
+  printf("\n\n\t\t\tb : "); scanf("%d", &b); // b의 값 입력
+  printf("\n\n\t\t\t그래프를 그립니다.\n"); Sleep(700);  // 위의 문구 잠깐동안 출력
+  system("cls"); // 콘솔창 초기화 
+  initgraph(); setcolor(3); // 빨간 설정 
+  line(50, 300, 900, 300);  //x축 빨간색으로 설계 
+  outtextxy(700, 160, "x축"); 
+  gotoxy(0, 0); 
+  setcolor(4); // 하늘색 설정 
+  line(450, 10, 450, 900); 
+  outtextxy(360, 10, "y축"); //y축 하늘색으로 설계 
+  gotoxy(0, 0); //좌표(0,0)으로 초기화 
+  setcolor(15);
+  x = -((double)b / (double)a); //  x = a = 기울기 
+  y = (double)b; // y= b = y절편
+  if (x > y)    // x 가 y보다 클경우 max와 max_y의 값 설정 
+  {  
+     max = (double)450 / (double)(x * 30);  
+     max_y = (double)450 / (double)(y * 30); 
+  } 
+  else  //y가 x보다 클경우 max와 max_y의 값 설정 
+  {  
+     max = (double)300 / (double)(y * 30);  
+     max_y = (double)450 / (double)(y * 30);
+  } 
+  if (max < 0)  // max의 값이 음수일 경우 음수로 변환  
+  max *= -1; 
+  if (max_y < 0)  
+  max_y *= -1; // max_y의 값이 음수일 경우 음수로 변환
+  if (x < 0) // x값이 음수일 경우 line함수를 통해 그래프의 선을 출력 
+  {  
+     if (y < 0) //x값과 y의 값이 음수일 경우   
+     line(450 + (x * 30) + (x * 30 * max), 300 + (y * 30 * max), 450 - (x * 30 * max_y), 300 - (y * 30) - (y * 30 * max_y));  
+     else if (y >= 0) //x값은 음수, y값은 양수일 경우   
+     line(450 + (x * 30) + (x * 30 * max_y), 300 + (y * 30 * max_y), 450 - (x * 30 * max), 300 - (y * 30) - (y * 30 * max)); 
+  } 
+  else if (x >= 0) // x값이 양수일 경우 line함수를 통해 그래프의 선을 출력 
+  {  
+      if (y < 0) // x값은 양수, y값은 음수일 경우  
+      line(450 - (x * 30 * max_y), 300 - (y * 30) - (y * 30 * max_y), 450 + (x * 30) + (x * 30 * max), 300 + (y * 30 * max));  
+      else if (y >= 0) // x값과 y값이 양수일 경우    line(450 - (x * 30 * max), 300 - (y * 30) - (y * 30 * max), 450 + (x * 30) + (x * 30 * max_y), 300 + (y * 30 * max_y));
+  } 
+  system("pause");
+  clrscr(); system("cls"); 
+  printf("\n\n\t\t\t1차함수에 대한 설명을 보시겠습니까? (y / n) : "); 
+  fflush(stdin); scanf(" %c", &select); 
+  system("cls"); 
+  if (select == 'y') 
+  {  
+    op = fopen("res//cubic.txt", "r");  // cubic.txt파일을 읽기모드로 열기
+    while ((fgets(buf, 150, op)) != NULL)  // op파일이 NULL이 아닐때까지 fgets로 불러옴  
+    {  
+       buf[strlen(buf) - 1] = '\0';  // 개행문자 제거를 위해 NULL 문자 삽입   
+       strcpy(Explain[j], buf);   // Explain배열에 buf배열 복사  
+       j++; 
+    }
+       fclose(op);  
+       for (int k = 0; k < j; k++)  
+       {   
+       setfontcolor(11);   
+       printf("\t\t%s\n", Explain[k]);   // 1차 함수에 대한 설명문 
+       } 
+       } 
+       else
+       {  
+       return;
+       }
+       setfontcolor(15);
+       printf("\n\n"); 
+       system("pause");
+       }
+  
+  
+  
+  
+  
+  
+  
