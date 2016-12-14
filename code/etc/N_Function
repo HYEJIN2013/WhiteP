@@ -1,0 +1,14 @@
+void N_Function()  // N차 함수 메인
+{
+int choice = 0; 
+while (1) {  system("cls"); 
+NHeader();
+  printf("\t\t원하는 함수를 선택해주세요 : ");  
+  scanf("%d", &choice);
+  switch (choice)  
+  {  case 1: Cubic_Function(); break;  //1차 함수  
+     case 2: Linear_Function(); break; // 2차 함수
+     case 3: return;  default: printf("\t\t정확한 메뉴를 선택해주세요."); break;  
+  }
+ }
+}
