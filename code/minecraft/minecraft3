@@ -1,0 +1,13 @@
+var http = require('q-io/http'),    BufferStream = require('q-io/buffer-stream'),    Url = require('url'),    _ = require('underscore'),    version = require('../../package.json').version,    debug = require('debug')('blaze-in:middleware:minecraft'),    inspect = require('sys').inspect,    sprintf = require('util').format,    uuid = require('node-uuid');
+function AuthenticationError(data) {  if (data.error && data.errorMessage) {    this.name = data.error;    this.message = data.errorMessage;  } else {    this.name = 'AuthentiationError';    this.message = data;  }}
+AuthenticationError.prototype = Error.prototype;
+function Minecraft(req, res, next) {  if (!(this instanceof Minecraft)) {    return new Minecraft(req);  }
+  this.req = req;  this.host = Url.parse(this.req.app.get('mojang authserver'));}
+Minecraft.prototype.request = function(pathname, body, method) {  var url = _.extend({}, this.host, {pathname: pathname});
+  var req = {    url: Url.format(url),    body: new BufferStream(JSON.stringify(body)),    method: method,    headers: {      Accepts: 'application/json',      'User-Agent': 'blaze-in/'+version+' +rcorsaro@gmail.com'    }  }
+  debug(">> %s %s", req.method, req.url);  debug(">> %s", JSON.stringify(body));
+  if (method === 'POST') {    req.headers['Content-Type'] = 'application/json';  }  return http.request(req)    .then(function(res) {      return [res, res.body.read()];    })    .spread(function(res, body) {      debug("<< %d %s %s", res.status, req.method, req.url);      debug("<< %s", body);      try {        res.data = JSON.parse(body);      } catch(e) {        res.data = body;      }      return res;    });}
+Minecraft.prototype.authenticate = function(username, password) {  var body = {    agent: {      name: 'Minecraft',      version: 1    },    username: username,    password: password,    clientToken: uuid.v4()  };
+  return this.request('authenticate', body, 'POST')    .then(function(res) {      if (res.status === 200) {        return res.data;      } else {        throw new AuthenticationError(res.data);      }    });}
+Minecraft.prototype.invalidate = function(accessToken, clientToken) {  return this.request('invalidate', {accessToken: accessToken, clientToken: clientToken})    .then(function(res) {      return res.status === 200;    });}
+exports = module.exports = function() {  return function(req, res, next) {    req.minecraft = Minecraft(req);    next();  }}
