@@ -1,0 +1,4 @@
+var fs = require('fs-extra')
+var objects = require('./indexes/1.11.json').objects
+for (var filePath in objects) {  if (!/\/(?:minecart|damage|music|records|mob|step|entity|item|block|liquid|ambient|dig|random)\//.test(filePath)) continue
+  var copyPath = filePath.replace('minecraft/', './')  var hash = objects[filePath].hash  var objectPath = './objects/' + hash.substring(0, 2) + '/' + hash  console.log(objectPath, '->', copyPath)  fs.copySync(objectPath, copyPath)}
