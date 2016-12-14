@@ -1,0 +1,5 @@
+//Her gir vi beskjed om å kalle en funksjon når visse hendelser skjer i Minecraft
+events.on('player.PlayerInteractEvent', function (listener, event) {     // Vi må finne ut om det var en "Lever" (altså en spak) som ble trukket i. Nå gjelder det ALLE spaker :-)     // Du kan hente ut spakens posisjon vha. block.location om du vil se etter en spesiell     var block = event.getClickedBlock();     var type = block.getType();     if(type==org.bukkit.Material.LEVER) {           if (block.data==3){               writeStatus('commands.txt','DOWN');                        }          else          {               writeStatus('commands.txt','UP');                   }         })
+
+//Funksjon for å skrive statusen til en fil. Her bruker vi javaklasser, siden vi er inne i et java-prograamwriteStatus=function(filename,status){     var File = java.io.File;     var PrintWriter = java.io.PrintWriter;     var FileWriter = java.io.FileWriter;
+     var f = new File(filename);     var out =  new PrintWriter(new FileWriter(f, true ));     out.println(status);     out.close()}
