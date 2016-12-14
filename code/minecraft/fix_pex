@@ -1,0 +1,12 @@
+var fs = require('fs'),    https = require('https'),    async = require('async'),    yaml = require('js-yaml');
+var TIMESTAMP = 1422921600;var data = fs.readFileSync('permissions.yml');var doc = yaml.safeLoad(data);
+//
+function lookupName(name, callback) {    var url = "https://api.mojang.com/users/profiles/minecraft/" + name + "?at=" + TIMESTAMP;
+    https.get(url, function(res) {        res.setEncoding('utf8');
+        res.on('data', function(data) {            callback(JSON.parse(data));        });    });}
+//
+var newUsers = { };var users = doc.users;var names = [];
+for (uuid in users) {    var user = users[uuid];    if (!user.options || !user.options.name) continue;
+    names.push({ id: uuid, name: user.options.name });}
+async.each(names,    function(item, callback) {        var uuid = item.id;        var name = item.name;                lookupName(name, function(data) {            var newUUID = data.id.substring(0, 8) + '-' + data.id.substring(8, 4) + '-' + data.id.substring(12, 4) + '-' + data.id.substring(16);            newUsers[newUUID] = users[uuid];
+            callback();        });    }, function() {        doc.users = newUsers;        console.log(yaml.safeDump(doc));    });
