@@ -1,0 +1,39 @@
+/* * Procedurally generated Minecraft dirt texture. */(function() {    var ctx, imgd;
+  ctx = document.getElementById('texture').getContext('2d');  imgd = ctx.createImageData(64, 64);
+  for(var x = 0; x < 48; x++) for(var y = 0; y < 16; y++) {    var color, br = Math.random() * 0.5 + 0.5;    if(x < 16) {  // Grass on the leftmost tile      color = 0x51D651;    }    else if(x < 32) { // Side on the center tile      // Behave randomly around the 7th vertical row of pixels,      // full grass and full dirt before and after that      if(y > br * 7)        color = 0x633402;      else        color = 0x51D651;    } else { // Dirt on the rightmost tile      color = 0x633402;    }
+    var idx = 4 * (y * 64 + x);    imgd.data[idx] =  br * ((color >> 16) & 0xFF);    imgd.data[idx + 1] = br * ((color >> 8) & 0xFF);    imgd.data[idx + 2] = br * ((color) & 0xFF);    imgd.data[idx + 3] = 0xFF;  }
+  ctx.putImageData(imgd, 0, 0);
+}());
+(function() {
+  var canvas, gl, prg, aspectRatio,      vertexAttrib, texcAttrib, projUniform, viewUniform, texUniform,      texture, viewMatrix, ortho,      Voxel, voxels, easeMap, quintFn;
+  /*   * Initialize context, compile shaders.   */  canvas = document.getElementById('canvas');  canvas.width = window.innerWidth;  canvas.height = window.innerHeight;  aspectRatio = canvas.clientWidth / canvas.clientHeight;
+  gl = canvas.getContext('webgl');  gl.enable(gl.DEPTH_TEST);  gl.clearColor(0.0, 0.0, 0.0, 0.0);  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);  gl.viewport(0, 0, canvas.clientWidth, canvas.clientHeight);
+  prg = (function(vert, frag) {    var prg = gl.createProgram();    gl.attachShader(prg, vert);     gl.attachShader(prg, frag);     gl.linkProgram(prg);    gl.useProgram(prg);    return prg;  }.apply(null, ['vertex', 'fragment']    .map(function(f) {      var xhr = new XMLHttpRequest();      xhr.open('GET', f + '.glsl', false);      xhr.send();      return { type: f, src: xhr.responseText };    })    .map(function(s) {      var sh = gl.createShader(s.type === 'vertex' ?                                gl.VERTEX_SHADER : gl.FRAGMENT_SHADER);      gl.shaderSource(sh, s.src);      gl.compileShader(sh);      return sh;    })));
+  /*   * Voxel class. Basically models a cube, offsets its vertices, UV maps it   * to the texture and that's it.   */  Voxel = function(pos) {    var points = new Float32Array([          -1,  1,  1,    1,  1,  1,   -1,  1, -1, // top           1,  1,  1,   -1,  1, -1,    1,  1, -1,
+          -1, -1,  1,    1, -1,  1,   -1, -1, -1, // bottom           1, -1,  1,   -1, -1, -1,    1, -1, -1,
+          -1, -1, -1,    1, -1, -1,   -1,  1, -1, // front           1, -1, -1,   -1,  1, -1,    1,  1, -1,
+          -1, -1,  1,    1, -1,  1,   -1,  1,  1, // back           1, -1,  1,   -1,  1,  1,    1,  1,  1,
+          -1, -1, -1,   -1, -1,  1,   -1,  1, -1, // left          -1, -1,  1,   -1,  1, -1,   -1,  1,  1,
+           1, -1, -1,    1, -1,  1,    1,  1, -1, // right           1, -1,  1,    1,  1, -1,    1,  1,  1
+        ].map(function(x, i) {          return (x + 2 * pos[i % 3]) / 10;        })),        hp = 1/256; // quarter texel offset to avoid bleeding problems
+    this.buffer = gl.createBuffer();    this.uvmap = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);    gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);    gl.bindBuffer(gl.ARRAY_BUFFER, this.uvmap);    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([            hp, .75 + hp, .25 - hp, .75 + hp,       hp, 1 - hp,      .25 - hp, .75 + hp,       hp,   1 - hp, .25 - hp, 1 - hp,
+       .5 + hp, .75 + hp, .75 - hp, .75 + hp,  .5 + hp, 1 - hp,      .75 - hp, .75 + hp,  .5 + hp,   1 - hp, .75 - hp, 1 - hp,
+      .25 + hp, .75 + hp,  .5 - hp, .75 + hp, .25 + hp, 1 - hp,       .5 - hp, .75 + hp, .25 + hp,   1 - hp,  .5 - hp, 1 - hp,
+      .25 + hp, .75 + hp,  .5 - hp, .75 + hp, .25 + hp, 1 - hp,       .5 - hp, .75 + hp, .25 + hp,   1 - hp,  .5 - hp, 1 - hp,      .25 + hp, .75 + hp,  .5 - hp, .75 + hp, .25 + hp, 1 - hp,       .5 - hp, .75 + hp, .25 + hp,   1 - hp,  .5 - hp, 1 - hp,      .25 + hp, .75 + hp,  .5 - hp, .75 + hp, .25 + hp, 1 - hp,       .5 - hp, .75 + hp, .25 + hp,   1 - hp,  .5 - hp, 1 - hp,      .25 + hp, .75 + hp,  .5 - hp, .75 + hp, .25 + hp, 1 - hp,       .5 - hp, .75 + hp, .25 + hp,   1 - hp,  .5 - hp, 1 - hp
+    ]), gl.STATIC_DRAW);  };
+  Voxel.prototype.draw = function() {    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);    gl.vertexAttribPointer(vertexAttrib, 3, gl.FLOAT, false, 0, 0);    gl.enableVertexAttribArray(vertexAttrib);    gl.bindBuffer(gl.ARRAY_BUFFER, this.uvmap);    gl.vertexAttribPointer(texcAttrib, 2, gl.FLOAT, false, 0, 0);    gl.enableVertexAttribArray(texcAttrib);    gl.drawArrays(gl.TRIANGLES, 0, 36);  }
+  // Initialize orthographic view matrix.  ortho = mat4.create();  mat4.ortho(ortho, -aspectRatio, aspectRatio, -1, 1, -10, 100);    // Initialize voxels using the specified positions  voxels = [];
+  [    [-2, -1, -2], [-1, -1, -2], [ 0, -1, -2], [ 1, -1, -2],                  [-1,  0, -2], [ 0,  0, -2], [ 1,  0, -2],                                              [ 1,  1, -2],    [-2, -1,  2], [-2, -1,  1], [-2, -1,  0],                   [-2,  0,  1], [-2,  0,  0],  ].map(function(x) {    voxels.push(new Voxel(x));  });
+  // Incremental quintic easing function - we don't map to [0, 1], we map to  // increments such that their sum is always 1 and we can rotate the matrix  // from the step before instead of reinitializing it to identity every time  quintFn = function(i) {    return Math.pow(i / 64, 5) - Math.pow((i - 1) / 64, 5);  }
+  // Create an easing map so we don't need to compute the rotation angle every  // time, just look up the table.  // 0 - 64 -> quintic ease out. 64 - 96 -> stay put  easeMap = [];  for(var i = 64; i < 96; i++)    easeMap[i] = 0;  for(var i = 1; i <= 64; i++)    easeMap[i - 1] = 0.5 * Math.PI * (quintFn(65 - i));
+  vertexAttrib = gl.getAttribLocation(prg, 'vertex');  texcAttrib = gl.getAttribLocation(prg, 'textureCoordinate');  projUniform = gl.getUniformLocation(prg, 'projection');  viewUniform = gl.getUniformLocation(prg, 'view');  texUniform = gl.getUniformLocation(prg, 'textureSampler');
+  gl.uniformMatrix4fv(projUniform, false, ortho);
+  texture = gl.createTexture();  gl.bindTexture(gl.TEXTURE_2D, texture);  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE,                document.getElementById('texture'));  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);  gl.uniform1i(texUniform, 0);
+  viewMatrix = mat4.create();
+  var counter = 0;
+  var loop = function() {    // Rotate the view matrix and step the counter    mat4.rotate(viewMatrix, viewMatrix, easeMap[counter], [0, 1, 0]);    counter++;    counter %= 95;
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);    gl.uniformMatrix4fv(viewUniform, false, viewMatrix);    voxels.map(function(vox) {      vox.draw();    });
+    requestAnimationFrame(loop);  }
+  loop();
+}());
