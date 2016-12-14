@@ -1,0 +1,6 @@
+var currentBlock;var depth;var drone;var i;var keep;var keepIndex;var length2;var width;
+function cube(length2, width, depth) {  var i_inc = 1;  if (1 > depth) {    i_inc = -i_inc;  }  for (i = 1;       i_inc >= 0 ? i <= depth : i >= depth;       i += i_inc) {    drone.down(1);    level(width, length2);  }  drone.up(depth);}
+function level(width, length2) {  var i_inc2 = 1;  if (1 > width) {    i_inc2 = -i_inc2;  }  for (i = 1;       i_inc2 >= 0 ? i <= width : i >= width;       i += i_inc2) {    drone.right(1);    row(length2);  }  drone.left(width);}
+function main() {  drone = (new Drone(me, me.location));  cube(3, 5, 2);}
+function mine() {  keep = [(Material.EMERALD_ORE), (Material.GOLD_ORE), (Material.LAPIS_ORE), (Material.REDSTONE_ORE), (Material.IRON_ORE), (Material.DIAMOND_ORE), (Material.COAL_ORE)];  currentBlock = ((drone.getLocation()).getBlock());  keepIndex = keep.indexOf(currentBlock.getType()) + 1;  if (keepIndex > 0) {    drone.box((Material.AIR));  }}
+function row(length2) {  var i_inc3 = 1;  if (1 > length2) {    i_inc3 = -i_inc3;  }  for (i = 1;       i_inc3 >= 0 ? i <= length2 : i >= length2;       i += i_inc3) {    mine();    drone.fwd(1);  }  drone.back(length2);}
