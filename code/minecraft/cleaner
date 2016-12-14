@@ -1,0 +1,14 @@
+var exclude = ['gta', 'dota', 'minecraft', 'resheb', 'referat', 'igry', 'igra', 'igri', 'game', 'flash', 'apk', 'android', 'mp3', 'fb2', 'dating', 'goroskop', 'astro', 'film', 'video', 'movie', 'book', 'download', 'torrent', 'kino', 'radio', 'weather', 'pesni', 'chords', 'anekdot', 'zodiak', 'minusovk', 'knig', 'recept', 'recipe', 'spongebob', 'barbie', 'skyrim', 'ferma', 'dom2', 'mafia', 'gadani', 'mario', 'epub', '2048', 'dendy', 'sega', 'zuma', 'aforizm', 'citat', 'pdf', 'simulat', 'mods', 'play', 'spintires', 'spin-tires'];
+
+var period = 'LAST_MONTH';
+function main() {
+    var periodString = '';
+    if (period) {        periodString = "DURING " + period;        Logger.log(periodString);    } else {        Logger.log('DURING ALL TIME');    }    var report = AdWordsApp.report("SELECT Domain, Clicks, ConvertedClicks " +        "FROM AUTOMATIC_PLACEMENTS_PERFORMANCE_REPORT " +        periodString);
+    var rows = report.rows();    var excludePlacementArray = [];
+    while (rows.hasNext()) {        var row = rows.next();        var placement = row['Domain'];        if (containsAny(placement.toString(), exclude) && (row['ConvertedClicks'] < 1)) {            excludePlacementArray[excludePlacementArray.length] = placement.toString();        }
+    }
+    addNegativeKeywordToCampaign(excludePlacementArray);
+}
+function containsAny(str, substrings) {    for (var i = 0; i != substrings.length; i++) {        var substring = substrings[i];        if ((str.indexOf(substring) != -1) && (str.indexOf('mobileapp::') == -1)) {            return substring;        }    }    return null;}
+function addNegativeKeywordToCampaign(negativePlacements) {    var campaignIterator = AdWordsApp.campaigns().withCondition("LabelNames CONTAINS_ANY ['CLEAN_ME']").get();    while (campaignIterator.hasNext()) {        var campaign = campaignIterator.next();
+        negativePlacements.forEach(function(entry) {            excludePlacement = campaign.display().newPlacementBuilder();            excludePlacement.withUrl(entry.toString()).exclude();            Logger.log(entry.toString() + ' - Excluded');        });    }}
