@@ -1,0 +1,5 @@
+var raknet = require('raknet');
+if(process.argv.length !=4) {  console.log("Usage: node ping.js <host> <port>");  process.exit(1);}
+var server = raknet.createServer({  host: process.argv[2],  port: parseInt(process.argv[3])});
+server.on('connection', function(client) {  client.on('unconnected_ping', function(packet) {    console.log(packet);    client.write('unconnected_pong', {      pingID: packet.pingID,      serverID: 0,      magic: 0,      serverName: 'MCPE;A Minecraft: PE Server;45 45;0.14.1;0;20'    });  });
+  client.on('error', function(err) {    console.log(err);  });});
