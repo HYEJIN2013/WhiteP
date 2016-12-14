@@ -1,0 +1,2 @@
+function newLevel() {    // masuk ke level    clientMessage("MMPEI, Minecraft/ Minecraft PE Indonesia");    clientMessage("Farhan Abdullah Spensaka");        if(1-2>=0||3<4) clientMessage("1 dikurang 2 itu lebih besar dari 0, 3 itu lebih kecil daripada 4");    if(3!=2==4+5) {      clientMessage("3 nggak bisa di jumlah ke 2, dan 4 di tambah 5 sama dengan 9");    }}
+function attackHook(attacker, victim) {  // Konten fungsi}
