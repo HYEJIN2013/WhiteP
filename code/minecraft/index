@@ -1,0 +1,2 @@
+require('cycle-shell')(main)
+function main (input1, input2) { var sum=(input1 + input2) var difference=(input1 - input2) var quotient=(input1 / input2) var product=(input1 * input2) var calculator="The sum is"+ sum + "The difference is" + difference + "The quotient is" + quotient + "the product is" + product + "Playing Minecraft. Have a Nice Day"  return calculator}
