@@ -1,0 +1,23 @@
+var tellraw = scope.get("tellraw");var chat_message = scope.get("chat_message");var chat_event = scope.get("chat_event");var scoreName = scope.get("OBJECTIVE_NAME");var float = scope.get("float");
+var layout = [    "%input%",    "",    "sqrt sin cos ( )",    "7 8 9 DEL AC",    "4 5 6  * / pi",    "1 2 3  + - e",    "0   .   ^ = rnd"];
+var nextCode = 11;var codes = {};for(var i = 0; i < layout.length; i++){    var line = layout[i].split(" ");    var chatObjs = [];
+    for(var ii = 0; ii < line.length; ii++)    {        var button = line[ii];        if(/[0-9]/g.test(button))        {            codes[button] = parseInt(button) || 10;            continue;        }
+        codes[button] = nextCode;        nextCode++;    }}codes["__num"] = nextCode;nextCode++;
+exports.showCalc = function(val){    tellraw((new Array(20 - layout.length + 1)).join("\n"));
+    for(var i = 0; i < layout.length; i++)    {        var line = layout[i].split(" ");        var chatObjs = [""];
+        if(line.length == 1 && line[0] == "%input%")        {            for(var ii = 20; ii > -1; ii--)            {                var sel = "@e[type=ArmorStand,x={0},y=5,z=-1,r=0]".format(ii);                chatObjs.push({selector: sel});            }
+            tellraw.apply(undefined, chatObjs);            continue;        }
+        for(var ii = 0; ii < line.length; ii++)        {            var button = line[ii];
+            if(button.trim() == "")            {                chatObjs.push(" ");                continue;            }
+            var color = "white";            if(["DEL", "AC", "="].indexOf(button) != -1)                color = "red";            else if(/[0-9]/.test(button))                color = "yellow";            else if(["pi", "e", "rnd"].indexOf(button) != -1)                color = "green";
+            var ev = chat_event("run_command", "/scoreboard players set {0} {1} {2}".format(val.name, scoreName, codes[button]));            var msg = chat_message(button, color, false, ev);            chatObjs.push(msg);            chatObjs.push(" ");        }
+        tellraw.apply(undefined, chatObjs);    }};
+exports.applyNames = function(){    for(var key in codes)    {        var _key = /[0-9a-zA-Z\.\(\)]/g.test(key) ? key : " " + key + " ";        command("entitydata @e[score_calc_min={0},score_calc={0}] {CustomName:\"{1}\"}".format(codes[key], _key))    }}
+exports.codeOf = function(button){    if(!codes.hasOwnProperty(button))        throw "There is no button with the label " + button;    return codes[button];}
+exports.floatBase = function(val){    return val.base;}
+exports.floatFromBase = function(base){    var val = float();    val.base.set(base);    return val;}
+exports.killCurrent = function(){    command("kill @e[type=ArmorStand,x=0,y=5,z=-1,r=0]");}
+exports.moveLeft = function(amount){    command("tp @e[type=ArmorStand,score_calc_min=1] ~1 ~ ~");}
+exports.moveRight = function(){    command("tp @e[type=ArmorStand,score_calc_min=1] ~-1 ~ ~");}
+exports.catchFromRight = function(){    command("tp @e[type=ArmorStand,x=0,y=5,z=-1,dx=-100] ~1 ~ ~");}exports.extendToRight = function(){    command("tp @e[type=ArmorStand,x=0,y=5,z=-1,dx=-100] ~-1 ~ ~");}
+exports.catchFromLeft = function(){    command("tp @e[type=ArmorStand,x=0,y=5,z=-1,dx=100] ~-1 ~ ~");}exports.extendToLeft = function(){    command("tp @e[type=ArmorStand,x=0,y=5,z=-1,dx=100] ~1 ~ ~");}
