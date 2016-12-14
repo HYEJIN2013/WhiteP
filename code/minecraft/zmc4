@@ -1,0 +1,2 @@
+var net = require('net');
+(setInterval(function(){  var client = net.connect({port: <PORT_HERE>, host: '<HOST_HERE>'},    function() {      console.log('Server is online.');    });  client.on('end', function() {    console.log('Server went down.')  })},2000));
