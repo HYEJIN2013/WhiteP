@@ -1,0 +1,11 @@
+/*Some handy utility functions I came up with working with Minecraft craftscripts*/
+// exec// performs a java exec by getting the java runtime by name
+exec = function name(cmd){    var cRuntime = java.lang.Class.forName("java.lang.Runtime");    var mGetRuntime = cRuntime.getMethod("getRuntime");    var rtsingleton = mGetRuntime.invoke(null);    var process = rtsingleton.exec(cmd);        var stdInput = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()));    var stdError = new java.io.BufferedReader(new java.io.InputStreamReader(process.getErrorStream()));}
+
+// read a file
+function read_file(path){      var stream = new java.io.FileInputStream(new java.io.File(path));      var fc = stream.getChannel();      var bb = fc.map(java.nio.channels.FileChannel.MapMode.READ_ONLY, 0, fc.size());      return java.nio.charset.Charset.defaultCharset().decode(bb).toString();  } 
+// load another js file/*Useful if you want to organise your craftscripts a bit. Copy and past load and read_file into the file where you call themnb functions in the file you load must be declared this thisfunctionname = function name(attrs){}and notfunctionname(attrs){}like add_command_block below - I dont know why - if you do I'd be interested to know*/
+function load(path){      eval(String(read_file(path)))  } 
+
+// adds a new command block// messy but it works
+add_command_block = function name(x, y, z, command){     // creates a block    var commandBlock = new BaseBlock(137);    var pt = new Vector(x, y, z);    session.rawSetBlock(pt, commandBlock);    // reads it backs again    var block = session.getBlock(pt);    // the tags are immutable so gets its current tags    var nbtdata = block.getNbtData()    var tags = nbtdata.getValue();    // clones them into a new set of tags but with command added    var newTags = {}    newTags["id"] = new StringTag("id", tags.get("id").getValue());    newTags["Command"] = new StringTag("Command", command);    newTags["x"] = new IntTag("x", tags.get("x").getValue());    newTags["y"] = new IntTag("y", tags.get("y").getValue());    newTags["z"] = new IntTag("x", tags.get("z").getValue());    var newCompoundTag = new CompoundTag("", newTags);    // replace tags with new ones    block.setNbtData(newCompoundTag);    // put block back    session.setBlock(pt, block);}
