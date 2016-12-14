@@ -1,0 +1,14 @@
+var net = require("net");
+function makeBuf(server, port) {    var bufSize = 7 + server.length;    var buffer = new Buffer(bufSize);
+    buffer.writeUInt8(bufSize - 1, 0);    buffer.writeUInt8(0, 1);    buffer.writeUInt8(5, 2);    buffer.writeUInt8(server.length, 3);    for (var i = 0; i < server.length; i++) {        buffer.write(server[i], 4 + i);    }    buffer.writeUInt16BE(25565, server.length + 4);    buffer.writeUInt8(1, server.length + 6);
+    return buffer;}
+var ping = function (server, port, callback, timeout) {    var MC_DEFAULT_PORT = 25565;    var started = false;    var response = "";    var buf = new Buffer("227d5d7d7d", "hex");    if (typeof port == "function") {        callback = port;        port = MC_DEFAULT_PORT;    }
+    if (typeof port !== "number") {        port = MC_DEFAULT_PORT;    }
+    if (typeof timeout == "undefined") {        timeout = 3000;    }    var socket = net.connect({        port: port,        host: server    }, function () {        socket.write(makeBuf(server, port), function () {            socket.write(new Buffer("0100", "hex"));        });    });
+    socket.setTimeout(timeout, function () {        if (callback != undefined) {            callback(new Error("Socket timed out when connecting to " + server + ":" + port), null);        }        socket.end();    });
+    socket.on("data", function (data) {        if (!started) {            response += data.slice(5);            started = true;        } else {            response += data;        }
+        if (data.slice(data.length - 5).compare(buf) == 0) {            if (callback !== undefined) {                callback(null, response);            }        }        socket.end();    });
+    socket.once('error', function (e) {        if (callback !== undefined) {            callback(e, null);        }    });};
+ping("ftb.oblivion-networks.com", 25565, function (error, data) {    if (error) {        return console.log(error);    }
+    console.log(data);
+    var data = JSON.parse(data);    console.log(data.description)    console.log(data.players.online);    var players;    if (data.players.online > 0 && data.players.hasOwnProperty("sample")) {        if (data.players.sample.length > 0) {            var players = "Players:\n";            for (var i = 0; i < data.players.sample.length; i++) {                players += data.players.sample[i].name + "\n";            }        }        console.log(players);    }        var mods = data.modinfo.modList;    console.log(mods);});
