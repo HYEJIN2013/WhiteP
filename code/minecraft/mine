@@ -1,0 +1,4 @@
+var Minecraft = require('minecraft');
+var mc = new Minecraft({  user: 'hello',  pass: 'world',  salt: 'salty'});
+var day = true;
+setInterval(function () {  mc.setWorldTime(['worldName', day ? 4000 : 14000]);  day = !day;}, 100);
