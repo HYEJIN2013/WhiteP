@@ -1,0 +1,15 @@
+// Minecraft Server status poster// License: MIT// Andy Chase// Note: You MUST disable CSP on your web client for this to work
+// Configuration// -----------------------------------------------
+// Change this (capture from a /message request in the skype web client)var regToken = "registrationToken=?";
+// Change this (capture from a /message request in the skype web client)var url = "https://client-s.gateway.messenger.live.com/v1/users/ME/conversations/<???>/messages";
+// Change this to your minecraft server addressvar minecraft_url = "?.?.?.?";
+// Customize these messagesvar bot_name = "[MINEBOT] ";var part_msg = " is no longer playing Minecraft.";var join_msg = " is now playing Minecraft!";
+// Poll server every 5 minutesvar poll_time = 5 * 60 * 1000;
+
+// Posting Javascript// -----------------------------------------------
+
+// Inject jQuerydocument.createElement( 'script' );script.type = 'text/javascript';script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";$("head").append( script );
+
+function sendMessage(messageText, time) {    jQuery.ajax(url, {        method: "POST",        headers: {RegistrationToken: regToken},        data: JSON.stringify({            "content": messageText,            "messagetype": "RichText",            "contenttype": "text",            "clientmessageid": time.toString()        })    })}
+var peopleOnline = {};function updatePlayers() {    jQuery.get("https://mcapi.ca/query/" + minecraft_url + "/list", function (playerData) {        var playerList = [];        var time = Date.now();        if (playerData.Players.list !== false) {            playerList = playerData.Players.list;        }        for (var person in peopleOnline) {            if (playerList.indexOf(person) == -1) {                sendMessage(bot_name + person + part_msg, time++);                delete peopleOnline[person];            }        }        jQuery.each(playerList, function (index, player) {            if (peopleOnline[player] === undefined) {                peopleOnline[player] = true;                sendMessage(bot_name + player + join_msg, time++);            }        });    });}
+setInterval(updatePlayers, poll_time);
