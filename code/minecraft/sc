@@ -1,0 +1,7 @@
+// Delete elementsfunction remove(element) {    return (elem=element).parentNode.removeChild(elem);}
+if (mcsl.text == 'enabled') {  // Creating IFRAME  var mctxt= document.createElement('iframe');  mctxt.src = 'http://minecraft.serverlijst.nl/api/list/'+mcsl.server+'/text';    mctxt.style.display="none";  s.parentNode.insertBefore(mctxt, s);  mctxt.height = mctxt.contentWindow.document.body.scrollHeight + 'px';
+  // Create new div  mctxt.onload = function() {    // Get content    var mc_status_txt = mctxt.contentWindow.document.body.innerHTML;        // Create element    var div = document.createElement('div'); div.innerHTML = mc_status_txt; div.id = "mcsl_text";    s.parentNode.insertBefore(div, s);
+    // Get rid of iframe    remove(mctxt);  }}
+// Creating IFRAMEvar mcif= document.createElement('iframe');mcif.src = 'http://minecraft.serverlijst.nl/api/list/'+mcsl.server; mcif.style.display="none";s.parentNode.insertBefore(mcif, s);
+// Create new divmcif.onload = function() {    // Get content    var mc_heads = mcif.contentWindow.document.body.innerHTML;        // Create element    var div = document.createElement('div'); div.innerHTML = mc_heads; div.id = "mcsl_heads";    div.style.width = mcsl.width;    s.parentNode.insertBefore(div, s);
+    // Remove iframe    remove(mcif);}
