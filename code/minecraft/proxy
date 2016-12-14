@@ -1,0 +1,5 @@
+var net = require("net");var mc = require('minecraft-protocol');
+var host = "46.38.234.116";var port = 25565;var server = new mc.Server("1.9");
+server.once("connection", function(client){	console.log("client connected");	var proxy = new mc.Client(false, "1.9");	proxy.setSocket(net.connect(port, host));
+	client.on("packet", function(data, info)	{		console.log("C->S", info.name, data);		proxy.write(info.name, data);	});	proxy.on("packet", function(data, info)	{		console.log("S->C", info.name, data);		client.write(info.name, data);	});});
+server.listen(25565);console.log("Awaiting client...");
