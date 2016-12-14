@@ -1,0 +1,17 @@
+const http = require('http');
+
+/********************** * L I B R A R Y **********************/
+/** * Make a request on the API * @param host hostname of the server, ex: mc.quarahtk.org * @param path url path of the server, ex: /raw_data * @param port port of the web server, ex: 80 * @param method HTTP method to use for the query, ex: GET * @param callback function which be called when there is a result. *        cb(err,data) is err is not null, there is an error. */requestAPI = function(host, path, port, method, cb) {  var options = {    port: port,    hostname: host,    method: method,    path: path  };
+  var req = http.request(options, function(res) {    var body = "";    res.on('data', function (chunk) {      body += chunk;    });
+    res.on('end', function() {      try {        cb(null, JSON.parse(body));      } catch(e) {        cb(e, null);      }    });  });
+  req.on('error', function (e) {    cb(e,null);  });
+  req.end();};
+getList = function(host, port, cb) {  requestAPI(host, "/raw_data/", port, "GET", cb);};
+getPlayer = function(host, port, id, cb) {  requestAPI(host, "/raw_data/"+id+".json", port, "GET", cb);};
+getPlayerList = function(host, port, list, cb) {  var todo = list.length;
+  list.forEach(function(elem) {    getPlayer(host,port,elem.uuid, function(err, data) {      if (!err) elem.data = data;      else elem.err = err;      if (--todo == 0) cb(list);    });  });};
+/*********************** * M A I N ***********************/
+players = [  {name: "hamilcare", uuid: "e18b05dd-d692-4f54-a656-20a39ca4460b"},  {name: "cortayx", uuid: "42fd87ca-82bb-4d35-8d16-d06eb9d87a79"},  {name: "nekraus", uuid: "496de51f-8662-4a00-842b-9802eeb8cc9b"},  {name: "passion", uuid: "9d73f4a3-6bbe-4d93-98ff-59e31c523f25"}];
+
+var useItemNetherBrick = 0;getPlayerList("mc.quarahtk.org", 80, players, function(list) {  list.forEach(function(player) {    console.log("----------\n"+player.name);    console.log("stat.useItem.minecraft.nether_brick: ", player.data["stat.useItem.minecraft.nether_brick"]);    useItemNetherBrick +=  player.data["stat.useItem.minecraft.nether_brick"];  });
+  console.log("-------------\nTOTAL");  console.log("stat.useItem.minecraft.nether_brick: ", useItemNetherBrick);});
