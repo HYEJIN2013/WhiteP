@@ -1,0 +1,1 @@
+nodal new conditional-joinsnodal g:model Tweet user_id:int body:stringnodal g:controller --for Tweetsnodal g:model --usernodal g:controller --for Usersnodal db:createnodal db:preparenodal db:migratenodal s
