@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+use strict;use YAML::XS;use Data::Dumper;
+my %players;my $NBT = "/usr/bin/nbt2yaml";
+foreach my $f (glob("/opt/minecraft_server/world/playerdata/*.dat")) {    my ($uuid) = $f =~ /\/([^\/]+?)\.dat$/;    my $data = `$NBT $f`;    my $yaml = Load($data);    my $pos;    my $dim;    foreach my $h (@{$yaml->{""}}) {        if (defined $h->{Pos}) {            $pos = $h;        }        if (defined $h->{Dimension}) {            $dim = $h->{Dimension};        }    }    my $name = `zgrep $uuid /opt/minecraft_server/logs/*.log* | head -1 | grep -oE 'player [^ ]* ' | cut -d' ' -f2`;    chomp($name);    # check that we have an icon...    my $res = `/home/minecraft/get_player_icon.php $name`;    $players{$name} = { x => $pos->{Pos}->[0], y => $pos->{Pos}->[1], z => $pos->{Pos}->[2], dimension => $dim };}
+my $TEMPLATE = <<'TEMPL';{ "players": [PLAYMARKS]}TEMPL
+my $markers = "";my $pcnt = scalar(keys %players);my $c = 1;foreach my $p (keys %players) {    my $icon = "player";    if (-e "/var/www/html/map2/static/markers/$p.png") {        $icon = $p;    }    my $world = $players{$p}{dimension} == 0 ? "world" : "nether";    my $mark = <<MARKER;        {                "username": "$p",                "icon": "$icon",                "world": "$world",                "x": ${$players{$p}{x}},                "y": ${$players{$p}{y}},                "z": ${$players{$p}{z}}        }MARKER    $markers .= $mark;    $markers .= "," if ++$c <= $pcnt;}
+$TEMPLATE =~ s/PLAYMARKS/$markers/m;
+if (open(my $fh,">/var/www/html/map2/players.json")) {    print $fh $TEMPLATE;    close $fh;} else {    print "Failed to open marker file: $!\n";}
