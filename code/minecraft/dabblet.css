@@ -1,0 +1,64 @@
+/**
+ * Minecraft Disks
+ */
+
+body{
+	background: black url(http://minecraftstal.com/stal.png) 0/30px;
+	animation: disks 2s linear 0 infinite;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+#pattern {
+	position:absolute;
+	animation: pattern 60s linear 0 infinite;
+}
+.i{
+	width:30px;
+	height:20px;
+	display:inline-block;
+	margin: 0; padding: 0;
+	background-color: black;
+	position: absolute;
+}
+
+@keyframes disks{
+    0% {
+		background-position: 0 0;
+    }
+
+    100% {
+		background-position: 60px 40px;
+    }
+}
+
+@keyframes pattern{
+    0% {
+		transform: translate(-549px, -49px);
+    }
+
+    100% {
+		transform: translate(1251px, 1151px)
+	}
+}
+
+.i:nth-child(0){left:0px;top:0px}
+.i:nth-child(1){left:30px;top:0px}
+.i:nth-child(2){left:60px;top:0px}
+.i:nth-child(3){left:150px;top:0px}
+.i:nth-child(4){left:210px;top:0px}
+.i:nth-child(5){left:300px;top:0px}
+.i:nth-child(6){left:390px;top:0px}
+.i:nth-child(7){left:540px;top:0px}
+.i:nth-child(8){left:30px;top:20px}
+.i:nth-child(9){left:180px;top:20px}
+.i:nth-child(10){left:300px;top:20px}
+.i:nth-child(11){left:390px;top:20px}
+.i:nth-child(12){left:510px;top:20px}
+.i:nth-child(13){left:570px;top:20px}
+.i:nth-child(14){left:30px;top:40px}
+.i:nth-child(15){left:180px;top:40px}
+.i:nth-child(16){left:300px;top:40px}
+.i:nth-child(17){left:390px;top:40px}
+.i:nth-child(18){left:420px;top:40px}
+.i:nth-child(19){left:540px;top:40px}
