@@ -1,0 +1,4 @@
+.glow {      text-shadow: 0 0 7px #ffa200;}
+body {  font-family: Source Sans Pro !important;  background-color: #FFF !important;  background: lightgray url("http://i.imgur.com/U2PKHmw.png") repeat;}
+.well{  background-color: #ffffff !important;}
+.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}.clearfix:after{clear:both}.hide-text{font:0/0  a0;
