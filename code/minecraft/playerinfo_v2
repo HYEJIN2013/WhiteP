@@ -1,0 +1,4 @@
+var mc=require("minecraft-protocol");
+var params={    "action": 0,    "data": [      {        "UUID": "ed1d1941-20b6-401c-a214-1e2a4e031799",        "name": "rom1504",        "properties": [],        "gamemode": 1,        "ping": 1,        "displayName": "rom1504"      },      {        "UUID": "a711f533-fcd1-4585-bed9-d35622b6ad9a",        "name": "rom15042",        "properties": [],        "gamemode": 1,        "ping": 1,        "displayName": "rom15042"      }    ]  };
+var buffer=mc.createPacketBuffer("player_info","play",params,true);
+console.log(buffer.toString("hex"));// 380002ed1d194120b6401ca2141e2a4e03179907726f6d3135303400010101a711f533fcd14585bed9d35622b6ad9a08726f6d31353034320001010108726f6d3135303432000000f828520300
