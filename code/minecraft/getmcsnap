@@ -1,0 +1,2 @@
+var request = require('request'),    baseUrl = "https://s3.amazonaws.com/Minecraft.Download/versions/",    queryUrl = baseUrl + "versions.json",    downloadUrl = "https://s3.amazonaws.com/Minecraft.Download/versions/";
+request(queryUrl, function(error, response, body) {  var mcReply = JSON.parse(body);  console.log(downloadUrl + mcReply.latest.snapshot + "/minecraft_server." + mcReply.latest.snapshot + ".jar");});
