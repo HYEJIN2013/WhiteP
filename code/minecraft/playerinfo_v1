@@ -1,0 +1,6 @@
+function transformUuid(s){  return s.split("-").map(function(item) { return parseInt(item, 16); });}
+var mc=require("minecraft-protocol");
+var params={    "action": 0,    "data": [      {        "UUID": transformUuid("ed1d1941-20b6-401c-a214-1e2a4e031799"),        "name": "rom1504",        "properties": [],        "gamemode": 1,        "ping": 1,        "hasDisplayName": true,        "displayName": "rom1504"      },      {        "UUID": transformUuid("a711f533-fcd1-4585-bed9-d35622b6ad9a"),        "name": "rom15042",        "properties": [],        "gamemode": 1,        "ping": 1,        "hasDisplayName": true,        "displayName": "rom15042"      }    ]  };
+var buffer=mc.createPacketBuffer(0x38,"play",params,true);
+console.log(buffer.toString("hex"));
+// 380002ed1d1941000020b60000401c0000a21407726f6d313530340001010107726f6d31353034a711f5330000fcd1000045850000bed908726f6d31353034320001010108726f6d3135303432
