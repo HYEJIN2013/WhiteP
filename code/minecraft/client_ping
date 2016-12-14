@@ -1,0 +1,1 @@
+var mc = require('../');var client = mc.ping({}, function (err,results) {  if (err !== null) {    console.log(err);  } else {    console.log(results);  }});
