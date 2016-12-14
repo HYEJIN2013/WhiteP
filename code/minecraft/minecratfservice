@@ -1,0 +1,3 @@
+// MinecraftService.js
+var proc  = require('child_process');var mcserver      = null;
+module.exports = {   start: function(options) {    mcserver = proc.spawn("java",['-Xms256M', '-Xmx256M', '-jar', 'minecraft_server.jar', 'nogui'],{ cwd: __dirname+"/minecraft/" });  },   stop: function(options) {    var res = "";    var cmd = "stop";    mcserver.stdin.write(cmd + "\r");    mcserver.stdout.on('data', function (data) {      if (data) {        lres = data + "";        return callback(lres);      }    });  },   send: function(cmd) {    var res = "";    mcserver.stdin.write(cmd + "\r");    mcserver.stdout.on('data', function (data) {      if (data) {        lres = data + "";        return callback(lres);      }    });  } };
