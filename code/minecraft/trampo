@@ -1,0 +1,6 @@
+// based on http://www.walterhiggins.net/blog/Minecraft-and-Trampolines-and-Javascript-Oh-Myvar blocks = require('blocks'),    sounds = require('sounds');
+function bounceOnSlime(event) {    var player = event.player;    var location = player.location;    var x = location.x        y = location.y - 1 // -1 what's underneath the player         z = location.z; 
+    var block = location.world.getBlockAt(x, y, z);
+    if(block.typeId === blocks.slime){        sounds.slimeAttack(player);  // play sound        player.motionY = 2;          // set motion of player upwards     }    }
+events.playerMove(bounceOnSlime); 
+// making a slime trampolineexports.trampoline = function()  {     d = new Drone(self);     d.box(blocks.slime, 3, 1 ,3); }
