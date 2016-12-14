@@ -1,0 +1,2 @@
+  // models/user.js    'use strict';
+  const Nodal = require('nodal');  const Tweet = Nodal.require('app/models/tweet.js'); // import me    User.setDatabase(Nodal.require('db/main.js'));  User.setSchema(Nodal.my.Schema.models.User);  User.joinedBy(Tweet); // add me
